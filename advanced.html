@@ -1,0 +1,1831 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>タイ語学習ダッシュボード - Level 3対策</title>
+<meta name="theme-color" content="#0a0e14">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="タイ語学習">
+<link rel="apple-touch-icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='20' fill='%230a0e14'/><text y='.9em' font-size='80' x='10'>🇹🇭</text></svg>">
+<link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@300;400;600&family=Noto+Sans+JP:wght@300;400;500;700&family=IBM+Plex+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0a0e14;
+    --surface: #15191f;
+    --surface2: #1d2229;
+    --surface3: #252b35;
+    --accent: #b8956e;
+    --accent2: #6ea8b8;
+    --thai: #d4b87a;
+    --green: #5eb88a;
+    --red: #b86e7e;
+    --text: #e4e2da;
+    --text-dim: #c8c6be;
+    --muted: #6e6e7e;
+    --border: #262c38;
+    --glow: rgba(184, 149, 110, 0.15);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Noto Sans JP', sans-serif;
+    min-height: 100vh;
+    padding: 20px 16px 60px;
+    opacity: 0;
+    animation: fadeIn 0.6s ease forwards;
+  }
+
+  @keyframes fadeIn {
+    to { opacity: 1; }
+  }
+
+  .header {
+    text-align: center;
+    margin-bottom: 36px;
+    padding-bottom: 24px;
+    border-bottom: 1px solid var(--border);
+    animation: slideDown 0.5s ease;
+  }
+
+  @keyframes slideDown {
+    from { transform: translateY(-20px); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
+  }
+
+  .header h1 {
+    font-family: 'Sarabun', sans-serif;
+    font-size: 1.85rem;
+    color: var(--thai);
+    letter-spacing: 0.08em;
+    margin-bottom: 8px;
+    font-weight: 600;
+  }
+
+  .header .tagline {
+    color: var(--text-dim);
+    font-size: 0.9rem;
+    font-weight: 400;
+    margin-bottom: 4px;
+  }
+
+  .header .subtitle {
+    color: var(--muted);
+    font-size: 0.8rem;
+    font-weight: 300;
+    letter-spacing: 0.02em;
+  }
+
+  .streak-bar {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    margin: 18px 0 0;
+    font-size: 0.82rem;
+    color: var(--text-dim);
+  }
+
+  .streak-count {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 1.3rem;
+    color: var(--accent);
+    font-weight: 600;
+  }
+
+  .tabs {
+    display: flex;
+    gap: 8px;
+    justify-content: center;
+    margin-bottom: 28px;
+    flex-wrap: wrap;
+    animation: fadeIn 0.6s ease 0.2s backwards;
+  }
+
+  .tab {
+    padding: 9px 18px;
+    border-radius: 22px;
+    border: 1px solid var(--border);
+    background: transparent;
+    color: var(--muted);
+    cursor: pointer;
+    font-family: 'Noto Sans JP', sans-serif;
+    font-size: 0.8rem;
+    font-weight: 500;
+    transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .tab.active {
+    background: var(--accent);
+    color: var(--bg);
+    border-color: var(--accent);
+    font-weight: 700;
+    box-shadow: 0 2px 12px var(--glow);
+  }
+
+  .tab:hover:not(.active) {
+    border-color: var(--accent);
+    color: var(--text);
+    background: rgba(184, 149, 110, 0.05);
+  }
+
+  .section { 
+    display: none;
+    animation: fadeSlideUp 0.4s ease;
+  }
+  
+  .section.active { display: block; }
+
+  @keyframes fadeSlideUp {
+    from { transform: translateY(10px); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
+  }
+
+  /* MODE SWITCHER */
+  .mode-switcher {
+    display: flex;
+    gap: 8px;
+    justify-content: center;
+    margin-bottom: 20px;
+  }
+
+  .mode-btn {
+    padding: 8px 20px;
+    border-radius: 18px;
+    border: 1px solid var(--border);
+    background: transparent;
+    color: var(--muted);
+    cursor: pointer;
+    font-size: 0.8rem;
+    font-weight: 500;
+    transition: all 0.25s;
+  }
+
+  .mode-btn.active {
+    background: var(--accent2);
+    color: var(--bg);
+    border-color: var(--accent2);
+    font-weight: 700;
+  }
+
+  /* DAILY CHECKLIST */
+  .checklist-grid {
+    display: grid;
+    gap: 11px;
+  }
+
+  .check-item {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 15px 18px;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    cursor: pointer;
+    transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .check-item:hover { 
+    border-color: var(--accent2); 
+    transform: translateY(-1px);
+    box-shadow: 0 4px 16px rgba(0,0,0,0.2);
+  }
+
+  .check-item.done {
+    border-color: var(--green);
+    background: rgba(94, 184, 138, 0.06);
+  }
+
+  .checkbox {
+    width: 22px;
+    height: 22px;
+    border-radius: 6px;
+    border: 2px solid var(--muted);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    font-size: 13px;
+    transition: all 0.2s;
+  }
+
+  .check-item.done .checkbox {
+    background: var(--green);
+    border-color: var(--green);
+    color: var(--bg);
+  }
+
+  .check-label {
+    flex: 1;
+  }
+
+  .check-label .main { 
+    font-size: 0.92rem; 
+    margin-bottom: 3px;
+    font-weight: 500;
+  }
+  
+  .check-label .sub { 
+    font-size: 0.74rem; 
+    color: var(--muted); 
+    line-height: 1.4;
+  }
+
+  .check-time {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.72rem;
+    color: var(--muted);
+    background: var(--surface2);
+    padding: 4px 9px;
+    border-radius: 10px;
+  }
+
+  .progress-summary {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 18px 20px;
+    margin-top: 18px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+
+  .progress-bar-wrap {
+    flex: 1;
+    height: 7px;
+    background: var(--surface2);
+    border-radius: 4px;
+    overflow: hidden;
+  }
+
+  .progress-bar {
+    height: 100%;
+    background: linear-gradient(90deg, var(--green), var(--accent2));
+    border-radius: 4px;
+    transition: width 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .progress-text {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.84rem;
+    color: var(--accent);
+    white-space: nowrap;
+    font-weight: 600;
+  }
+
+  /* VOCAB FLASHCARD */
+  .flashcard-area {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 22px;
+  }
+
+  .category-select {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .cat-btn {
+    padding: 7px 15px;
+    border-radius: 18px;
+    border: 1px solid var(--border);
+    background: transparent;
+    color: var(--muted);
+    cursor: pointer;
+    font-size: 0.77rem;
+    font-family: 'Noto Sans JP', sans-serif;
+    font-weight: 500;
+    transition: all 0.25s;
+  }
+
+  .cat-btn.active {
+    background: var(--surface2);
+    color: var(--thai);
+    border-color: var(--thai);
+    box-shadow: 0 2px 10px rgba(212, 184, 122, 0.15);
+  }
+
+  .flashcard {
+    width: 100%;
+    max-width: 440px;
+    min-height: 220px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 22px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 36px 30px;
+    cursor: pointer;
+    text-align: center;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    user-select: none;
+  }
+
+  .flashcard:hover { 
+    transform: translateY(-3px); 
+    border-color: var(--accent2);
+    box-shadow: 0 8px 24px rgba(0,0,0,0.25);
+  }
+
+  .flashcard .thai-word {
+    font-family: 'Sarabun', sans-serif;
+    font-size: 2.5rem;
+    color: var(--thai);
+    margin-bottom: 10px;
+    line-height: 1.25;
+    font-weight: 600;
+  }
+
+  .flashcard .romanji {
+    font-size: 0.84rem;
+    color: var(--muted);
+    margin-bottom: 6px;
+    font-style: italic;
+  }
+
+  .flashcard .meaning {
+    font-size: 1.12rem;
+    color: var(--text-dim);
+    margin-top: 14px;
+    display: none;
+    font-weight: 500;
+  }
+
+  .flashcard .meaning.show { display: block; }
+
+  .flashcard .tap-hint {
+    font-size: 0.7rem;
+    color: var(--muted);
+    position: absolute;
+    bottom: 14px;
+    right: 18px;
+  }
+
+  .speaker-btn {
+    position: absolute;
+    top: 18px;
+    right: 18px;
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    border-radius: 50%;
+    width: 44px;
+    height: 44px;
+    font-size: 1.3rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.25s;
+  }
+
+  .speaker-btn:hover {
+    background: var(--accent);
+    border-color: var(--accent);
+    transform: scale(1.1);
+  }
+
+  .speaker-btn:active {
+    transform: scale(0.95);
+  }
+
+  .phrase-card {
+    cursor: default;
+  }
+
+  .phrase-card .meaning {
+    display: block;
+  }
+
+  .card-counter {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.78rem;
+    color: var(--muted);
+  }
+
+  .fc-buttons {
+    display: flex;
+    gap: 12px;
+  }
+
+  .fc-btn {
+    padding: 11px 26px;
+    border-radius: 12px;
+    border: none;
+    font-family: 'Noto Sans JP', sans-serif;
+    font-size: 0.84rem;
+    cursor: pointer;
+    font-weight: 600;
+    transition: all 0.2s;
+  }
+
+  .fc-btn:hover { 
+    opacity: 0.85;
+    transform: translateY(-1px);
+  }
+
+  .fc-btn.good { background: var(--green); color: var(--bg); }
+  .fc-btn.again { background: var(--surface2); color: var(--text); border: 1px solid var(--border); }
+  .fc-btn.skip { background: transparent; color: var(--muted); border: 1px solid var(--border); }
+
+  /* GRAMMAR */
+  .grammar-list {
+    display: grid;
+    gap: 13px;
+  }
+
+  .grammar-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    overflow: hidden;
+    transition: all 0.25s;
+  }
+
+  .grammar-card:hover {
+    border-color: var(--accent2);
+    box-shadow: 0 4px 16px rgba(0,0,0,0.15);
+  }
+
+  .grammar-header {
+    padding: 15px 19px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    cursor: pointer;
+    transition: background 0.2s;
+  }
+
+  .grammar-header:hover { background: var(--surface2); }
+
+  .grammar-tag {
+    font-size: 0.68rem;
+    padding: 4px 9px;
+    border-radius: 9px;
+    background: var(--surface2);
+    color: var(--accent2);
+    font-family: 'IBM Plex Mono', monospace;
+    white-space: nowrap;
+    font-weight: 600;
+  }
+
+  .grammar-title { 
+    flex: 1; 
+    font-size: 0.9rem;
+    font-weight: 500;
+  }
+
+  .grammar-body {
+    display: none;
+    padding: 0 19px 19px;
+    border-top: 1px solid var(--border);
+  }
+
+  .grammar-body.open { display: block; }
+
+  .example-box {
+    margin-top: 15px;
+    background: var(--surface2);
+    border-radius: 12px;
+    padding: 15px;
+  }
+
+  .example-box .thai {
+    font-family: 'Sarabun', sans-serif;
+    font-size: 1.18rem;
+    color: var(--thai);
+    margin-bottom: 5px;
+    font-weight: 500;
+  }
+
+  .example-box .romaji { 
+    font-size: 0.76rem; 
+    color: var(--muted); 
+    margin-bottom: 7px; 
+  }
+  
+  .example-box .jp { 
+    font-size: 0.86rem; 
+    color: var(--text-dim);
+    font-weight: 400;
+  }
+
+  .pattern-box {
+    margin-top: 13px;
+    padding: 11px 15px;
+    border-left: 3px solid var(--accent);
+    font-size: 0.81rem;
+    color: var(--muted);
+    line-height: 1.65;
+    background: rgba(184, 149, 110, 0.03);
+  }
+
+  /* WEEKLY PLAN */
+  .week-grid {
+    display: grid;
+    gap: 11px;
+  }
+
+  .day-row {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 15px 17px;
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+    transition: all 0.25s;
+  }
+
+  .day-row:hover {
+    border-color: var(--accent2);
+    transform: translateX(2px);
+  }
+
+  .day-row.today {
+    border-color: var(--accent);
+    background: rgba(184, 149, 110, 0.06);
+    box-shadow: 0 2px 12px var(--glow);
+  }
+
+  .day-label {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.73rem;
+    color: var(--muted);
+    min-width: 38px;
+    margin-top: 3px;
+    font-weight: 600;
+  }
+
+  .day-row.today .day-label { color: var(--accent); }
+
+  .day-content { flex: 1; }
+
+  .day-title {
+    font-size: 0.87rem;
+    font-weight: 600;
+    margin-bottom: 5px;
+  }
+
+  .day-tasks {
+    font-size: 0.77rem;
+    color: var(--muted);
+    line-height: 1.75;
+  }
+
+  .day-tasks .thai-ex {
+    color: var(--thai);
+    font-family: 'Sarabun', sans-serif;
+    font-size: 0.86rem;
+  }
+
+  .day-time {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.7rem;
+    color: var(--muted);
+    background: var(--surface2);
+    padding: 4px 9px;
+    border-radius: 9px;
+    white-space: nowrap;
+    margin-top: 3px;
+  }
+
+  .section-title {
+    font-size: 0.69rem;
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+    color: var(--muted);
+    margin-bottom: 16px;
+    padding-left: 4px;
+    font-weight: 600;
+  }
+
+  /* TIPS */
+  .tips-grid { display: grid; gap: 13px; }
+
+  .tip-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 18px;
+    display: flex;
+    gap: 15px;
+    align-items: flex-start;
+    transition: all 0.25s;
+  }
+
+  .tip-card:hover {
+    border-color: var(--accent2);
+    transform: translateX(2px);
+    box-shadow: 0 4px 16px rgba(0,0,0,0.15);
+  }
+
+  .tip-icon { font-size: 1.35rem; }
+
+  .tip-title { 
+    font-size: 0.88rem; 
+    font-weight: 600; 
+    margin-bottom: 7px; 
+  }
+  
+  .tip-body { 
+    font-size: 0.79rem; 
+    color: var(--muted); 
+    line-height: 1.7; 
+  }
+  
+  .tip-body .highlight { 
+    color: var(--thai); 
+    font-family: 'Sarabun', sans-serif; 
+    font-size: 0.93rem; 
+  }
+
+  @media (max-width: 480px) {
+    body { padding: 16px 14px 56px; }
+    .header h1 { font-size: 1.55rem; }
+    .flashcard .thai-word { font-size: 2rem; }
+    .flashcard { min-height: 200px; padding: 30px 24px; }
+  }
+
+  /* Loading state removed for smoother experience */
+</style>
+</head>
+<body>
+
+<div class="header">
+  <h1>ภาษาไทย レベル3 学習</h1>
+  <p class="tagline">職場で使えるタイ語を効率的に習得</p>
+  <p class="subtitle">毎日少しずつ・無理なく継続</p>
+  <div class="streak-bar">
+    <span>🔥 連続学習</span>
+    <span class="streak-count" id="streakCount">1</span>
+    <span>日目</span>
+  </div>
+  <div class="progress-overview" style="display:grid; grid-template-columns: repeat(3, 1fr); gap:10px; margin-top:16px;">
+    <div class="progress-item" style="background:var(--surface); border:1px solid var(--border); border-radius:10px; padding:10px; text-align:center;">
+      <div style="font-size:0.7rem; color:var(--muted); margin-bottom:4px;">単語</div>
+      <div style="font-family:'IBM Plex Mono',monospace; font-size:1.1rem; color:var(--accent); font-weight:600;" id="vocabProgress">0/200</div>
+    </div>
+    <div class="progress-item" style="background:var(--surface); border:1px solid var(--border); border-radius:10px; padding:10px; text-align:center;">
+      <div style="font-size:0.7rem; color:var(--muted); margin-bottom:4px;">フレーズ</div>
+      <div style="font-family:'IBM Plex Mono',monospace; font-size:1.1rem; color:var(--accent); font-weight:600;" id="phraseProgress">0/200</div>
+    </div>
+    <div class="progress-item" style="background:var(--surface); border:1px solid var(--border); border-radius:10px; padding:10px; text-align:center;">
+      <div style="font-size:0.7rem; color:var(--muted); margin-bottom:4px;">文法</div>
+      <div style="font-family:'IBM Plex Mono',monospace; font-size:1.1rem; color:var(--accent); font-weight:600;" id="grammarProgress">0/20</div>
+    </div>
+  </div>
+</div>
+
+<div class="tabs">
+  <button class="tab active" onclick="switchTab('daily')">📋 今日のタスク</button>
+  <button class="tab" onclick="switchTab('phrases')">💬 職場フレーズ</button>
+  <button class="tab" onclick="switchTab('vocab')">🃏 単語カード</button>
+  <button class="tab" onclick="switchTab('grammar')">📖 文法ポイント</button>
+  <button class="tab" onclick="switchTab('weekly')">📅 週間プラン</button>
+  <button class="tab" onclick="switchTab('tips')">💡 学習のコツ</button>
+</div>
+
+<!-- DAILY CHECKLIST -->
+<div class="section active" id="daily">
+  <p class="section-title">今日のチェックリスト（目安：30〜40分）</p>
+  <div class="checklist-grid" id="checklistGrid">
+    <div class="check-item" onclick="toggleCheck(this)">
+      <div class="checkbox">✓</div>
+      <div class="check-label">
+        <div class="main">🔤 単語カード 10枚</div>
+        <div class="sub">職場・品質管理テーマを優先</div>
+      </div>
+      <div class="check-time">10分</div>
+    </div>
+    <div class="check-item" onclick="toggleCheck(this)">
+      <div class="checkbox">✓</div>
+      <div class="check-label">
+        <div class="main">📖 文法ポイント 1項目を読む</div>
+        <div class="sub">例文を声に出して1回読む</div>
+      </div>
+      <div class="check-time">5分</div>
+    </div>
+    <div class="check-item" onclick="toggleCheck(this)">
+      <div class="checkbox">✓</div>
+      <div class="check-label">
+        <div class="main">🗣️ 音読 3文</div>
+        <div class="sub">職場で使うフレーズを練習</div>
+      </div>
+      <div class="check-time">5分</div>
+    </div>
+    <div class="check-item" onclick="toggleCheck(this)">
+      <div class="checkbox">✓</div>
+      <div class="check-label">
+        <div class="main">👂 リスニング（YouTube / ドラマ）</div>
+        <div class="sub">ながら聴きでもOK</div>
+      </div>
+      <div class="check-time">10〜15分</div>
+    </div>
+    <div class="check-item" onclick="toggleCheck(this)">
+      <div class="checkbox">✓</div>
+      <div class="check-label">
+        <div class="main">✍️ 短文ライティング 1〜2文</div>
+        <div class="sub">今日の出来事をタイ語で書いてみる</div>
+      </div>
+      <div class="check-time">5〜10分</div>
+    </div>
+    <div class="check-item" onclick="toggleCheck(this)">
+      <div class="checkbox">✓</div>
+      <div class="check-label">
+        <div class="main">💬 同僚へタイ語で一言</div>
+        <div class="sub">สวัสดีครับ / ขอบคุณครับ でもOK</div>
+      </div>
+      <div class="check-time">実践</div>
+    </div>
+  </div>
+  <div class="progress-summary">
+    <div class="progress-bar-wrap">
+      <div class="progress-bar" id="progressBar" style="width:0%"></div>
+    </div>
+    <div class="progress-text" id="progressText">0 / 6</div>
+  </div>
+</div>
+
+<!-- WORKPLACE PHRASES -->
+<div class="section" id="phrases">
+  <p class="section-title">職場会話フレーズ（200フレーズ・音声付き）</p>
+  
+  <div class="mode-switcher">
+    <button class="mode-btn active" onclick="setPhraseMode('learn')">📚 学習モード</button>
+    <button class="mode-btn" onclick="setPhraseMode('review')">🔄 復習モード</button>
+  </div>
+
+  <div class="flashcard-area">
+    <div class="category-select">
+      <button class="cat-btn active" onclick="setPhraseCategory('meeting', this)">🏭 会議</button>
+      <button class="cat-btn" onclick="setPhraseCategory('instruction', this)">🔍 指示</button>
+      <button class="cat-btn" onclick="setPhraseCategory('question', this)">☀️ 質問</button>
+      <button class="cat-btn" onclick="setPhraseCategory('polite', this)">🙏 敬語</button>
+    </div>
+
+    <div class="flashcard phrase-card" id="phraseCard">
+      <div class="thai-word" id="phraseThai">–</div>
+      <button class="speaker-btn" id="speakerBtn" onclick="playAudio('phrase')">🔊</button>
+      <div class="romanji" id="phraseRomaji">–</div>
+      <div class="meaning show" id="phraseJP">–</div>
+    </div>
+
+    <div class="card-counter" id="phraseCounter">1 / 50</div>
+
+    <div class="fc-buttons" id="phraseButtons">
+      <button class="fc-btn skip" onclick="prevPhrase()">← 前</button>
+      <button class="fc-btn again" onclick="markPhrase(false)">もう一度</button>
+      <button class="fc-btn good" onclick="markPhrase(true)">覚えた ✓</button>
+      <button class="fc-btn skip" onclick="nextPhrase()">次 →</button>
+    </div>
+  </div>
+</div>
+
+<!-- VOCAB FLASHCARD -->
+<div class="section" id="vocab">
+  <p class="section-title">単語フラッシュカード（200単語）</p>
+  
+  <div class="mode-switcher">
+    <button class="mode-btn active" onclick="setVocabMode('learn')">📚 学習モード</button>
+    <button class="mode-btn" onclick="setVocabMode('review')">🔄 復習モード</button>
+  </div>
+
+  <div class="flashcard-area">
+    <div class="category-select">
+      <button class="cat-btn active" onclick="setCategory('work', this)">🏭 職場</button>
+      <button class="cat-btn" onclick="setCategory('quality', this)">🔍 品質</button>
+      <button class="cat-btn" onclick="setCategory('daily', this)">☀️ 日常</button>
+      <button class="cat-btn" onclick="setCategory('polite', this)">🙏 敬語</button>
+    </div>
+
+    <div class="flashcard" id="flashcard" onclick="showMeaning()">
+      <button class="speaker-btn" onclick="event.stopPropagation(); playAudio('vocab')">🔊</button>
+      <div class="thai-word" id="fcThai">–</div>
+      <div class="romanji" id="fcRomaji">–</div>
+      <div class="meaning" id="fcMeaning">–</div>
+      <div class="tap-hint">タップして意味を表示</div>
+    </div>
+
+    <div class="card-counter" id="cardCounter">1 / 10</div>
+
+    <div class="fc-buttons" id="fcButtons" style="display:none">
+      <button class="fc-btn again" onclick="nextCard(false)">もう一度</button>
+      <button class="fc-btn good" onclick="nextCard(true)">覚えた ✓</button>
+    </div>
+    <div id="fcNext" style="display:none">
+      <button class="fc-btn skip" onclick="startCards()">もう一周する</button>
+    </div>
+  </div>
+</div>
+
+<!-- GRAMMAR -->
+<div class="section" id="grammar">
+  <p class="section-title">レベル3 文法ポイント（タップで開く）</p>
+  <div class="grammar-list">
+
+    <div class="grammar-card">
+      <div class="grammar-header" onclick="toggleGrammar(this)">
+        <span class="grammar-tag">使役</span>
+        <span class="grammar-title">ให้ の使い方（〜させる）</span>
+        <span>▾</span>
+      </div>
+      <div class="grammar-body">
+        <div class="pattern-box">
+          <strong>パターン：</strong> 主語 + ให้ + 人 + 動詞<br>
+          「〜に〜させる / 〜してもらう」
+        </div>
+        <div class="example-box">
+          <div class="thai">ผมให้เขาตรวจสอบชิ้นงานครับ</div>
+          <div class="romaji">phom hai khao truat-sop chin-ngan khrap</div>
+          <div class="jp">私は彼に部品を検査させました。</div>
+        </div>
+        <div class="example-box">
+          <div class="thai">กรุณาให้ผมทราบด้วยครับ</div>
+          <div class="romaji">ga-ru-na hai phom sap duay khrap</div>
+          <div class="jp">ご連絡いただけますでしょうか。</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="grammar-card">
+      <div class="grammar-header" onclick="toggleGrammar(this)">
+        <span class="grammar-tag">条件</span>
+        <span class="grammar-title">ถ้า / หาก（もし〜なら）</span>
+        <span>▾</span>
+      </div>
+      <div class="grammar-body">
+        <div class="pattern-box">
+          <strong>パターン：</strong> ถ้า/หาก + 条件 + ก็ + 結果<br>
+          หาก はより書き言葉・丁寧な表現
+        </div>
+        <div class="example-box">
+          <div class="thai">ถ้าพบข้อบกพร่อง ให้รายงานทันทีครับ</div>
+          <div class="romaji">tha phop kho-bok-phroeng hai rai-ngan than-thi khrap</div>
+          <div class="jp">不良を発見したら、すぐに報告してください。</div>
+        </div>
+        <div class="example-box">
+          <div class="thai">หากมีปัญหา ผมจะช่วยครับ</div>
+          <div class="romaji">hak mi pan-ha phom ja chuay khrap</div>
+          <div class="jp">問題があれば、私が対応します。</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="grammar-card">
+      <div class="grammar-header" onclick="toggleGrammar(this)">
+        <span class="grammar-tag">受動</span>
+        <span class="grammar-title">ถูก（受け身・マイナス表現）</span>
+        <span>▾</span>
+      </div>
+      <div class="grammar-body">
+        <div class="pattern-box">
+          <strong>パターン：</strong> 主語 + ถูก + 動詞<br>
+          日本語の「〜された（否定的な意味合い）」に相当
+        </div>
+        <div class="example-box">
+          <div class="thai">ชิ้นงานถูกปฏิเสธจากลูกค้าครับ</div>
+          <div class="romaji">chin-ngan thuk pa-ti-set jak luk-kha khrap</div>
+          <div class="jp">部品が顧客から拒否されました。</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="grammar-card">
+      <div class="grammar-header" onclick="toggleGrammar(this)">
+        <span class="grammar-tag">程度</span>
+        <span class="grammar-title">ค่อนข้าง / พอสมควร（わりと〜）</span>
+        <span>▾</span>
+      </div>
+      <div class="grammar-body">
+        <div class="pattern-box">
+          <strong>ค่อนข้าง</strong>：わりと・かなり（やや強調）<br>
+          <strong>พอสมควร</strong>：まあまあ・ほどほどに
+        </div>
+        <div class="example-box">
+          <div class="thai">ปัญหานี้ค่อนข้างซับซ้อนครับ</div>
+          <div class="romaji">pan-ha ni khon-khang sap-son khrap</div>
+          <div class="jp">この問題はかなり複雑です。</div>
+        </div>
+        <div class="example-box">
+          <div class="thai">ผลลัพธ์ดีพอสมควรครับ</div>
+          <div class="romaji">phon-lap di pho-som-khuan khrap</div>
+          <div class="jp">結果はまあまあ良いです。</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="grammar-card">
+      <div class="grammar-header" onclick="toggleGrammar(this)">
+        <span class="grammar-tag">接続</span>
+        <span class="grammar-title">นอกจากนี้ / อีกทั้ง（さらに・加えて）</span>
+        <span>▾</span>
+      </div>
+      <div class="grammar-body">
+        <div class="pattern-box">
+          ビジネス文書や説明でよく使う接続詞。<br>
+          <strong>นอกจากนี้</strong>：これに加えて / さらに<br>
+          <strong>อีกทั้ง</strong>：また / さらには
+        </div>
+        <div class="example-box">
+          <div class="thai">นอกจากนี้ เราต้องตรวจสอบกระบวนการด้วยครับ</div>
+          <div class="romaji">nok-jak-ni rao tong truat-sop gra-buan-gan duay khrap</div>
+          <div class="jp">さらに、私たちはプロセスも確認する必要があります。</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- WEEKLY PLAN -->
+<div class="section" id="weekly">
+  <p class="section-title">週間学習プラン（無理のない設計）</p>
+  <div class="week-grid">
+    <div class="day-row today" id="todayRow">
+      <div class="day-label">今日</div>
+      <div class="day-content">
+        <div class="day-title">単語 + 文法 集中デー</div>
+        <div class="day-tasks">
+          単語10枚 → 文法1項目 → 音読3文<br>
+          <span class="thai-ex">ให้ の使い方を練習</span>
+        </div>
+      </div>
+      <div class="day-time">30〜40分</div>
+    </div>
+    <div class="day-row">
+      <div class="day-label">月</div>
+      <div class="day-content">
+        <div class="day-title">📝 単語 強化デー</div>
+        <div class="day-tasks">新単語10枚 + 復習5枚 + ライティング1文</div>
+      </div>
+      <div class="day-time">20分</div>
+    </div>
+    <div class="day-row">
+      <div class="day-label">火</div>
+      <div class="day-content">
+        <div class="day-title">📖 文法 + 読解デー</div>
+        <div class="day-tasks">文法1項目 → 例文を音読 → 自分で1文作る</div>
+      </div>
+      <div class="day-time">25分</div>
+    </div>
+    <div class="day-row">
+      <div class="day-label">水</div>
+      <div class="day-content">
+        <div class="day-title">👂 リスニング デー</div>
+        <div class="day-tasks">YouTube / ドラマ / ニュース（ながら聴きOK）<br>
+          聞き取れた単語をメモする</div>
+      </div>
+      <div class="day-time">15〜30分</div>
+    </div>
+    <div class="day-row">
+      <div class="day-label">木</div>
+      <div class="day-content">
+        <div class="day-title">🗣️ スピーキング デー</div>
+        <div class="day-tasks">職場フレーズを音読 → 同僚に実際に使ってみる<br>
+          <span class="thai-ex">มีปัญหาอะไรไหมครับ？</span>（何か問題ありますか？）</div>
+      </div>
+      <div class="day-time">20分</div>
+    </div>
+    <div class="day-row">
+      <div class="day-label">金</div>
+      <div class="day-content">
+        <div class="day-title">✍️ ライティング デー</div>
+        <div class="day-tasks">今週の出来事を2〜3文でまとめる（日記風）<br>
+          Claudeにチェックしてもらう</div>
+      </div>
+      <div class="day-time">20分</div>
+    </div>
+    <div class="day-row">
+      <div class="day-label">土</div>
+      <div class="day-content">
+        <div class="day-title">🔄 総復習デー</div>
+        <div class="day-tasks">今週の単語を全部見直し → 弱点の文法を1つ再確認</div>
+      </div>
+      <div class="day-time">30分</div>
+    </div>
+    <div class="day-row">
+      <div class="day-label">日</div>
+      <div class="day-content">
+        <div class="day-title">😌 休息 or 実践デー</div>
+        <div class="day-tasks">お休み、または家族との会話でタイ語を実践する</div>
+      </div>
+      <div class="day-time">自由</div>
+    </div>
+  </div>
+</div>
+
+<!-- TIPS -->
+<div class="section" id="tips">
+  <p class="section-title">レベル3合格に向けた学習のコツ</p>
+  <div class="tips-grid">
+    <div class="tip-card">
+      <div class="tip-icon">🔁</div>
+      <div>
+        <div class="tip-title">毎日5分でもいい、継続が最強</div>
+        <div class="tip-body">長時間より毎日少しずつの方が記憶に定着します。忙しい日は単語カード5枚だけでOK。</div>
+      </div>
+    </div>
+    <div class="tip-card">
+      <div class="tip-icon">🏭</div>
+      <div>
+        <div class="tip-title">職場語彙を優先して覚える</div>
+        <div class="tip-body">
+          毎日使う言葉は自然に身につきます。<br>
+          <span class="highlight">ตรวจสอบ（検査）・รายงาน（報告）・แก้ไข（修正）</span><br>
+          このような仕事関連語から始めましょう。
+        </div>
+      </div>
+    </div>
+    <div class="tip-card">
+      <div class="tip-icon">👂</div>
+      <div>
+        <div class="tip-title">耳を鍛える：ながら聴きを習慣に</div>
+        <div class="tip-body">通勤・移動中にタイ語のYouTubeやポッドキャストを流すだけでOK。意識して聴かなくてもリスニング力は上がります。</div>
+      </div>
+    </div>
+    <div class="tip-card">
+      <div class="tip-icon">✍️</div>
+      <div>
+        <div class="tip-title">アウトプットを毎週する</div>
+        <div class="tip-body">読む・聴くだけでなく、短文を書くことで定着が一気に上がります。金曜の日記習慣が効果的です。</div>
+      </div>
+    </div>
+    <div class="tip-card">
+      <div class="tip-icon">🎯</div>
+      <div>
+        <div class="tip-title">レベル3の出題傾向を把握する</div>
+        <div class="tip-body">読解・文法・語彙・リスニングの4技能。特に文法の正確さと語彙数が鍵。過去問を月1回やってみましょう。</div>
+      </div>
+    </div>
+    <div class="tip-card">
+      <div class="tip-icon">🗣️</div>
+      <div>
+        <div class="tip-title">職場の同僚を先生にする</div>
+        <div class="tip-body">タイ人スタッフへの指示・依頼をできるだけタイ語でやってみましょう。間違えても大丈夫、実践が一番の練習です。</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+function playAudio(type) {
+  const text = type === 'phrase' ? 
+    document.getElementById('phraseThai').textContent :
+    document.getElementById('fcThai').textContent;
+  
+  if (text === '–' || text.includes('🎉')) return;
+  
+  if ('speechSynthesis' in window) {
+    window.speechSynthesis.cancel();
+    const utterance = new SpeechSynthesisUtterance(text);
+    utterance.lang = 'th-TH';
+    utterance.rate = 0.8;
+    window.speechSynthesis.speak(utterance);
+  }
+}
+
+// ================================
+// PROGRESS TRACKING
+// ================================
+function loadProgress() {
+  const saved = localStorage.getItem('thaiLearningProgress');
+  if (saved) return JSON.parse(saved);
+  return { vocabLearned: {}, phrasesLearned: {}, grammarLearned: {} };
+}
+
+function saveProgress() {
+  localStorage.setItem('thaiLearningProgress', JSON.stringify(progress));
+  updateProgressDisplay();
+}
+
+let progress = loadProgress();
+
+function updateProgressDisplay() {
+  const vocabCount = Object.keys(progress.vocabLearned).filter(k => progress.vocabLearned[k]).length;
+  const phraseCount = Object.keys(progress.phrasesLearned).filter(k => progress.phrasesLearned[k]).length;
+  const grammarCount = Object.keys(progress.grammarLearned).filter(k => progress.grammarLearned[k]).length;
+  
+  document.getElementById('vocabProgress').textContent = vocabCount + '/200';
+  document.getElementById('phraseProgress').textContent = phraseCount + '/200';
+  document.getElementById('grammarProgress').textContent = grammarCount + '/20';
+}
+
+// ---- Tabs ----
+function switchTab(tab) {
+  document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+  document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+  document.getElementById(tab).classList.add('active');
+  event.target.classList.add('active');
+}
+
+// ---- Checklist ----
+function toggleCheck(el) {
+  el.classList.toggle('done');
+  updateProgress();
+}
+
+function updateProgress() {
+  const items = document.querySelectorAll('.check-item');
+  const done = document.querySelectorAll('.check-item.done').length;
+  const pct = Math.round((done / items.length) * 100);
+  document.getElementById('progressBar').style.width = pct + '%';
+  document.getElementById('progressText').textContent = done + ' / ' + items.length;
+}
+
+// ---- Streak ----
+document.getElementById('streakCount').textContent = '1';
+
+// ---- Vocab ----
+const vocabData = {
+  work: [
+    // 既存10個
+    { thai: 'ตรวจสอบ', romaji: 'truat-sop', jp: '検査する・確認する' },
+    { thai: 'รายงาน', romaji: 'rai-ngan', jp: '報告する / 報告書' },
+    { thai: 'แก้ไข', romaji: 'gae-khai', jp: '修正する・直す' },
+    { thai: 'กระบวนการ', romaji: 'gra-buan-gan', jp: 'プロセス・工程' },
+    { thai: 'ประสิทธิภาพ', romaji: 'pra-sit-thi-phap', jp: '効率・パフォーマンス' },
+    { thai: 'มอบหมาย', romaji: 'mop-mai', jp: '割り当てる・委任する' },
+    { thai: 'กำหนดการ', romaji: 'gam-not-gan', jp: 'スケジュール・日程' },
+    { thai: 'ดำเนินการ', romaji: 'dam-noen-gan', jp: '実施する・進める' },
+    { thai: 'เอกสาร', romaji: 'ek-ga-san', jp: '書類・ドキュメント' },
+    { thai: 'ประชุม', romaji: 'pra-chum', jp: '会議する / 会議' },
+    // 新規40個
+    { thai: 'ผลิต', romaji: 'pha-lit', jp: '生産する' },
+    { thai: 'วัตถุดิบ', romaji: 'wat-thu-dip', jp: '原材料' },
+    { thai: 'คลังสินค้า', romaji: 'khlang-sin-kha', jp: '倉庫' },
+    { thai: 'ส่งออก', romaji: 'song-ok', jp: '輸出する' },
+    { thai: 'นำเข้า', romaji: 'nam-khao', jp: '輸入する' },
+    { thai: 'ผู้จัดการ', romaji: 'phu-jat-gan', jp: '管理者・マネージャー' },
+    { thai: 'พนักงาน', romaji: 'pha-nak-ngan', jp: '従業員' },
+    { thai: 'เงินเดือน', romaji: 'ngoen-duean', jp: '給料' },
+    { thai: 'โบนัส', romaji: 'bo-nas', jp: 'ボーナス' },
+    { thai: 'วันหยุด', romaji: 'wan-yut', jp: '休日' },
+    { thai: 'ลาป่วย', romaji: 'la-puay', jp: '病欠する' },
+    { thai: 'ลากิจ', romaji: 'la-kit', jp: '私用で休む' },
+    { thai: 'ทำงานล่วงเวลา', romaji: 'tham-ngan-luang-wela', jp: '残業する' },
+    { thai: 'ประกันสังคม', romaji: 'pra-gan-sang-khom', jp: '社会保険' },
+    { thai: 'สัญญา', romaji: 'san-ya', jp: '契約' },
+    { thai: 'บริษัท', romaji: 'bo-ri-sat', jp: '会社' },
+    { thai: 'โรงงาน', romaji: 'rong-ngan', jp: '工場' },
+    { thai: 'แผนก', romaji: 'pha-naek', jp: '部門・部署' },
+    { thai: 'ตำแหน่ง', romaji: 'tam-naeng', jp: '役職・ポジション' },
+    { thai: 'หัวหน้า', romaji: 'hua-na', jp: '上司・リーダー' },
+    { thai: 'ผู้ใต้บังคับบัญชา', romaji: 'phu-tai-bang-khap-ban-cha', jp: '部下' },
+    { thai: 'ทีมงาน', romaji: 'thim-ngan', jp: 'チーム' },
+    { thai: 'โครงการ', romaji: 'khrong-gan', jp: 'プロジェクト' },
+    { thai: 'เป้าหมาย', romaji: 'pao-mai', jp: '目標' },
+    { thai: 'ผลงาน', romaji: 'phon-ngan', jp: '成果・実績' },
+    { thai: 'ประเมินผล', romaji: 'pra-moem-phon', jp: '評価する' },
+    { thai: 'อบรม', romaji: 'op-rom', jp: '研修・トレーニング' },
+    { thai: 'พัฒนา', romaji: 'phat-tha-na', jp: '開発する・育成する' },
+    { thai: 'ลูกค้า', romaji: 'luk-kha', jp: '顧客' },
+    { thai: 'คู่ค้า', romaji: 'khu-kha', jp: '取引先' },
+    { thai: 'ผู้ส่งมอบ', romaji: 'phu-song-mop', jp: 'サプライヤー' },
+    { thai: 'ใบสั่งซื้อ', romaji: 'bai-sang-sue', jp: '発注書' },
+    { thai: 'ใบเสนอราคา', romaji: 'bai-sa-noe-ra-kha', jp: '見積書' },
+    { thai: 'ใบแจ้งหนี้', romaji: 'bai-jaeng-ni', jp: '請求書' },
+    { thai: 'ชำระเงิน', romaji: 'cham-ra-ngoen', jp: '支払う' },
+    { thai: 'เครดิต', romaji: 'khre-dit', jp: '信用・掛け' },
+    { thai: 'กำไร', romaji: 'gam-rai', jp: '利益' },
+    { thai: 'ขาดทุน', romaji: 'khat-thun', jp: '損失' },
+    { thai: 'งบประมาณ', romaji: 'ngop-pra-man', jp: '予算' },
+    { thai: 'ค่าใช้จ่าย', romaji: 'kha-chai-jai', jp: '経費・支出' }
+  ],
+  quality: [
+    // 既存10個
+    { thai: 'ข้อบกพร่อง', romaji: 'kho-bok-phroeng', jp: '不良・欠陥' },
+    { thai: 'มาตรฐาน', romaji: 'mat-tra-than', jp: '基準・スタンダード' },
+    { thai: 'ปฏิเสธ', romaji: 'pa-ti-set', jp: '拒否する・却下する' },
+    { thai: 'สาเหตุ', romaji: 'sa-het', jp: '原因' },
+    { thai: 'แก้ไขปัญหา', romaji: 'gae-khai-pan-ha', jp: '問題を解決する' },
+    { thai: 'ผลการตรวจ', romaji: 'phon-gan-truat', jp: '検査結果' },
+    { thai: 'ควบคุม', romaji: 'khuap-khum', jp: '管理する・コントロールする' },
+    { thai: 'ปรับปรุง', romaji: 'prap-prung', jp: '改善する' },
+    { thai: 'ชิ้นงาน', romaji: 'chin-ngan', jp: '部品・ワーク' },
+    { thai: 'ผ่านการตรวจ', romaji: 'phan-gan-truat', jp: '検査合格' },
+    // 新規40個
+    { thai: 'คุณภาพ', romaji: 'khun-na-phap', jp: '品質' },
+    { thai: 'ตรวจสอบคุณภาพ', romaji: 'truat-sop-khun-na-phap', jp: '品質検査' },
+    { thai: 'รับประกัน', romaji: 'rap-pra-gan', jp: '保証する' },
+    { thai: 'ของเสีย', romaji: 'khong-sia', jp: '不良品・廃棄物' },
+    { thai: 'แยกของเสีย', romaji: 'yaek-khong-sia', jp: '不良品を分ける' },
+    { thai: 'เกณฑ์', romaji: 'ken', jp: '基準・条件' },
+    { thai: 'ผ่านเกณฑ์', romaji: 'phan-ken', jp: '基準を満たす' },
+    { thai: 'ไม่ผ่านเกณฑ์', romaji: 'mai-phan-ken', jp: '基準未達' },
+    { thai: 'ตัวอย่าง', romaji: 'tua-yang', jp: 'サンプル' },
+    { thai: 'ทดสอบ', romaji: 'thot-sop', jp: 'テストする' },
+    { thai: 'วิเคราะห์', romaji: 'wi-khro', jp: '分析する' },
+    { thai: 'วัด', romaji: 'wat', jp: '測定する' },
+    { thai: 'ชั่ง', romaji: 'chang', jp: '重さを測る' },
+    { thai: 'นับ', romaji: 'nap', jp: '数える' },
+    { thai: 'ตรวจนับ', romaji: 'truat-nap', jp: '点検・棚卸し' },
+    { thai: 'บันทึก', romaji: 'ban-thuek', jp: '記録する' },
+    { thai: 'รายงานผล', romaji: 'rai-ngan-phon', jp: '結果報告' },
+    { thai: 'เอกสารคุณภาพ', romaji: 'ek-ga-san-khun-na-phap', jp: '品質文書' },
+    { thai: 'ใบรับรอง', romaji: 'bai-rap-rong', jp: '証明書' },
+    { thai: 'ISO', romaji: 'ai-so', jp: 'ISO（品質規格）' },
+    { thai: 'ตรวจสอบภายใน', romaji: 'truat-sop-phai-nai', jp: '内部監査' },
+    { thai: 'ตรวจสอบภายนอก', romaji: 'truat-sop-phai-nok', jp: '外部監査' },
+    { thai: 'ไม่เป็นไปตามมาตรฐาน', romaji: 'mai-pen-pai-tam-mat-tra-than', jp: '基準不適合' },
+    { thai: 'แก้ไขทันที', romaji: 'gae-khai-than-thi', jp: 'すぐに修正' },
+    { thai: 'ป้องกัน', romaji: 'pong-gan', jp: '予防する' },
+    { thai: 'มาตรการป้องกัน', romaji: 'mat-tra-gan-pong-gan', jp: '予防措置' },
+    { thai: 'ความเสี่ยง', romaji: 'khwam-siang', jp: 'リスク' },
+    { thai: 'ประเมินความเสี่ยง', romaji: 'pra-moem-khwam-siang', jp: 'リスク評価' },
+    { thai: 'ปลอดภัย', romaji: 'plot-phai', jp: '安全' },
+    { thai: 'อันตราย', romaji: 'an-ta-rai', jp: '危険' },
+    { thai: 'เครื่องมือวัด', romaji: 'khruang-mu-wat', jp: '測定機器' },
+    { thai: 'สอบเทียบ', romaji: 'sop-thiap', jp: '校正する' },
+    { thai: 'ความแม่นยำ', romaji: 'khwam-maen-yam', jp: '精度' },
+    { thai: 'ความคลาดเคลื่อน', romaji: 'khwam-khlat-khluean', jp: '誤差' },
+    { thai: 'ผลิตภัณฑ์', romaji: 'pha-lit-ta-phan', jp: '製品' },
+    { thai: 'ผลิตภัณฑ์สำเร็จรูป', romaji: 'pha-lit-ta-phan-sam-ret-rup', jp: '完成品' },
+    { thai: 'กึ่งสำเร็จรูป', romaji: 'kueng-sam-ret-rup', jp: '半製品' },
+    { thai: 'วัสดุ', romaji: 'wat-sa-du', jp: '材料' },
+    { thai: 'คัดแยก', romaji: 'khat-yaek', jp: '選別する' },
+    { thai: 'ตรวจรับ', romaji: 'truat-rap', jp: '受入検査' }
+  ],
+  daily: [
+    // 既存10個
+    { thai: 'เมื่อคืน', romaji: 'muea-khuoen', jp: '昨夜' },
+    { thai: 'สัปดาห์หน้า', romaji: 'sap-da na', jp: '来週' },
+    { thai: 'ระหว่าง', romaji: 'ra-wang', jp: '〜の間・〜中' },
+    { thai: 'เพิ่งจะ', romaji: 'phoeng-ja', jp: 'ちょうど〜したところ' },
+    { thai: 'อีกนาน', romaji: 'ik nan', jp: 'もっと時間がかかる' },
+    { thai: 'เดี๋ยว', romaji: 'diao', jp: 'すぐに・ちょっと待って' },
+    { thai: 'บางครั้ง', romaji: 'bang-khrang', jp: '時々' },
+    { thai: 'โดยปกติ', romaji: 'doi-pa-ga-ti', jp: '通常・いつもは' },
+    { thai: 'ฉุกเฉิน', romaji: 'chuk-choeon', jp: '緊急' },
+    { thai: 'สะดวก', romaji: 'sa-duak', jp: '便利な・都合がよい' },
+    // 新規40個
+    { thai: 'เช้า', romaji: 'chao', jp: '朝' },
+    { thai: 'กลางวัน', romaji: 'klang-wan', jp: '昼' },
+    { thai: 'บ่าย', romaji: 'bai', jp: '午後' },
+    { thai: 'เย็น', romaji: 'yen', jp: '夕方' },
+    { thai: 'กลางคืน', romaji: 'klang-khuen', jp: '夜' },
+    { thai: 'วันนี้', romaji: 'wan-ni', jp: '今日' },
+    { thai: 'เมื่อวาน', romaji: 'muea-wan', jp: '昨日' },
+    { thai: 'พรุ่งนี้', romaji: 'phrung-ni', jp: '明日' },
+    { thai: 'มะรืนนี้', romaji: 'ma-ruen-ni', jp: '明後日' },
+    { thai: 'สัปดาห์นี้', romaji: 'sap-da-ni', jp: '今週' },
+    { thai: 'สัปดาห์ที่แล้ว', romaji: 'sap-da-thi-laeo', jp: '先週' },
+    { thai: 'เดือนนี้', romaji: 'duean-ni', jp: '今月' },
+    { thai: 'เดือนหน้า', romaji: 'duean-na', jp: '来月' },
+    { thai: 'ปีนี้', romaji: 'pi-ni', jp: '今年' },
+    { thai: 'ปีหน้า', romaji: 'pi-na', jp: '来年' },
+    { thai: 'ตอนนี้', romaji: 'ton-ni', jp: '今' },
+    { thai: 'ทันที', romaji: 'than-thi', jp: 'すぐに' },
+    { thai: 'เร็วๆ', romaji: 'reo-reo', jp: '早く' },
+    { thai: 'ช้า', romaji: 'cha', jp: '遅い' },
+    { thai: 'สาย', romaji: 'sai', jp: '遅刻' },
+    { thai: 'ตรงเวลา', romaji: 'trong-wela', jp: '時間通り' },
+    { thai: 'ก่อน', romaji: 'kon', jp: '前に' },
+    { thai: 'หลัง', romaji: 'lang', jp: '後に' },
+    { thai: 'ขณะนี้', romaji: 'kha-na-ni', jp: 'この瞬間・ただいま' },
+    { thai: 'เสมอ', romaji: 'sa-moe', jp: 'いつも' },
+    { thai: 'ไม่เคย', romaji: 'mai-khoei', jp: '一度もない' },
+    { thai: 'เคย', romaji: 'khoei', jp: '〜したことがある' },
+    { thai: 'แล้ว', romaji: 'laeo', jp: 'もう〜した' },
+    { thai: 'ยัง', romaji: 'yang', jp: 'まだ' },
+    { thai: 'ยังไม่', romaji: 'yang-mai', jp: 'まだ〜していない' },
+    { thai: 'กำลัง', romaji: 'gam-lang', jp: '〜している（進行中）' },
+    { thai: 'จะ', romaji: 'ja', jp: '〜する（未来）' },
+    { thai: 'คง', romaji: 'khong', jp: 'たぶん' },
+    { thai: 'อาจจะ', romaji: 'at-ja', jp: 'おそらく' },
+    { thai: 'แน่นอน', romaji: 'nae-non', jp: '確実に' },
+    { thai: 'ไม่แน่ใจ', romaji: 'mai-nae-jai', jp: '確信がない' },
+    { thai: 'เหมือนกัน', romaji: 'muean-gan', jp: '同じ' },
+    { thai: 'ต่างกัน', romaji: 'tang-gan', jp: '違う' },
+    { thai: 'มากกว่า', romaji: 'mak-kwa', jp: '〜より多い' },
+    { thai: 'น้อยกว่า', romaji: 'noi-kwa', jp: '〜より少ない' }
+  ],
+  polite: [
+    // 既存10個
+    { thai: 'กรุณา', romaji: 'ga-ru-na', jp: '〜してください（丁寧）' },
+    { thai: 'ขอโทษครับ', romaji: 'kho-thot khrap', jp: '申し訳ありません' },
+    { thai: 'รบกวน', romaji: 'rop-guan', jp: 'お手数をおかけしますが' },
+    { thai: 'ยินดีครับ', romaji: 'yin-di khrap', jp: 'どういたしまして・喜んで' },
+    { thai: 'ได้รับทราบครับ', romaji: 'dai-rap-sap khrap', jp: '承知しました' },
+    { thai: 'ขอเรียนให้ทราบ', romaji: 'kho-rian-hai-sap', jp: 'ご報告申し上げます' },
+    { thai: 'โปรดทราบ', romaji: 'prot-sap', jp: 'ご承知おきください' },
+    { thai: 'ขอความอนุเคราะห์', romaji: 'kho-khwam-a-nu-khro', jp: 'ご協力をお願いします' },
+    { thai: 'ตามที่ได้แจ้ง', romaji: 'tam-thi-dai-jaeng', jp: '以前ご連絡の通り' },
+    { thai: 'สอบถามได้ครับ', romaji: 'sop-tham-dai khrap', jp: 'お気軽にお問い合わせください' },
+    // 新規40個
+    { thai: 'สวัสดีครับ', romaji: 'sa-wat-di khrap', jp: 'こんにちは（男性）' },
+    { thai: 'สวัสดีค่ะ', romaji: 'sa-wat-di kha', jp: 'こんにちは（女性）' },
+    { thai: 'ขอบคุณครับ', romaji: 'khop-khun khrap', jp: 'ありがとうございます（男性）' },
+    { thai: 'ขอบคุณค่ะ', romaji: 'khop-khun kha', jp: 'ありがとうございます（女性）' },
+    { thai: 'ขอบคุณมากครับ', romaji: 'khop-khun-mak khrap', jp: '大変ありがとうございます' },
+    { thai: 'ไม่เป็นไรครับ', romaji: 'mai-pen-rai khrap', jp: '大丈夫です・気にしないで' },
+    { thai: 'ด้วยความเคารพ', romaji: 'duay-khwam-khao-rop', jp: '敬具' },
+    { thai: 'เรียน', romaji: 'rian', jp: '〜様（宛名）' },
+    { thai: 'ท่าน', romaji: 'than', jp: '〜様（尊敬）' },
+    { thai: 'คุณ', romaji: 'khun', jp: 'あなた・〜さん' },
+    { thai: 'เชิญ', romaji: 'chooen', jp: 'どうぞ' },
+    { thai: 'เชิญครับ', romaji: 'chooen khrap', jp: 'どうぞ（丁寧）' },
+    { thai: 'ขออนุญาต', romaji: 'kho-a-nu-yat', jp: '失礼します' },
+    { thai: 'ขอตัวก่อนครับ', romaji: 'kho-tua-kon khrap', jp: 'お先に失礼します' },
+    { thai: 'รอสักครู่ครับ', romaji: 'ro-sak-khru khrap', jp: '少々お待ちください' },
+    { thai: 'รออีกครู่หนึ่งครับ', romaji: 'ro-ik-khru-nueng khrap', jp: 'もう少しお待ちください' },
+    { thai: 'ขอรับครับ', romaji: 'kho-rap khrap', jp: 'かしこまりました' },
+    { thai: 'เข้าใจครับ', romaji: 'khao-jai khrap', jp: '理解しました' },
+    { thai: 'ไม่เข้าใจครับ', romaji: 'mai-khao-jai khrap', jp: '理解できません' },
+    { thai: 'ขอโทษที่ทำให้รอนานครับ', romaji: 'kho-thot-thi-tham-hai-ro-nan khrap', jp: 'お待たせして申し訳ありません' },
+    { thai: 'ขอโทษที่มาสายครับ', romaji: 'kho-thot-thi-ma-sai khrap', jp: '遅刻して申し訳ありません' },
+    { thai: 'ขอแสดงความนับถือ', romaji: 'kho-sa-daeng-khwam-nap-thue', jp: '敬意を表します' },
+    { thai: 'ด้วยความขอบคุณ', romaji: 'duay-khwam-khop-khun', jp: '感謝を込めて' },
+    { thai: 'กราบเรียน', romaji: 'krap-rian', jp: '謹んで申し上げます' },
+    { thai: 'เรียนผู้บริหาร', romaji: 'rian-phu-bo-ri-han', jp: '経営者各位' },
+    { thai: 'เรียนท่านผู้จัดการ', romaji: 'rian-than-phu-jat-gan', jp: 'マネージャー様' },
+    { thai: 'ตามคำสั่ง', romaji: 'tam-kham-sang', jp: 'ご指示通りに' },
+    { thai: 'ด้วยความเต็มใจ', romaji: 'duay-khwam-tem-jai', jp: '喜んで' },
+    { thai: 'ขอบพระคุณอย่างสูง', romaji: 'khop-phra-khun-yang-sung', jp: '心より感謝申し上げます' },
+    { thai: 'ขอให้โชคดีครับ', romaji: 'kho-hai-chok-di khrap', jp: 'ご多幸をお祈りします' },
+    { thai: 'ขออภัยครับ', romaji: 'kho-a-phai khrap', jp: 'お詫び申し上げます' },
+    { thai: 'รู้สึกเป็นเกียรติ', romaji: 'ru-suek-pen-kiat', jp: '光栄に存じます' },
+    { thai: 'ขอขอบพระคุณเป็นอย่างสูง', romaji: 'kho-khop-phra-khun-pen-yang-sung', jp: '深く御礼申し上げます' },
+    { thai: 'ได้โปรดครับ', romaji: 'dai-prot khrap', jp: 'どうかお願いします' },
+    { thai: 'ช่วยเหลือด้วยครับ', romaji: 'chuay-luea-duay khrap', jp: 'お助けください' },
+    { thai: 'ยินดีต้อนรับครับ', romaji: 'yin-di-ton-rap khrap', jp: 'ようこそ・歓迎いたします' },
+    { thai: 'ขอแสดงความยินดี', romaji: 'kho-sa-daeng-khwam-yin-di', jp: 'お祝い申し上げます' },
+    { thai: 'ขอให้สุขภาพแข็งแรง', romaji: 'kho-hai-suk-kha-phap-khaeng-raeng', jp: 'ご健勝をお祈りします' },
+    { thai: 'ประสบความสำเร็จ', romaji: 'pra-sop-khwam-sam-ret', jp: '成功されますように' },
+    { thai: 'ตามสมควร', romaji: 'tam-som-khuan', jp: '適切に・相応しく' }
+  ]
+};
+
+// ---- Workplace Phrases ----
+const phrasesData = {
+  meeting: [
+    // 既存10個
+    { thai: 'ขอบคุณที่มาประชุมครับ', romaji: 'khop-khun thi ma pra-chum khrap', jp: '会議に来ていただきありがとうございます' },
+    { thai: 'เรามาเริ่มประชุมกันเลยครับ', romaji: 'rao ma roem pra-chum gan loei khrap', jp: '会議を始めましょう' },
+    { thai: 'วันนี้เรามีหัวข้ออะไรบ้างครับ', romaji: 'wan-ni rao mi hua-kho a-rai bang khrap', jp: '本日の議題は何ですか' },
+    { thai: 'มีคำถามอะไรไหมครับ', romaji: 'mi kham-tham a-rai mai khrap', jp: '何か質問はありますか' },
+    { thai: 'ผมเห็นด้วยกับความคิดนี้ครับ', romaji: 'phom hen-duay gap khwam-khit ni khrap', jp: 'この意見に賛成です' },
+    { thai: 'ขอเพิ่มเติมอีกนิดหนึ่งครับ', romaji: 'kho phoem-toem ik nit-nueng khrap', jp: '少し補足させてください' },
+    { thai: 'เราตกลงกันแล้วใช่ไหมครับ', romaji: 'rao tok-long gan laeo chai-mai khrap', jp: '合意できましたね' },
+    { thai: 'ขอสรุปประเด็นสำคัญครับ', romaji: 'kho sa-rup pra-den sam-khan khrap', jp: '重要なポイントをまとめます' },
+    { thai: 'ประชุมครั้งหน้าวันไหนครับ', romaji: 'pra-chum khrang-na wan-nai khrap', jp: '次の会議はいつですか' },
+    { thai: 'ขอบคุณทุกคนครับ', romaji: 'khop-khun thuk-khon khrap', jp: '皆さんありがとうございました' },
+    // 新規40個
+    { thai: 'กรุณานั่งครับ', romaji: 'ga-ru-na nang khrap', jp: 'お座りください' },
+    { thai: 'เริ่มประชุมตอนกี่โมงครับ', romaji: 'roem pra-chum ton ki-mong khrap', jp: '会議は何時に始まりますか' },
+    { thai: 'ขออนุญาตพูดครับ', romaji: 'kho a-nu-yat phut khrap', jp: '発言させてください' },
+    { thai: 'ผมมีความเห็นต่างครับ', romaji: 'phom mi khwam-hen-tang khrap', jp: '異なる意見があります' },
+    { thai: 'ช่วยอธิบายเพิ่มเติมได้ไหมครับ', romaji: 'chuay a-thi-bai phoem-toem dai-mai khrap', jp: 'もう少し説明していただけますか' },
+    { thai: 'ผมไม่ค่อยเห็นด้วยครับ', romaji: 'phom mai-khoi hen-duay khrap', jp: 'あまり賛成できません' },
+    { thai: 'เราควรพิจารณาอีกครั้งครับ', romaji: 'rao khuan phi-ja-ra-na ik-khrang khrap', jp: 'もう一度検討すべきです' },
+    { thai: 'มีข้อมูลเพิ่มเติมไหมครับ', romaji: 'mi kho-mun phoem-toem mai khrap', jp: '追加情報はありますか' },
+    { thai: 'ขอดูเอกสารหน่อยครับ', romaji: 'kho du ek-ga-san noi khrap', jp: '資料を見せてください' },
+    { thai: 'เราต้องตัดสินใจวันนี้ไหมครับ', romaji: 'rao tong tat-sin-jai wan-ni mai khrap', jp: '今日決定する必要がありますか' },
+    { thai: 'ขอเวลาคิดอีกสักครู่ครับ', romaji: 'kho wela khit ik sak-khru khrap', jp: '少し考える時間をください' },
+    { thai: 'ให้ลงมติกันไหมครับ', romaji: 'hai long-ma-ti gan mai khrap', jp: '投票しましょうか' },
+    { thai: 'ใครเห็นด้วยบ้างครับ', romaji: 'khrai hen-duay bang khrap', jp: '誰が賛成ですか' },
+    { thai: 'ใครคัดค้านบ้างครับ', romaji: 'khrai khat-khan bang khrap', jp: '誰が反対ですか' },
+    { thai: 'งดออกเสียงครับ', romaji: 'ngot ok siang khrap', jp: '棄権します' },
+    { thai: 'มติเป็นเอกฉันท์ครับ', romaji: 'ma-ti pen ek-ka-chan khrap', jp: '満場一致です' },
+    { thai: 'ขอบันทึกรายงานการประชุมครับ', romaji: 'kho ban-thuek rai-ngan gan pra-chum khrap', jp: '議事録を記録してください' },
+    { thai: 'ใครเป็นเลขานุการครับ', romaji: 'khrai pen le-kha-nu-gan khrap', jp: '誰が書記ですか' },
+    { thai: 'ขอแจกเอกสารครับ', romaji: 'kho jaek ek-ga-san khrap', jp: '資料を配布します' },
+    { thai: 'กรุณาดูหน้านี้ครับ', romaji: 'ga-ru-na du na-ni khrap', jp: 'このページを見てください' },
+    { thai: 'มีใครไม่เข้าใจไหมครับ', romaji: 'mi khrai mai khao-jai mai khrap', jp: '分からない方はいますか' },
+    { thai: 'ขอพักเบรกสักครู่ครับ', romaji: 'kho phak break sak-khru khrap', jp: '少し休憩しましょう' },
+    { thai: 'กลับมาประชุมต่อครับ', romaji: 'klap ma pra-chum to khrap', jp: '会議を再開します' },
+    { thai: 'เรามีเวลาจำกัดครับ', romaji: 'rao mi wela jam-gat khrap', jp: '時間が限られています' },
+    { thai: 'ขอให้สรุปสั้นๆ ครับ', romaji: 'kho hai sa-rup san-san khrap', jp: '簡潔にまとめてください' },
+    { thai: 'เรื่องนี้เร่งด่วนครับ', romaji: 'rueang ni reng-duan khrap', jp: 'これは緊急です' },
+    { thai: 'ขอเลื่อนเป็นครั้งหน้าครับ', romaji: 'kho luean pen khrang-na khrap', jp: '次回に延期しましょう' },
+    { thai: 'วาระถัดไปครับ', romaji: 'wa-ra that-pai khrap', jp: '次の議題です' },
+    { thai: 'ขอถามคำถามหน่อยครับ', romaji: 'kho tham kham-tham noi khrap', jp: '質問させてください' },
+    { thai: 'ใครมีความคิดเห็นบ้างครับ', romaji: 'khrai mi khwam-khit-hen bang khrap', jp: '意見がある方はいますか' },
+    { thai: 'ผมขอแนะนำครับ', romaji: 'phom kho nae-nam khrap', jp: '提案させてください' },
+    { thai: 'เราควรทำอย่างไรครับ', romaji: 'rao khuan tham yang-rai khrap', jp: 'どうすべきでしょうか' },
+    { thai: 'มีทางเลือกอื่นไหมครับ', romaji: 'mi thang-lueak uen mai khrap', jp: '他の選択肢はありますか' },
+    { thai: 'ขอให้โหวตครับ', romaji: 'kho hai wot khrap', jp: '投票してください' },
+    { thai: 'ผลโหวตเป็นอย่างไรครับ', romaji: 'phon wot pen yang-rai khrap', jp: '投票結果はどうですか' },
+    { thai: 'ขอปิดประชุมครับ', romaji: 'kho pit pra-chum khrap', jp: '会議を終了します' },
+    { thai: 'ขอบคุณที่ให้ความร่วมมือครับ', romaji: 'khop-khun thi hai khwam-ruam-mue khrap', jp: 'ご協力ありがとうございました' },
+    { thai: 'นัดประชุมครั้งหน้าครับ', romaji: 'nat pra-chum khrang-na khrap', jp: '次回の会議を設定します' },
+    { thai: 'ส่งรายงานภายในพรุ่งนี้ครับ', romaji: 'song rai-ngan phai-nai phrung-ni khrap', jp: '明日までに報告書を提出してください' },
+    { thai: 'กรุณาตรวจสอบอีกครั้งครับ', romaji: 'ga-ru-na truat-sop ik-khrang khrap', jp: 'もう一度ご確認ください' }
+  ],
+  instruction: [
+    // 既存10個
+    { thai: 'ช่วยตรวจสอบนี่หน่อยครับ', romaji: 'chuay truat-sop ni noi khrap', jp: 'これを確認してください' },
+    { thai: 'กรุณาทำให้เสร็จภายในวันนี้ครับ', romaji: 'ga-ru-na tham hai set phai-nai wan-ni khrap', jp: '本日中に完了してください' },
+    { thai: 'ส่งรายงานมาให้ผมด้วยครับ', romaji: 'song rai-ngan ma hai phom duay khrap', jp: '報告書を提出してください' },
+    { thai: 'อย่าลืมบันทึกข้อมูลนะครับ', romaji: 'ya luem ban-thuek kho-mun na khrap', jp: 'データ記録を忘れないでください' },
+    { thai: 'ต้องระวังตรงนี้ให้ดีครับ', romaji: 'tong ra-wang trong-ni hai di khrap', jp: 'ここは注意してください' },
+    { thai: 'ให้เขาช่วยด้วยครับ', romaji: 'hai khao chuay duay khrap', jp: '彼に手伝ってもらってください' },
+    { thai: 'ปฏิบัติตามขั้นตอนนี้ครับ', romaji: 'pa-ti-bat tam khan-ton ni khrap', jp: 'この手順に従ってください' },
+    { thai: 'แก้ไขส่วนนี้ใหม่ครับ', romaji: 'gae-khai suan-ni mai khrap', jp: 'この部分を修正してください' },
+    { thai: 'รีบทำให้เร็วหน่อยครับ', romaji: 'rip tham hai reo noi khrap', jp: '急いでやってください' },
+    { thai: 'ทำตามที่บอกนะครับ', romaji: 'tham tam thi bok na khrap', jp: '言った通りにしてください' },
+    // 新規40個
+    { thai: 'เริ่มทำงานเลยครับ', romaji: 'roem tham-ngan loei khrap', jp: '作業を始めてください' },
+    { thai: 'หยุดทำงานก่อนครับ', romaji: 'yut tham-ngan kon khrap', jp: '作業を止めてください' },
+    { thai: 'ทำต่อได้ครับ', romaji: 'tham to dai khrap', jp: '続けてください' },
+    { thai: 'รอคำสั่งครับ', romaji: 'ro kham-sang khrap', jp: '指示を待ってください' },
+    { thai: 'เตรียมอุปกรณ์ให้พร้อมครับ', romaji: 'triam u-pa-kon hai phrom khrap', jp: '設備を準備してください' },
+    { thai: 'จัดโต๊ะให้เรียบร้อยครับ', romaji: 'jat to hai riap-roi khrap', jp: '机を整理してください' },
+    { thai: 'เก็บของให้เข้าที่ครับ', romaji: 'kep khong hai khao-thi khrap', jp: '物を片付けてください' },
+    { thai: 'ทำความสะอาดครับ', romaji: 'tham khwam-sa-at khrap', jp: '掃除してください' },
+    { thai: 'เช็ดเครื่องจักรครับ', romaji: 'chet khruean jak khrap', jp: '機械を拭いてください' },
+    { thai: 'ตรวจเช็คเครื่องมือครับ', romaji: 'truat-check khruean-mu khrap', jp: '工具を点検してください' },
+    { thai: 'เปลี่ยนชิ้นส่วนนี้ครับ', romaji: 'plian chin-suan ni khrap', jp: 'この部品を交換してください' },
+    { thai: 'ซ่อมแซมให้เสร็จวันนี้ครับ', romaji: 'som-saem hai set wan-ni khrap', jp: '今日中に修理してください' },
+    { thai: 'ปรับแต่งตามที่บอกครับ', romaji: 'prap-taeng tam-thi-bok khrap', jp: '言った通りに調整してください' },
+    { thai: 'ทดสอบก่อนใช้งานครับ', romaji: 'thot-sop kon chai-ngan khrap', jp: '使う前にテストしてください' },
+    { thai: 'เริ่มเครื่องได้ครับ', romaji: 'roem khruean dai khrap', jp: '機械を起動してください' },
+    { thai: 'ปิดเครื่องด้วยครับ', romaji: 'pit khruean duay khrap', jp: '機械を停止してください' },
+    { thai: 'ตั้งค่าตามนี้ครับ', romaji: 'tang kha tam-ni khrap', jp: 'この設定にしてください' },
+    { thai: 'ปรับความเร็วลงครับ', romaji: 'prap khwam-reo long khrap', jp: '速度を下げてください' },
+    { thai: 'เพิ่มความเร็วขึ้นครับ', romaji: 'phoem khwam-reo khuen khrap', jp: '速度を上げてください' },
+    { thai: 'ใส่วัตถุดิบเพิ่มครับ', romaji: 'sai wat-thu-dip phoem khrap', jp: '原材料を追加してください' },
+    { thai: 'เอาออกมาครับ', romaji: 'ao ok ma khrap', jp: '取り出してください' },
+    { thai: 'ใส่เข้าไปครับ', romaji: 'sai khao-pai khrap', jp: '入れてください' },
+    { thai: 'วางตรงนี้ครับ', romaji: 'wang trong-ni khrap', jp: 'ここに置いてください' },
+    { thai: 'ย้ายไปตรงนั้นครับ', romaji: 'yai pai trong-nan khrap', jp: 'あそこに移動してください' },
+    { thai: 'จัดเรียงตามลำดับครับ', romaji: 'jat-riang tam-lam-dap khrap', jp: '順番に並べてください' },
+    { thai: 'นับจำนวนให้ชัดเจนครับ', romaji: 'nap jam-nuan hai chat-jen khrap', jp: '数をはっきり数えてください' },
+    { thai: 'เขียนรายงานให้ละเอียดครับ', romaji: 'khian rai-ngan hai la-iat khrap', jp: '報告書を詳しく書いてください' },
+    { thai: 'ลงชื่อตรงนี้ครับ', romaji: 'long-chue trong-ni khrap', jp: 'ここにサインしてください' },
+    { thai: 'ประทับตราด้วยครับ', romaji: 'pra-thap tra duay khrap', jp: '押印してください' },
+    { thai: 'ส่งอีเมลหาผมครับ', romaji: 'song email ha phom khrap', jp: 'メールを送ってください' },
+    { thai: 'โทรหาฉันทันทีครับ', romaji: 'tho ha chan than-thi khrap', jp: 'すぐに電話してください' },
+    { thai: 'แจ้งให้ทุกคนทราบครับ', romaji: 'jaeng hai thuk-khon sap khrap', jp: '全員に知らせてください' },
+    { thai: 'ประกาศในกลุ่มไลน์ครับ', romaji: 'pra-kat nai klum line khrap', jp: 'LINEグループで告知してください' },
+    { thai: 'อัพเดทสถานะครับ', romaji: 'up-date sa-tha-na khrap', jp: 'ステータスを更新してください' },
+    { thai: 'ติดตามความคืบหน้าครับ', romaji: 'tit-tam khwam-khuep-na khrap', jp: '進捗を追跡してください' },
+    { thai: 'รายงานผลทุกวันครับ', romaji: 'rai-ngan phon thuk-wan khrap', jp: '毎日報告してください' },
+    { thai: 'อย่าลืมนะครับ', romaji: 'ya luem na khrap', jp: '忘れないでくださいね' },
+    { thai: 'ทำให้ดีที่สุดครับ', romaji: 'tham hai di thi-sut khrap', jp: '最善を尽くしてください' },
+    { thai: 'ขอบคุณที่ช่วยครับ', romaji: 'khop-khun thi chuay khrap', jp: '手伝ってくれてありがとう' },
+    { thai: 'เก่งมากเลยครับ', romaji: 'keng mak loei khrap', jp: 'とても上手です' }
+  ],
+  question: [
+    // 既存10個
+    { thai: 'มีปัญหาอะไรไหมครับ', romaji: 'mi pan-ha a-rai mai khrap', jp: '何か問題ありますか' },
+    { thai: 'ทำเสร็จแล้วหรือยังครับ', romaji: 'tham set laeo rue yang khrap', jp: '終わりましたか' },
+    { thai: 'เข้าใจไหมครับ', romaji: 'khao-jai mai khrap', jp: '理解できましたか' },
+    { thai: 'ต้องการความช่วยเหลือไหมครับ', romaji: 'tong-gan khwam-chuay-luea mai khrap', jp: '手伝いが必要ですか' },
+    { thai: 'คิดว่ายังไงครับ', romaji: 'khit wa yang-ngai khrap', jp: 'どう思いますか' },
+    { thai: 'ผลเป็นอย่างไรครับ', romaji: 'phon pen yang-rai khrap', jp: '結果はどうですか' },
+    { thai: 'มีข้อสงสัยไหมครับ', romaji: 'mi kho-song-sai mai khrap', jp: '疑問はありますか' },
+    { thai: 'พร้อมแล้วใช่ไหมครับ', romaji: 'phrom laeo chai-mai khrap', jp: '準備できましたか' },
+    { thai: 'ยังมีอะไรอีกไหมครับ', romaji: 'yang mi a-rai ik mai khrap', jp: '他に何かありますか' },
+    { thai: 'ทำไมเป็นแบบนี้ครับ', romaji: 'tham-mai pen baep-ni khrap', jp: 'なぜこうなったのですか' },
+    // 新規40個
+    { thai: 'ไปไหนมาครับ', romaji: 'pai-nai ma khrap', jp: 'どこに行ってきましたか' },
+    { thai: 'ทำอะไรอยู่ครับ', romaji: 'tham a-rai yu khrap', jp: '何をしていますか' },
+    { thai: 'กำลังทำอะไรครับ', romaji: 'gam-lang tham a-rai khrap', jp: '今何をしていますか' },
+    { thai: 'จะทำอะไรต่อครับ', romaji: 'ja tham a-rai to khrap', jp: '次に何をしますか' },
+    { thai: 'ใครทำครับ', romaji: 'khrai tham khrap', jp: '誰がやりましたか' },
+    { thai: 'ทำเมื่อไหร่ครับ', romaji: 'tham muea-rai khrap', jp: 'いつやりましたか' },
+    { thai: 'ทำที่ไหนครับ', romaji: 'tham thi-nai khrap', jp: 'どこでやりましたか' },
+    { thai: 'ใช้เวลานานแค่ไหนครับ', romaji: 'chai wela nan khae-nai khrap', jp: 'どのくらい時間がかかりますか' },
+    { thai: 'ใช้อุปกรณ์อะไรครับ', romaji: 'chai u-pa-kon a-rai khrap', jp: 'どんな設備を使いますか' },
+    { thai: 'ต้องการวัสดุอะไรบ้างครับ', romaji: 'tong-gan wat-sa-du a-rai bang khrap', jp: 'どんな材料が必要ですか' },
+    { thai: 'มีสต็อกเหลือไหมครับ', romaji: 'mi stock luea mai khrap', jp: '在庫は残っていますか' },
+    { thai: 'ได้กี่ชิ้นครับ', romaji: 'dai ki-chin khrap', jp: '何個できましたか' },
+    { thai: 'ของเสียมีกี่เปอร์เซ็นต์ครับ', romaji: 'khong-sia mi ki percent khrap', jp: '不良率は何パーセントですか' },
+    { thai: 'ใครรับผิดชอบครับ', romaji: 'khrai rap-phit-chop khrap', jp: '誰が担当ですか' },
+    { thai: 'แผนการผลิตเป็นอย่างไรครับ', romaji: 'phaen-gan pha-lit pen yang-rai khrap', jp: '生産計画はどうですか' },
+    { thai: 'กำหนดส่งวันไหนครับ', romaji: 'gam-not song wan-nai khrap', jp: '納期はいつですか' },
+    { thai: 'ลูกค้าต้องการเมื่อไหร่ครับ', romaji: 'luk-kha tong-gan muea-rai khrap', jp: '顧客はいつ必要としていますか' },
+    { thai: 'ราคาเท่าไหร่ครับ', romaji: 'ra-kha thao-rai khrap', jp: '価格はいくらですか' },
+    { thai: 'สามารถต่อรองได้ไหมครับ', romaji: 'sa-ma-rat to-rong dai-mai khrap', jp: '値引き交渉できますか' },
+    { thai: 'มีส่วนลดไหมครับ', romaji: 'mi suan-lot mai khrap', jp: '割引はありますか' },
+    { thai: 'ส่งได้ทันไหมครับ', romaji: 'song dai than mai khrap', jp: '間に合いますか' },
+    { thai: 'จะล่าช้าหรือเปล่าครับ', romaji: 'ja la-cha rue plao khrap', jp: '遅れますか' },
+    { thai: 'ต้องเร่งรัดไหมครับ', romaji: 'tong reng-rat mai khrap', jp: '急ぐ必要がありますか' },
+    { thai: 'มีเครื่องสำรองไหมครับ', romaji: 'mi khruean sam-rong mai khrap', jp: '予備機はありますか' },
+    { thai: 'ซ่อมได้ไหมครับ', romaji: 'som dai-mai khrap', jp: '修理できますか' },
+    { thai: 'ต้องเปลี่ยนใหม่หรือครับ', romaji: 'tong plian mai rue khrap', jp: '新しいものに交換する必要がありますか' },
+    { thai: 'ค่าใช้จ่ายเท่าไหร่ครับ', romaji: 'kha-chai-jai thao-rai khrap', jp: '費用はいくらですか' },
+    { thai: 'อนุมัติแล้วหรือยังครับ', romaji: 'a-nu-mat laeo rue yang khrap', jp: '承認されましたか' },
+    { thai: 'ใครเป็นผู้อนุมัติครับ', romaji: 'khrai pen phu a-nu-mat khrap', jp: '誰が承認者ですか' },
+    { thai: 'เอกสารครบไหมครับ', romaji: 'ek-ga-san khrop mai khrap', jp: '書類は揃っていますか' },
+    { thai: 'ขาดอะไรบ้างครับ', romaji: 'khat a-rai bang khrap', jp: '何が不足していますか' },
+    { thai: 'ต้องเพิ่มอะไรอีกไหมครับ', romaji: 'tong phoem a-rai ik mai khrap', jp: '他に追加する必要がありますか' },
+    { thai: 'ตรวจสอบหมดแล้วใช่ไหมครับ', romaji: 'truat-sop mot laeo chai-mai khrap', jp: '全部チェックしましたか' },
+    { thai: 'มีข้อผิดพลาดไหมครับ', romaji: 'mi kho-phit-phlat mai khrap', jp: 'ミスはありますか' },
+    { thai: 'แน่ใจแล้วใช่ไหมครับ', romaji: 'nae-jai laeo chai-mai khrap', jp: '確信していますか' },
+    { thai: 'ตรวจซ้ำอีกครั้งได้ไหมครับ', romaji: 'truat sam ik-khrang dai-mai khrap', jp: 'もう一度確認できますか' },
+    { thai: 'รายงานส่งแล้วหรือยังครับ', romaji: 'rai-ngan song laeo rue yang khrap', jp: '報告書は提出しましたか' },
+    { thai: 'ได้รับแจ้งแล้วใช่ไหมครับ', romaji: 'dai-rap jaeng laeo chai-mai khrap', jp: '通知は受け取りましたか' },
+    { thai: 'เข้าใจคำสั่งไหมครับ', romaji: 'khao-jai kham-sang mai khrap', jp: '指示は理解できましたか' },
+    { thai: 'มั่นใจว่าทำได้ไหมครับ', romaji: 'man-jai wa tham-dai mai khrap', jp: 'できると確信していますか' },
+    { thai: 'ต้องการอธิบายเพิ่มไหมครับ', romaji: 'tong-gan a-thi-bai phoem mai khrap', jp: '追加説明が必要ですか' },
+    { thai: 'ช่วยได้ไหมครับ', romaji: 'chuay dai-mai khrap', jp: '手伝えますか' },
+    { thai: 'สบายดีไหมครับ', romaji: 'sa-bai-di mai khrap', jp: '大丈夫ですか' },
+    { thai: 'เหนื่อยไหมครับ', romaji: 'nuea mai khrap', jp: '疲れましたか' },
+    { thai: 'พักก่อนไหมครับ', romaji: 'phak kon mai khrap', jp: '先に休みますか' },
+    { thai: 'หิวข้าวไหมครับ', romaji: 'hiu khao mai khrap', jp: 'お腹空きましたか' },
+    { thai: 'กลับบ้านได้แล้วครับ', romaji: 'klap ban dai laeo khrap', jp: 'もう帰っていいですよ' },
+    { thai: 'พรุ่งนี้มาทำงานไหมครับ', romaji: 'phrung-ni ma tham-ngan mai khrap', jp: '明日出勤しますか' }
+  ],
+  polite: [
+    // 既存10個
+    { thai: 'ขอโทษที่รบกวนครับ', romaji: 'kho-thot thi rop-guan khrap', jp: 'お邪魔してすみません' },
+    { thai: 'รบกวนถามหน่อยครับ', romaji: 'rop-guan tham noi khrap', jp: 'ちょっとお聞きしてもよろしいですか' },
+    { thai: 'ขอบคุณมากครับ', romaji: 'khop-khun mak khrap', jp: '本当にありがとうございます' },
+    { thai: 'ยินดีครับ', romaji: 'yin-di khrap', jp: 'どういたしまして' },
+    { thai: 'ได้รับทราบครับ', romaji: 'dai-rap-sap khrap', jp: '承知しました' },
+    { thai: 'ขอโทษด้วยครับ', romaji: 'kho-thot duay khrap', jp: '申し訳ございません' },
+    { thai: 'กรุณารอสักครู่ครับ', romaji: 'ga-ru-na ro sak-khru khrap', jp: '少々お待ちください' },
+    { thai: 'ขอความกรุณาด้วยครับ', romaji: 'kho khwam-ga-ru-na duay khrap', jp: 'お願いします' },
+    { thai: 'ขอบพระคุณอย่างสูงครับ', romaji: 'khop-phra-khun yang-sung khrap', jp: '心より感謝申し上げます' },
+    { thai: 'สอบถามได้เลยครับ', romaji: 'sop-tham dai loei khrap', jp: 'お気軽にお尋ねください' },
+    // 新規40個
+    { thai: 'สวัสดีตอนเช้าครับ', romaji: 'sa-wat-di ton-chao khrap', jp: 'おはようございます' },
+    { thai: 'สวัสดีตอนบ่ายครับ', romaji: 'sa-wat-di ton-bai khrap', jp: 'こんにちは（午後）' },
+    { thai: 'ราตรีสวัสดิ์ครับ', romaji: 'ra-tri sa-wat khrap', jp: 'おやすみなさい' },
+    { thai: 'เชิญนั่งครับ', romaji: 'chooen nang khrap', jp: 'お座りください' },
+    { thai: 'เชิญรับประทานครับ', romaji: 'chooen rap-pra-than khrap', jp: '召し上がってください' },
+    { thai: 'ขอให้อร่อยนะครับ', romaji: 'kho hai a-roi na khrap', jp: 'ごゆっくりどうぞ' },
+    { thai: 'ขออภัยในความไม่สะดวกครับ', romaji: 'kho-a-phai nai khwam-mai sa-duak khrap', jp: 'ご不便をおかけして申し訳ございません' },
+    { thai: 'ขอโทษที่ทำให้ผิดหวังครับ', romaji: 'kho-thot thi tham hai phit-wang khrap', jp: 'ご期待に添えず申し訳ありません' },
+    { thai: 'ขอให้โทษด้วยครับ', romaji: 'kho hai thot duay khrap', jp: 'お許しください' },
+    { thai: 'รู้สึกเสียใจมากครับ', romaji: 'ru-suek sia-jai mak khrap', jp: '大変残念に思います' },
+    { thai: 'ผมจะพยายามปรับปรุงครับ', romaji: 'phom ja pha-ya-yam prap-prung khrap', jp: '改善するよう努めます' },
+    { thai: 'ขอรับคำสั่งครับ', romaji: 'kho rap kham-sang khrap', jp: 'ご指示をお受けします' },
+    { thai: 'ตามที่ท่านสั่งครับ', romaji: 'tam thi than sang khrap', jp: 'おっしゃる通りにいたします' },
+    { thai: 'ด้วยความนับถือครับ', romaji: 'duay khwam nap-thue khrap', jp: '敬具' },
+    { thai: 'ขอแสดงความนับถืออย่างสูงครับ', romaji: 'kho sa-daeng khwam nap-thue yang sung khrap', jp: '深く敬意を表します' },
+    { thai: 'เรียนผู้มีเกียรติครับ', romaji: 'rian phu mi kiat khrap', jp: '尊敬する皆様' },
+    { thai: 'ท่านผู้ทรงเกียรติครับ', romaji: 'than phu song kiat khrap', jp: '名誉ある方々' },
+    { thai: 'ขอขอบคุณเป็นอย่างยิ่งครับ', romaji: 'kho khop-khun pen yang ying khrap', jp: '誠にありがとうございます' },
+    { thai: 'ขอบใจจริงๆ ครับ', romaji: 'khop-jai jing-jing khrap', jp: '本当に感謝します' },
+    { thai: 'ช่วยได้มากเลยครับ', romaji: 'chuay dai mak loei khrap', jp: '大変助かりました' },
+    { thai: 'ขอขอบพระคุณอย่างสูงครับ', romaji: 'kho khop phra-khun yang sung khrap', jp: '深く御礼申し上げます' },
+    { thai: 'ไม่รู้จะขอบคุณยังไงดีครับ', romaji: 'mai ru ja khop-khun yang-ngai di khrap', jp: 'お礼の言葉もございません' },
+    { thai: 'รู้สึกซาบซึ้งมากครับ', romaji: 'ru-suek sap-sueng mak khrap', jp: '深く感動しております' },
+    { thai: 'ขอให้ประสบความสำเร็จครับ', romaji: 'kho hai pra-sop khwam sam-ret khrap', jp: 'ご成功をお祈りします' },
+    { thai: 'ขอให้มีความสุขครับ', romaji: 'kho hai mi khwam-suk khrap', jp: 'お幸せでありますように' },
+    { thai: 'ขอให้สุขภาพแข็งแรงครับ', romaji: 'kho hai suk-kha-phap khaeng-raeng khrap', jp: 'ご健勝をお祈りします' },
+    { thai: 'ขอให้โชคดีครับ', romaji: 'kho hai chok-di khrap', jp: '幸運を祈ります' },
+    { thai: 'ขอให้ราบรื่นครับ', romaji: 'kho hai rap-ruen khrap', jp: '順調でありますように' },
+    { thai: 'พบกันใหม่ครับ', romaji: 'phop gan mai khrap', jp: 'またお会いしましょう' },
+    { thai: 'ไปมาดีๆ นะครับ', romaji: 'pai ma di-di na khrap', jp: '気をつけて行ってきてください' },
+    { thai: 'กลับบ้านปลอดภัยนะครับ', romaji: 'klap ban plot-phai na khrap', jp: '気をつけてお帰りください' },
+    { thai: 'ฝันดีครับ', romaji: 'fan di khrap', jp: 'よい夢を' },
+    { thai: 'พักผ่อนให้เต็มที่ครับ', romaji: 'phak-phon hai tem-thi khrap', jp: 'ゆっくりお休みください' },
+    { thai: 'หายป่วยเร็วๆ นะครับ', romaji: 'hai puay reo-reo na khrap', jp: 'お大事に' },
+    { thai: 'ขอให้หายไวๆ ครับ', romaji: 'kho hai hai wai-wai khrap', jp: '早く良くなりますように' },
+    { thai: 'ดูแลสุขภาพด้วยนะครับ', romaji: 'du-lae suk-kha-phap duay na khrap', jp: '健康に気をつけてください' },
+    { thai: 'อย่าทำงานหนักเกินไปนะครับ', romaji: 'ya tham-ngan nak koen-pai na khrap', jp: '無理しないでください' },
+    { thai: 'ขอให้ทำงานสะดวกครับ', romaji: 'kho hai tham-ngan sa-duak khrap', jp: '業務がスムーズに運びますように' },
+    { thai: 'ขอให้ประสบผลสำเร็จครับ', romaji: 'kho hai pra-sop phon sam-ret khrap', jp: '成果をあげられますように' },
+    { thai: 'ยินดีต้อนรับสู่บริษัทครับ', romaji: 'yin-di ton-rap su bo-ri-sat khrap', jp: '弊社へようこそ' },
+    { thai: 'ยินดีที่ได้รู้จักครับ', romaji: 'yin-di thi dai ru-jak khrap', jp: 'お会いできて光栄です' },
+    { thai: 'ยินดีที่ได้ร่วมงานครับ', romaji: 'yin-di thi dai ruam-ngan khrap', jp: 'ご一緒に働けて嬉しいです' },
+    { thai: 'ขอให้การทำงานราบรื่นครับ', romaji: 'kho hai gan tham-ngan rap-ruen khrap', jp: '円滑な業務をお祈りします' },
+    { thai: 'ยินดีให้บริการครับ', romaji: 'yin-di hai bo-ri-gan khrap', jp: '喜んでお手伝いします' },
+    { thai: 'มีอะไรให้ช่วยบอกได้เลยครับ', romaji: 'mi a-rai hai chuay bok dai loei khrap', jp: '何かお手伝いできることがあれば言ってください' },
+    { thai: 'พร้อมให้ความช่วยเหลือครับ', romaji: 'phrom hai khwam chuay-luea khrap', jp: 'お手伝いさせていただきます' },
+    { thai: 'หากต้องการอะไรบอกได้นะครับ', romaji: 'hak tong-gan a-rai bok dai na khrap', jp: '何か必要でしたらおっしゃってください' },
+    { thai: 'ยินดีรับใช้ครับ', romaji: 'yin-di rap-chai khrap', jp: '謹んでお仕えします' }
+  ]
+};;
+
+let currentPhraseCategory = 'meeting';
+let currentPhrases = [];
+let phraseIndex = 0;
+let phraseMode = 'learn';
+
+function setPhraseMode(mode) {
+  phraseMode = mode;
+  const btns = document.querySelectorAll('#phrases .mode-btn');
+  btns.forEach(b => b.classList.remove('active'));
+  event.target.classList.add('active');
+  
+  if (mode === 'learn') {
+    document.getElementById('phraseButtons').innerHTML = `
+      <button class="fc-btn skip" onclick="prevPhrase()">← 前</button>
+      <button class="fc-btn again" onclick="markPhrase(false)">もう一度</button>
+      <button class="fc-btn good" onclick="markPhrase(true)">覚えた ✓</button>
+      <button class="fc-btn skip" onclick="nextPhrase()">次 →</button>
+    `;
+  } else {
+    document.getElementById('phraseButtons').innerHTML = `
+      <button class="fc-btn skip" onclick="prevPhrase()">← 前</button>
+      <button class="fc-btn skip" onclick="nextPhrase()">次 →</button>
+    `;
+  }
+  
+  currentPhrases = getPhraseList();
+  phraseIndex = 0;
+  showPhrase();
+}
+
+function setPhraseCategory(cat, btn) {
+  currentPhraseCategory = cat;
+  document.querySelectorAll('#phrases .cat-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  currentPhrases = getPhraseList();
+  phraseIndex = 0;
+  showPhrase();
+}
+
+function getPhraseList() {
+  const allPhrases = phrasesData[currentPhraseCategory].slice(0, 50); // 最初の50個のみ
+  if (phraseMode === 'learn') {
+    return allPhrases.filter((p, i) => !progress.phrasesLearned[currentPhraseCategory + '_' + i]);
+  }
+  return allPhrases;
+}
+
+function showPhrase() {
+  if (currentPhrases.length === 0) {
+    document.getElementById('phraseThai').textContent = '🎉 全て学習済み！';
+    document.getElementById('phraseRomaji').textContent = 'おつかれさまでした';
+    document.getElementById('phraseJP').textContent = '復習モードで見直せます';
+    document.getElementById('phraseCounter').textContent = '完了';
+    return;
+  }
+  
+  const p = currentPhrases[phraseIndex];
+  document.getElementById('phraseThai').textContent = p.thai;
+  document.getElementById('phraseRomaji').textContent = p.romaji;
+  document.getElementById('phraseJP').textContent = p.jp;
+  document.getElementById('phraseCounter').textContent = (phraseIndex + 1) + ' / ' + currentPhrases.length;
+}
+
+function nextPhrase() {
+  phraseIndex = (phraseIndex + 1) % currentPhrases.length;
+  showPhrase();
+}
+
+function prevPhrase() {
+  phraseIndex = (phraseIndex - 1 + currentPhrases.length) % currentPhrases.length;
+  showPhrase();
+}
+
+function markPhrase(learned) {
+  const p = currentPhrases[phraseIndex];
+  const allPhrases = phrasesData[currentPhraseCategory].slice(0, 50); // 50個に制限
+  const realIndex = allPhrases.indexOf(p);
+  progress.phrasesLearned[currentPhraseCategory + '_' + realIndex] = learned;
+  saveProgress();
+  
+  if (learned && phraseMode === 'learn') {
+    currentPhrases = getPhraseList();
+    if (phraseIndex >= currentPhrases.length) phraseIndex = 0;
+  }
+  showPhrase();
+}
+
+let currentCategory = 'work';
+let currentCards = [];
+let cardIndex = 0;
+let revealed = false;
+let vocabMode = 'learn';
+
+function setVocabMode(mode) {
+  vocabMode = mode;
+  const btns = document.querySelectorAll('#vocab .mode-btn');
+  btns.forEach(b => b.classList.remove('active'));
+  event.target.classList.add('active');
+  
+  // 復習モードでは「覚えた」ボタンを非表示にする
+  if (mode === 'review') {
+    // showCard()で表示されるボタンは学習モードのみ
+  }
+  
+  startCards();
+}
+
+function setCategory(cat, btn) {
+  currentCategory = cat;
+  document.querySelectorAll('.cat-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  startCards();
+}
+
+function getVocabList() {
+  const allVocab = vocabData[currentCategory].slice(0, 50); // 最初の50個のみ
+  if (vocabMode === 'learn') {
+    return allVocab.filter((v, i) => !progress.vocabLearned[currentCategory + '_' + i]);
+  }
+  return allVocab;
+}
+
+function shuffle(arr) {
+  return [...arr].sort(() => Math.random() - 0.5);
+}
+
+function startCards() {
+  const list = getVocabList();
+  currentCards = vocabMode === 'learn' ? shuffle(list) : list;
+  cardIndex = 0;
+  revealed = false;
+  document.getElementById('fcButtons').style.display = 'none';
+  document.getElementById('fcNext').style.display = 'none';
+  showCard();
+}
+
+function showCard() {
+  if (currentCards.length === 0 || cardIndex >= currentCards.length) {
+    document.getElementById('fcThai').textContent = '🎉 完了！';
+    document.getElementById('fcRomaji').textContent = vocabMode === 'learn' ? '全て学習済み' : 'おつかれさまでした';
+    document.getElementById('fcMeaning').textContent = '';
+    document.getElementById('fcMeaning').classList.remove('show');
+    document.getElementById('cardCounter').textContent = '完了';
+    document.getElementById('fcButtons').style.display = 'none';
+    document.getElementById('fcNext').style.display = vocabMode === 'review' ? 'block' : 'none';
+    return;
+  }
+  
+  const c = currentCards[cardIndex];
+  const allVocab = vocabData[currentCategory].slice(0, 50); // 50個に制限
+  const realIndex = allVocab.indexOf(c);
+  
+  document.getElementById('fcThai').textContent = c.thai;
+  document.getElementById('fcRomaji').textContent = c.romaji;
+  document.getElementById('fcMeaning').textContent = c.jp;
+  document.getElementById('fcMeaning').classList.remove('show');
+  document.getElementById('cardCounter').textContent = (cardIndex + 1) + ' / ' + currentCards.length;
+  document.getElementById('fcButtons').style.display = 'none';
+  revealed = false;
+}
+
+function showMeaning() {
+  if (!revealed) {
+    document.getElementById('fcMeaning').classList.add('show');
+    // 学習モードの時だけボタンを表示
+    if (vocabMode === 'learn') {
+      document.getElementById('fcButtons').style.display = 'flex';
+    }
+    revealed = true;
+  }
+}
+
+function nextCard(knew) {
+  const c = currentCards[cardIndex];
+  const allVocab = vocabData[currentCategory].slice(0, 50); // 50個に制限
+  const realIndex = allVocab.indexOf(c);
+  
+  if (vocabMode === 'learn') {
+    progress.vocabLearned[currentCategory + '_' + realIndex] = knew;
+    saveProgress();
+    
+    if (!knew) {
+      currentCards.push(currentCards[cardIndex]);
+    }
+  }
+  
+  cardIndex++;
+  revealed = false;
+  document.getElementById('fcButtons').style.display = 'none';
+  showCard();
+}
+
+// ---- Grammar ----
+function toggleGrammar(header) {
+  const body = header.nextElementSibling;
+  body.classList.toggle('open');
+}
+
+// ---- Init ----
+currentPhrases = phrasesData['meeting'];
+showPhrase();
+startCards();
+updateProgress();
+updateProgressDisplay();
+
+// ---- PWA: offline cache ----
+if ('serviceWorker' in navigator) {
+  const swCode = `
+    const CACHE = 'thai-study-pro-v1';
+    self.addEventListener('install', e => self.skipWaiting());
+    self.addEventListener('fetch', e => {
+      e.respondWith(caches.match(e.request).then(r => r || fetch(e.request).then(res => {
+        const clone = res.clone();
+        caches.open(CACHE).then(c => c.put(e.request, clone));
+        return res;
+      }).catch(() => r)));
+    });
+  `;
+  const blob = new Blob([swCode], { type: 'application/javascript' });
+  const swUrl = URL.createObjectURL(blob);
+  navigator.serviceWorker.register(swUrl).catch(() => {});
+}
+</script>
+</body>
+</html>
