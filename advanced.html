@@ -1230,7 +1230,28 @@ function updateProgress() {
 }
 
 // ---- Streak ----
-document.getElementById('streakCount').textContent = '1';
+(function() {
+  const today = new Date().toISOString().slice(0, 10);
+  const last = localStorage.getItem('lastAccessDate');
+  let streak = parseInt(localStorage.getItem('streakCount') || '0', 10);
+  if (last === today) {
+    // 同じ日 → 変更なし
+  } else if (last) {
+    const yesterday = new Date();
+    yesterday.setDate(yesterday.getDate() - 1);
+    const yesterdayStr = yesterday.toISOString().slice(0, 10);
+    if (last === yesterdayStr) {
+      streak += 1;
+    } else {
+      streak = 1;
+    }
+  } else {
+    streak = 1;
+  }
+  localStorage.setItem('lastAccessDate', today);
+  localStorage.setItem('streakCount', String(streak));
+  document.getElementById('streakCount').textContent = String(streak);
+})();
 
 // ---- Vocab ----
 const vocabData = {
