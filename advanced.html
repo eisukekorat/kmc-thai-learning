@@ -674,6 +674,100 @@
 
   /* Loading state removed for smoother experience */
 
+  /* ---- Practice Quiz ---- */
+  .practice-btn {
+    margin-top: 14px;
+    background: var(--surface3);
+    border: 1px solid var(--accent2);
+    color: var(--accent2);
+    border-radius: 8px;
+    padding: 8px 16px;
+    font-size: 0.82rem;
+    cursor: pointer;
+    transition: all 0.2s;
+    width: 100%;
+  }
+  .practice-btn:hover { background: rgba(110,168,184,0.12); }
+
+  .practice-area {
+    display: none;
+    margin-top: 14px;
+    border-top: 1px solid var(--border);
+    padding-top: 14px;
+  }
+  .practice-area.open { display: block; }
+
+  .practice-q {
+    margin-bottom: 14px;
+  }
+
+  .practice-q-text {
+    font-size: 0.9rem;
+    color: var(--text);
+    margin-bottom: 10px;
+    line-height: 1.6;
+    background: var(--surface2);
+    padding: 10px 12px;
+    border-radius: 8px;
+  }
+
+  .practice-choices {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  .practice-choice {
+    background: var(--surface3);
+    border: 1px solid var(--border);
+    color: var(--text-dim);
+    border-radius: 8px;
+    padding: 9px 14px;
+    font-size: 0.85rem;
+    cursor: pointer;
+    text-align: left;
+    transition: all 0.15s;
+    font-family: 'Sarabun', sans-serif;
+  }
+  .practice-choice:hover:not(:disabled) { border-color: var(--accent); color: var(--text); }
+  .practice-choice.correct { background: rgba(94,184,138,0.15); border-color: var(--green); color: var(--green); }
+  .practice-choice.wrong { background: rgba(184,110,126,0.12); border-color: var(--red); color: var(--red); }
+  .practice-choice:disabled { cursor: default; }
+
+  .practice-explanation {
+    display: none;
+    font-size: 0.78rem;
+    color: var(--muted);
+    margin-top: 6px;
+    padding: 6px 10px;
+    background: var(--surface2);
+    border-radius: 6px;
+  }
+  .practice-explanation.show { display: block; }
+
+  .practice-perfect {
+    display: none;
+    text-align: center;
+    font-size: 1.1rem;
+    color: var(--accent);
+    padding: 14px;
+    font-weight: 600;
+  }
+  .practice-perfect.show { display: block; }
+
+  .practice-reset-btn {
+    margin-top: 10px;
+    width: 100%;
+    background: transparent;
+    border: 1px solid var(--border);
+    color: var(--muted);
+    border-radius: 8px;
+    padding: 7px;
+    font-size: 0.78rem;
+    cursor: pointer;
+  }
+  .practice-reset-btn:hover { border-color: var(--accent); color: var(--accent); }
+
   /* ---- Home / SRS ---- */
   .home-progress {
     display: grid;
@@ -1002,119 +1096,7 @@
 <!-- GRAMMAR -->
 <div class="section" id="grammar">
   <p class="section-title">レベル3 文法ポイント（タップで開く）</p>
-  <div class="grammar-list">
-
-    <div class="grammar-card">
-      <div class="grammar-header" onclick="toggleGrammar(this)">
-        <span class="grammar-tag">使役</span>
-        <span class="grammar-title">ให้ の使い方（〜させる）</span>
-        <span>▾</span>
-      </div>
-      <div class="grammar-body">
-        <div class="pattern-box">
-          <strong>パターン：</strong> 主語 + ให้ + 人 + 動詞<br>
-          「〜に〜させる / 〜してもらう」
-        </div>
-        <div class="example-box">
-          <div class="thai">ผมให้เขาตรวจสอบชิ้นงานครับ</div>
-          <div class="romaji">phom hai khao truat-sop chin-ngan khrap</div>
-          <div class="jp">私は彼に部品を検査させました。</div>
-        </div>
-        <div class="example-box">
-          <div class="thai">กรุณาให้ผมทราบด้วยครับ</div>
-          <div class="romaji">ga-ru-na hai phom sap duay khrap</div>
-          <div class="jp">ご連絡いただけますでしょうか。</div>
-        </div>
-      </div>
-    </div>
-
-    <div class="grammar-card">
-      <div class="grammar-header" onclick="toggleGrammar(this)">
-        <span class="grammar-tag">条件</span>
-        <span class="grammar-title">ถ้า / หาก（もし〜なら）</span>
-        <span>▾</span>
-      </div>
-      <div class="grammar-body">
-        <div class="pattern-box">
-          <strong>パターン：</strong> ถ้า/หาก + 条件 + ก็ + 結果<br>
-          หาก はより書き言葉・丁寧な表現
-        </div>
-        <div class="example-box">
-          <div class="thai">ถ้าพบข้อบกพร่อง ให้รายงานทันทีครับ</div>
-          <div class="romaji">tha phop kho-bok-phroeng hai rai-ngan than-thi khrap</div>
-          <div class="jp">不良を発見したら、すぐに報告してください。</div>
-        </div>
-        <div class="example-box">
-          <div class="thai">หากมีปัญหา ผมจะช่วยครับ</div>
-          <div class="romaji">hak mi pan-ha phom ja chuay khrap</div>
-          <div class="jp">問題があれば、私が対応します。</div>
-        </div>
-      </div>
-    </div>
-
-    <div class="grammar-card">
-      <div class="grammar-header" onclick="toggleGrammar(this)">
-        <span class="grammar-tag">受動</span>
-        <span class="grammar-title">ถูก（受け身・マイナス表現）</span>
-        <span>▾</span>
-      </div>
-      <div class="grammar-body">
-        <div class="pattern-box">
-          <strong>パターン：</strong> 主語 + ถูก + 動詞<br>
-          日本語の「〜された（否定的な意味合い）」に相当
-        </div>
-        <div class="example-box">
-          <div class="thai">ชิ้นงานถูกปฏิเสธจากลูกค้าครับ</div>
-          <div class="romaji">chin-ngan thuk pa-ti-set jak luk-kha khrap</div>
-          <div class="jp">部品が顧客から拒否されました。</div>
-        </div>
-      </div>
-    </div>
-
-    <div class="grammar-card">
-      <div class="grammar-header" onclick="toggleGrammar(this)">
-        <span class="grammar-tag">程度</span>
-        <span class="grammar-title">ค่อนข้าง / พอสมควร（わりと〜）</span>
-        <span>▾</span>
-      </div>
-      <div class="grammar-body">
-        <div class="pattern-box">
-          <strong>ค่อนข้าง</strong>：わりと・かなり（やや強調）<br>
-          <strong>พอสมควร</strong>：まあまあ・ほどほどに
-        </div>
-        <div class="example-box">
-          <div class="thai">ปัญหานี้ค่อนข้างซับซ้อนครับ</div>
-          <div class="romaji">pan-ha ni khon-khang sap-son khrap</div>
-          <div class="jp">この問題はかなり複雑です。</div>
-        </div>
-        <div class="example-box">
-          <div class="thai">ผลลัพธ์ดีพอสมควรครับ</div>
-          <div class="romaji">phon-lap di pho-som-khuan khrap</div>
-          <div class="jp">結果はまあまあ良いです。</div>
-        </div>
-      </div>
-    </div>
-
-    <div class="grammar-card">
-      <div class="grammar-header" onclick="toggleGrammar(this)">
-        <span class="grammar-tag">接続</span>
-        <span class="grammar-title">นอกจากนี้ / อีกทั้ง（さらに・加えて）</span>
-        <span>▾</span>
-      </div>
-      <div class="grammar-body">
-        <div class="pattern-box">
-          ビジネス文書や説明でよく使う接続詞。<br>
-          <strong>นอกจากนี้</strong>：これに加えて / さらに<br>
-          <strong>อีกทั้ง</strong>：また / さらには
-        </div>
-        <div class="example-box">
-          <div class="thai">นอกจากนี้ เราต้องตรวจสอบกระบวนการด้วยครับ</div>
-          <div class="romaji">nok-jak-ni rao tong truat-sop gra-buan-gan duay khrap</div>
-          <div class="jp">さらに、私たちはプロセスも確認する必要があります。</div>
-        </div>
-      </div>
-    </div>
-
+  <div class="grammar-list" id="grammarList">
   </div>
 </div>
 
@@ -2029,9 +2011,364 @@ function startSrsReview() {
 }
 
 // ---- Grammar ----
+const grammarData = [
+  {
+    tag: '使役', title: 'ให้ の使い方（〜させる）',
+    pattern: '主語 + ให้ + 人 + 動詞<br>「〜に〜させる / 〜してもらう」',
+    examples: [
+      { thai: 'ผมให้เขาตรวจสอบชิ้นงานครับ', romaji: 'phom hai khao truat-sop chin-ngan khrap', jp: '私は彼に部品を検査させました。' },
+      { thai: 'กรุณาให้ผมทราบด้วยครับ', romaji: 'ga-ru-na hai phom sap duay khrap', jp: 'ご連絡いただけますでしょうか。' }
+    ],
+    practice: [
+      { question: 'ผมให้เขา____ชิ้นงานครับ', choices: ['ตรวจสอบ', 'รายงาน', 'ประชุม'], correct: 0, explanation: '「検査させる」なので ตรวจสอบ が正解' },
+      { question: '____ให้เขาแก้ไขด่วนครับ', choices: ['ผม', 'เขา', 'ถ้า'], correct: 0, explanation: '「私が彼に修正させる」の主語は ผม' },
+      { question: 'กรุณาให้ผม____ด้วยครับ', choices: ['ทราบ', 'เคย', 'จะ'], correct: 0, explanation: 'ให้ผมทราบ＝「私に知らせてください」' }
+    ]
+  },
+  {
+    tag: '条件', title: 'ถ้า / หาก（もし〜なら）',
+    pattern: 'ถ้า/หาก + 条件 + ก็ + 結果<br>หาก はより書き言葉・丁寧な表現',
+    examples: [
+      { thai: 'ถ้าพบข้อบกพร่อง ให้รายงานทันทีครับ', romaji: 'tha phop kho-bok-phroeng hai rai-ngan than-thi khrap', jp: '不良を発見したら、すぐに報告してください。' },
+      { thai: 'หากมีปัญหา ผมจะช่วยครับ', romaji: 'hak mi pan-ha phom ja chuay khrap', jp: '問題があれば、私が対応します。' }
+    ],
+    practice: [
+      { question: '____พบข้อบกพร่อง ให้หยุดสายการผลิตครับ', choices: ['ถ้า', 'และ', 'แต่'], correct: 0, explanation: '条件を表す ถ้า が正解' },
+      { question: 'ถ้าเครื่องจักรเสีย____ต้องแจ้งทันทีครับ', choices: ['ก็', 'จาก', 'กับ'], correct: 0, explanation: 'ถ้า...ก็ のセットで「もし〜なら〜」' },
+      { question: '____มีปัญหา ผมจะช่วยครับ', choices: ['หาก', 'เพราะ', 'ซึ่ง'], correct: 0, explanation: 'หาก＝もし（書き言葉で丁寧）' }
+    ]
+  },
+  {
+    tag: '受動', title: 'ถูก（受け身・マイナス表現）',
+    pattern: '主語 + ถูก + 動詞<br>日本語の「〜された（否定的な意味合い）」に相当',
+    examples: [
+      { thai: 'ชิ้นงานถูกปฏิเสธจากลูกค้าครับ', romaji: 'chin-ngan thuk pa-ti-set jak luk-kha khrap', jp: '部品が顧客から拒否されました。' }
+    ],
+    practice: [
+      { question: 'ชิ้นงาน____ปฏิเสธจากลูกค้าครับ', choices: ['ถูก', 'ให้', 'ควร'], correct: 0, explanation: '受け身の ถูก が正解' },
+      { question: 'รายงาน____ส่งผิดครับ', choices: ['ถูก', 'จะ', 'ต้อง'], correct: 0, explanation: '「報告書が誤って提出された」= ถูก + 動詞' },
+      { question: '____สั่งให้แก้ไขแล้วครับ', choices: ['ถูก', 'ให้', 'กำลัง'], correct: 0, explanation: '「（命令を）受けた」= ถูก + สั่ง' }
+    ]
+  },
+  {
+    tag: '程度', title: 'ค่อนข้าง / พอสมควร（わりと〜）',
+    pattern: '<strong>ค่อนข้าง</strong>：わりと・かなり（やや強調）<br><strong>พอสมควร</strong>：まあまあ・ほどほどに',
+    examples: [
+      { thai: 'ปัญหานี้ค่อนข้างซับซ้อนครับ', romaji: 'pan-ha ni khon-khang sap-son khrap', jp: 'この問題はかなり複雑です。' },
+      { thai: 'ผลลัพธ์ดีพอสมควรครับ', romaji: 'phon-lap di pho-som-khuan khrap', jp: '結果はまあまあ良いです。' }
+    ],
+    practice: [
+      { question: 'ปัญหานี้____ซับซ้อนครับ', choices: ['ค่อนข้าง', 'ถ้า', 'ถูก'], correct: 0, explanation: 'ค่อนข้าง＝かなり・わりと' },
+      { question: 'ผลงานดี____ครับ', choices: ['พอสมควร', 'ค่อนข้าง', 'ให้'], correct: 0, explanation: 'พอสมควร＝まあまあ（文末に置く）' },
+      { question: 'เครื่องจักรเก่า____ครับ', choices: ['ค่อนข้าง', 'ถ้า', 'แต่'], correct: 0, explanation: 'ค่อนข้าง + 形容詞 で「かなり〜」' }
+    ]
+  },
+  {
+    tag: '接続', title: 'นอกจากนี้ / อีกทั้ง（さらに・加えて）',
+    pattern: 'ビジネス文書や説明でよく使う接続詞。<br><strong>นอกจากนี้</strong>：これに加えて / さらに<br><strong>อีกทั้ง</strong>：また / さらには',
+    examples: [
+      { thai: 'นอกจากนี้ เราต้องตรวจสอบกระบวนการด้วยครับ', romaji: 'nok-jak-ni rao tong truat-sop gra-buan-gan duay khrap', jp: 'さらに、私たちはプロセスも確認する必要があります。' }
+    ],
+    practice: [
+      { question: '____เราต้องตรวจสอบเอกสารด้วยครับ', choices: ['นอกจากนี้', 'ถ้า', 'เพราะ'], correct: 0, explanation: 'นอกจากนี้＝さらに・加えて' },
+      { question: '____เราต้องแก้ไขกระบวนการด้วยครับ', choices: ['อีกทั้ง', 'ถูก', 'ควร'], correct: 0, explanation: 'อีกทั้ง＝また・さらには' },
+      { question: 'ปัญหาคือการผลิตช้า ____คุณภาพต่ำด้วยครับ', choices: ['อีกทั้ง', 'ถ้า', 'ให้'], correct: 0, explanation: '「また〜でもある」= อีกทั้ง' }
+    ]
+  },
+  {
+    tag: '進行', title: 'กำลัง（〜している・現在進行形）',
+    pattern: '主語 + กำลัง + 動詞 + อยู่<br>「今〜しているところ」（อยู่ は省略可能）',
+    examples: [
+      { thai: 'ผมกำลังตรวจสอบชิ้นงานครับ', romaji: 'phom gam-lang truat-sop chin-ngan khrap', jp: '私は今部品を検査しています。' },
+      { thai: 'เครื่องจักรกำลังทำงานอยู่ครับ', romaji: 'khruean-jak gam-lang tham-ngan yu khrap', jp: '機械は現在稼働中です。' }
+    ],
+    practice: [
+      { question: 'ผม____ตรวจสอบชิ้นงานครับ', choices: ['กำลัง', 'จะ', 'เคย'], correct: 0, explanation: 'กำลัง + 動詞 で「〜している」（進行形）' },
+      { question: 'เครื่องจักร____ทำงาน____ครับ', choices: ['กำลัง / อยู่', 'จะ / แล้ว', 'ต้อง / ได้'], correct: 0, explanation: 'กำลัง...อยู่ で継続中を強調' },
+      { question: 'ขณะนี้ทีม____ซ่อมแซมอยู่ครับ', choices: ['กำลัง', 'ถ้า', 'ให้'], correct: 0, explanation: '「現在チームが修理中」= กำลัง + 動詞' }
+    ]
+  },
+  {
+    tag: '未来', title: 'จะ（〜する・未来・意志）',
+    pattern: '主語 + จะ + 動詞<br>「〜するつもり / 〜する（予定・意志）」',
+    examples: [
+      { thai: 'พรุ่งนี้ผมจะตรวจสอบสายการผลิตครับ', romaji: 'phrung-ni phom ja truat-sop sai-gan-pha-lit khrap', jp: '明日、私は生産ラインを確認します。' },
+      { thai: 'ถ้าพบปัญหาจะแจ้งทันทีครับ', romaji: 'tha phop pan-ha ja jaeng than-thi khrap', jp: '問題が見つかればすぐに報告します。' }
+    ],
+    practice: [
+      { question: 'พรุ่งนี้ผม____ตรวจสอบสายการผลิตครับ', choices: ['จะ', 'กำลัง', 'เคย'], correct: 0, explanation: 'จะ + 動詞 で「〜するつもり・〜する」（未来）' },
+      { question: 'ถ้าพบปัญหา____แจ้งทันทีครับ', choices: ['จะ', 'ให้', 'ถูก'], correct: 0, explanation: 'ถ้า...จะ で「もし〜なら〜する」' },
+      { question: 'ผม____ส่งรายงานพรุ่งนี้ครับ', choices: ['จะ', 'กำลัง', 'ถ้า'], correct: 0, explanation: '「明日報告書を提出します」= จะ + 動詞' }
+    ]
+  },
+  {
+    tag: '経験', title: 'เคย / ไม่เคย（〜したことがある/ない）',
+    pattern: 'เคย + 動詞：〜したことがある<br>ไม่เคย + 動詞：〜したことがない',
+    examples: [
+      { thai: 'ผมเคยทำงานที่โรงงานนี้มาก่อนครับ', romaji: 'phom khoei tham-ngan thi rong-ngan ni ma kon khrap', jp: '以前この工場で働いたことがあります。' },
+      { thai: 'ผมไม่เคยมาสายโดยไม่แจ้งครับ', romaji: 'phom mai-khoei ma sai doi mai jaeng khrap', jp: '連絡なしに遅刻したことはありません。' }
+    ],
+    practice: [
+      { question: 'ผม____ทำงานที่โรงงานนี้มาก่อนครับ', choices: ['เคย', 'จะ', 'กำลัง'], correct: 0, explanation: 'เคย＝〜したことがある（経験）' },
+      { question: 'ผม____มาสายโดยไม่แจ้งครับ', choices: ['ไม่เคย', 'กำลัง', 'ถ้า'], correct: 0, explanation: 'ไม่เคย＝〜したことがない' },
+      { question: 'คุณ____ใช้เครื่องมือนี้ไหมครับ', choices: ['เคย', 'จะ', 'ต้อง'], correct: 0, explanation: '「この機械を使ったことがありますか」= เคย + 動詞' }
+    ]
+  },
+  {
+    tag: '義務', title: 'ต้อง（〜しなければならない）',
+    pattern: '主語 + ต้อง + 動詞<br>「絶対に〜しなければならない」（強い義務・必要）',
+    examples: [
+      { thai: 'พนักงานทุกคนต้องสวมอุปกรณ์ป้องกันครับ', romaji: 'pha-nak-ngan thuk-khon tong suam u-pa-kon pong-gan khrap', jp: '全従業員は保護具を着用しなければなりません。' },
+      { thai: 'ต้องส่งรายงานภายในวันนี้ครับ', romaji: 'tong song rai-ngan phai-nai wan-ni khrap', jp: '今日中に報告書を提出しなければなりません。' }
+    ],
+    practice: [
+      { question: 'พนักงานทุกคน____สวมอุปกรณ์ป้องกันครับ', choices: ['ต้อง', 'ควร', 'อาจจะ'], correct: 0, explanation: 'ต้อง＝〜しなければならない（義務・必要）' },
+      { question: '____ส่งรายงานภายในวันนี้ครับ', choices: ['ต้อง', 'เคย', 'กำลัง'], correct: 0, explanation: '「今日中に報告書を提出しなければならない」= ต้อง' },
+      { question: 'ถ้าพบของเสีย____แยกทันทีครับ', choices: ['ต้อง', 'เพราะ', 'แต่'], correct: 0, explanation: 'ต้อง + 動詞 で「必ず〜しなければならない」' }
+    ]
+  },
+  {
+    tag: '推奨', title: 'ควร（〜すべき・〜した方がよい）',
+    pattern: '主語 + ควร + 動詞<br>「〜すべき / 〜した方が良い」（ต้อง より柔らかい）',
+    examples: [
+      { thai: 'เราควรตรวจสอบสาเหตุก่อนครับ', romaji: 'rao khuan truat-sop sa-het kon khrap', jp: 'まず原因を確認すべきです。' },
+      { thai: 'ปัญหานี้ควรรายงานให้ผู้จัดการทราบครับ', romaji: 'pan-ha ni khuan rai-ngan hai phu-jat-gan sap khrap', jp: 'この問題はマネージャーに報告すべきです。' }
+    ],
+    practice: [
+      { question: 'เรา____ตรวจสอบสาเหตุก่อนครับ', choices: ['ควร', 'ต้อง', 'ถูก'], correct: 0, explanation: 'ควร＝〜すべき（推奨・望ましい）' },
+      { question: 'ปัญหานี้____รายงานให้ผู้จัดการทราบครับ', choices: ['ควร', 'กำลัง', 'จะ'], correct: 0, explanation: '「この問題はマネージャーに報告すべき」= ควร' },
+      { question: 'พนักงานใหม่____เข้ารับการอบรมครับ', choices: ['ควร', 'เคย', 'ถ้า'], correct: 0, explanation: '「新入社員は研修を受けるべき」= ควร' }
+    ]
+  },
+  {
+    tag: '可能', title: 'สามารถ...ได้（〜できる）',
+    pattern: '主語 + สามารถ + 動詞 + ได้<br>「〜することができる」',
+    examples: [
+      { thai: 'ผมสามารถทำงานนี้ได้ครับ', romaji: 'phom sa-ma-rat tham-ngan ni dai khrap', jp: '私はこの仕事ができます。' },
+      { thai: 'สอบถามเพิ่มเติมได้ครับ', romaji: 'sop-tham phoem-toem dai khrap', jp: 'さらにお問い合わせいただけます。' }
+    ],
+    practice: [
+      { question: 'ผมสามารถ____งานนี้ได้ครับ', choices: ['ทำ', 'จะ', 'ให้'], correct: 0, explanation: 'สามารถ + 動詞 + ได้ で「〜できる」' },
+      { question: '____สอบถามเพิ่มเติมได้ครับ', choices: ['สามารถ', 'ต้อง', 'ถูก'], correct: 0, explanation: 'สามารถ + 動詞 + ได้ で可能を表す' },
+      { question: 'เครื่องจักรนี้สามารถผลิตได้วันละ____ชิ้นครับ', choices: ['500', 'จะ', 'ควร'], correct: 0, explanation: 'สามารถ...ได้ は「〜することができる」' }
+    ]
+  },
+  {
+    tag: '完了', title: 'แล้ว（もう〜した・完了）',
+    pattern: '動詞 + แล้ว（文末）<br>「もう〜した / 〜し終わった」（完了・変化）',
+    examples: [
+      { thai: 'ส่งรายงานแล้วครับ', romaji: 'song rai-ngan laeo khrap', jp: '報告書はもう提出しました。' },
+      { thai: 'ตรวจสอบชิ้นงานแล้วทุกชิ้นครับ', romaji: 'truat-sop chin-ngan laeo thuk-chin khrap', jp: '全部品の検査が完了しました。' }
+    ],
+    practice: [
+      { question: 'ส่งรายงาน____ครับ', choices: ['แล้ว', 'กำลัง', 'จะ'], correct: 0, explanation: 'แล้ว を文末に置いて「〜済み・完了」を表す' },
+      { question: 'ตรวจสอบชิ้นงาน____ทุกชิ้นครับ', choices: ['แล้ว', 'ต้อง', 'ควร'], correct: 0, explanation: '「全部品の検査が完了した」= 動詞 + แล้ว' },
+      { question: 'เครื่องจักรซ่อม____ครับ', choices: ['แล้ว', 'กำลัง', 'ถ้า'], correct: 0, explanation: '「機械の修理が終わった」= แล้ว' }
+    ]
+  },
+  {
+    tag: '継続', title: 'ยัง...อยู่（まだ〜している）',
+    pattern: '主語 + ยัง + 動詞 + อยู่<br>「まだ〜している / 〜し続けている」',
+    examples: [
+      { thai: 'ยังมีของเสียอยู่ครับ', romaji: 'yang mi khong-sia yu khrap', jp: 'まだ不良品があります。' },
+      { thai: 'เครื่องจักรยังเสียอยู่ครับ', romaji: 'khruean-jak yang sia yu khrap', jp: '機械はまだ故障中です。' }
+    ],
+    practice: [
+      { question: 'ยังมีของเสีย____ครับ', choices: ['อยู่', 'แล้ว', 'ต้อง'], correct: 0, explanation: '「まだ不良品がある」= ยัง + 動詞 + อยู่' },
+      { question: 'เครื่องจักรยังเสีย____ครับ', choices: ['อยู่', 'แล้ว', 'ได้'], correct: 0, explanation: '「機械はまだ故障中」= ยัง + อยู่' },
+      { question: 'ผม____ทำงาน____ครับ', choices: ['ยัง / อยู่', 'กำลัง / แล้ว', 'ให้ / ต้อง'], correct: 0, explanation: 'ยัง + 動詞 + อยู่ で「まだ〜している」' }
+    ]
+  },
+  {
+    tag: '理由', title: 'เพราะ / เนื่องจาก（〜なので）',
+    pattern: '<strong>เพราะ</strong>：〜なので・〜のため（口語）<br><strong>เนื่องจาก</strong>：〜のため（書き言葉・丁寧）',
+    examples: [
+      { thai: 'มาสายเพราะรถติดครับ', romaji: 'ma sai phro rot tit khrap', jp: '渋滞で遅刻しました。' },
+      { thai: 'เนื่องจากเครื่องจักรเสีย การผลิตจึงหยุดครับ', romaji: 'nueang-jak khruean-jak sia gan-pha-lit jueng yut khrap', jp: '機械の故障により、生産が停止しました。' }
+    ],
+    practice: [
+      { question: 'มาสาย____รถติดครับ', choices: ['เพราะ', 'ถ้า', 'แต่'], correct: 0, explanation: 'เพราะ＝〜なので・〜のため（理由）' },
+      { question: '____เครื่องจักรเสีย การผลิตจึงหยุดครับ', choices: ['เนื่องจาก', 'กำลัง', 'ให้'], correct: 0, explanation: 'เนื่องจาก＝〜のため（書き言葉・より丁寧）' },
+      { question: 'ของเสียเพิ่มขึ้น____ไม่มีการตรวจสอบครับ', choices: ['เพราะ', 'ถ้า', 'ต้อง'], correct: 0, explanation: '「不良品が増えた→なぜなら検査がなかったから」= เพราะ' }
+    ]
+  },
+  {
+    tag: '逆接', title: 'แต่（しかし・でも）',
+    pattern: '文1 + แต่ + 文2<br>「〜だが、しかし〜」（逆接）',
+    examples: [
+      { thai: 'งานเสร็จแล้ว แต่มีของเสียอยู่ครับ', romaji: 'ngan set laeo tae mi khong-sia yu khrap', jp: '仕事は終わりましたが、まだ不良品があります。' },
+      { thai: 'ราคาสูง แต่คุณภาพดีมากครับ', romaji: 'ra-kha sung tae khun-na-phap di mak khrap', jp: '値段は高いが、品質はとても良いです。' }
+    ],
+    practice: [
+      { question: 'งานเสร็จแล้ว____มีของเสียอยู่ครับ', choices: ['แต่', 'เพราะ', 'ให้'], correct: 0, explanation: 'แต่＝しかし・でも（逆接）' },
+      { question: 'เขาตรวจสอบแล้ว____ยังพบปัญหาครับ', choices: ['แต่', 'เพราะ', 'กำลัง'], correct: 0, explanation: '「確認したが、まだ問題が見つかった」= แต่' },
+      { question: 'ราคาสูง____คุณภาพดีมากครับ', choices: ['แต่', 'ถ้า', 'ต้อง'], correct: 0, explanation: '「値段は高いが品質が良い」= แต่' }
+    ]
+  },
+  {
+    tag: '目的', title: 'เพื่อ（〜のために）',
+    pattern: '動詞 + เพื่อ + 目的<br>「〜するために〜する」（目的）',
+    examples: [
+      { thai: 'ตรวจสอบชิ้นงานเพื่อป้องกันของเสียครับ', romaji: 'truat-sop chin-ngan phuea pong-gan khong-sia khrap', jp: '不良品防止のために部品を検査します。' },
+      { thai: 'อบรมเพื่อพัฒนาทักษะพนักงานครับ', romaji: 'op-rom phuea phat-tha-na thak-sa pha-nak-ngan khrap', jp: 'スタッフのスキル向上のために研修します。' }
+    ],
+    practice: [
+      { question: 'ตรวจสอบชิ้นงาน____ป้องกันของเสียครับ', choices: ['เพื่อ', 'เพราะ', 'แต่'], correct: 0, explanation: 'เพื่อ＝〜のために（目的）' },
+      { question: 'อบรม____พัฒนาทักษะพนักงานครับ', choices: ['เพื่อ', 'ถ้า', 'ให้'], correct: 0, explanation: '「スタッフのスキル向上のため研修する」= เพื่อ' },
+      { question: 'ส่งรายงาน____ให้ผู้จัดการทราบครับ', choices: ['เพื่อ', 'เพราะ', 'ต้อง'], correct: 0, explanation: 'เพื่อ + 動詞 で目的を表す' }
+    ]
+  },
+  {
+    tag: '関係節', title: 'ซึ่ง（〜という・関係節）',
+    pattern: '名詞 + ซึ่ง + 動詞/説明<br>「〜という〜 / 〜で〜」（関係節）',
+    examples: [
+      { thai: 'ชิ้นงานซึ่งผ่านการตรวจสอบแล้วพร้อมส่งครับ', romaji: 'chin-ngan sueng phan-gan-truat laeo phrom song khrap', jp: '検査に合格した部品は出荷準備ができています。' },
+      { thai: 'เอกสารซึ่งผมส่งเมื่อวานนี้ถูกต้องครับ', romaji: 'ek-ga-san sueng phom song muea-wan-ni thuk-tong khrap', jp: '昨日私が提出した書類は正確です。' }
+    ],
+    practice: [
+      { question: 'ชิ้นงาน____ผ่านการตรวจสอบแล้วพร้อมส่งครับ', choices: ['ซึ่ง', 'ถ้า', 'ให้'], correct: 0, explanation: 'ซึ่ง＝〜という・〜で（関係節を作る）' },
+      { question: 'เอกสาร____ผมส่งเมื่อวานนี้ถูกต้องครับ', choices: ['ซึ่ง', 'เพราะ', 'แต่'], correct: 0, explanation: '「昨日提出した書類は正確」= ซึ่ง' },
+      { question: 'ปัญหา____เกิดขึ้นต้องแก้ไขทันทีครับ', choices: ['ซึ่ง', 'ต้อง', 'กำลัง'], correct: 0, explanation: '「発生した問題はすぐに修正すべき」= ซึ่ง' }
+    ]
+  },
+  {
+    tag: '列挙', title: 'ทั้ง...และ（〜と〜・両方）',
+    pattern: 'ทั้ง + 名詞/節1 + และ + 名詞/節2<br>「〜と〜の両方・〜も〜も」',
+    examples: [
+      { thai: 'ต้องตรวจสอบทั้งคุณภาพและปริมาณครับ', romaji: 'tong truat-sop thang khun-na-phap lae pa-ri-man khrap', jp: '品質と数量の両方を確認する必要があります。' },
+      { thai: 'ทั้งผู้จัดการและพนักงานต้องรับรู้ครับ', romaji: 'thang phu-jat-gan lae pha-nak-ngan tong rap-ru khrap', jp: 'マネージャーも従業員も知る必要があります。' }
+    ],
+    practice: [
+      { question: 'ต้องตรวจสอบ____คุณภาพ____ปริมาณครับ', choices: ['ทั้ง / และ', 'ถ้า / ก็', 'เพราะ / แต่'], correct: 0, explanation: 'ทั้ง...และ＝〜と〜両方（列挙）' },
+      { question: '____ผู้จัดการ____พนักงานต้องรับรู้ครับ', choices: ['ทั้ง / และ', 'ให้ / ต้อง', 'เคย / ไม่เคย'], correct: 0, explanation: '「マネージャーも従業員も知る必要がある」= ทั้ง...และ' },
+      { question: 'พัฒนา____ทักษะ____ความรู้ครับ', choices: ['ทั้ง / และ', 'เพราะ / แต่', 'ถ้า / ก็'], correct: 0, explanation: 'ทั้ง + 名詞1 + และ + 名詞2 で「両方とも〜」' }
+    ]
+  },
+  {
+    tag: '譲歩', title: 'ไม่ว่า（〜にかかわらず）',
+    pattern: 'ไม่ว่า + 疑問詞/名詞 + จะ + 動詞<br>「どんな〜でも / 〜にかかわらず」',
+    examples: [
+      { thai: 'ไม่ว่าจะเกิดปัญหาอะไร ต้องแก้ไขทันทีครับ', romaji: 'mai-wa ja koet pan-ha a-rai tong gae-khai than-thi khrap', jp: 'どんな問題が起きても、すぐに対処しなければなりません。' },
+      { thai: 'ไม่ว่าใคร ต้องปฏิบัติตามกฎครับ', romaji: 'mai-wa khrai tong pa-ti-bat tam kot khrap', jp: '誰であっても規則に従わなければなりません。' }
+    ],
+    practice: [
+      { question: '____จะเกิดปัญหาอะไร ต้องแก้ไขทันทีครับ', choices: ['ไม่ว่า', 'ถ้า', 'เพราะ'], correct: 0, explanation: 'ไม่ว่า＝〜にかかわらず・どんな〜でも' },
+      { question: '____ใคร ต้องปฏิบัติตามกฎครับ', choices: ['ไม่ว่า', 'ให้', 'ต้อง'], correct: 0, explanation: '「誰であっても規則に従わなければならない」= ไม่ว่า' },
+      { question: '____สถานการณ์จะเป็นอย่างไร เราต้องพยายามครับ', choices: ['ไม่ว่า', 'แต่', 'เพื่อ'], correct: 0, explanation: 'ไม่ว่า...จะ... で「どんな〜でも〜する」' }
+    ]
+  },
+  {
+    tag: '準拠', title: 'ตาม（〜に従って・〜通りに）',
+    pattern: 'ตาม + 名詞（規則・指示など）<br>「〜に従って / 〜の通りに」',
+    examples: [
+      { thai: 'ดำเนินการตามขั้นตอนที่กำหนดครับ', romaji: 'dam-noen-gan tam khan-ton thi gam-not khrap', jp: '定められた手順通りに進めます。' },
+      { thai: 'ทำตามคำสั่งของผู้จัดการครับ', romaji: 'tham tam kham-sang khong phu-jat-gan khrap', jp: 'マネージャーの指示通りに行います。' }
+    ],
+    practice: [
+      { question: 'ดำเนินการ____ขั้นตอนที่กำหนดครับ', choices: ['ตาม', 'ให้', 'เพราะ'], correct: 0, explanation: 'ตาม＝〜に従って・〜通りに' },
+      { question: 'ทำ____คำสั่งของผู้จัดการครับ', choices: ['ตาม', 'เพื่อ', 'ซึ่ง'], correct: 0, explanation: '「マネージャーの指示通りに行う」= ตาม' },
+      { question: 'ส่งงาน____กำหนดเวลาครับ', choices: ['ตาม', 'ถ้า', 'แต่'], correct: 0, explanation: '「期日通りに提出する」= ตาม' }
+    ]
+  }
+];
+
+function renderGrammarCards() {
+  const list = document.getElementById('grammarList');
+  list.innerHTML = grammarData.map((g, i) => `
+    <div class="grammar-card" data-gidx="${i}">
+      <div class="grammar-header" onclick="toggleGrammar(this)">
+        <span class="grammar-tag">${g.tag}</span>
+        <span class="grammar-title">${g.title}</span>
+        <span>▾</span>
+      </div>
+      <div class="grammar-body">
+        <div class="pattern-box"><strong>パターン：</strong> ${g.pattern}</div>
+        ${g.examples.map(e => `
+        <div class="example-box">
+          <div class="thai">${e.thai}</div>
+          <div class="romaji">${e.romaji}</div>
+          <div class="jp">${e.jp}</div>
+        </div>`).join('')}
+        <button class="practice-btn" onclick="togglePractice(${i}, this)">📝 練習問題を開く</button>
+        <div class="practice-area" id="practice-${i}">
+          ${g.practice.map((q, qi) => `
+          <div class="practice-q" id="pq-${i}-${qi}">
+            <div class="practice-q-text">Q${qi+1}. ${q.question}</div>
+            <div class="practice-choices">
+              ${q.choices.map((c, ci) => `
+              <button class="practice-choice" onclick="answerPractice(${i},${qi},${ci})" data-ci="${ci}">${c}</button>`).join('')}
+            </div>
+            <div class="practice-explanation" id="pexp-${i}-${qi}">${q.explanation}</div>
+          </div>`).join('')}
+          <div class="practice-perfect" id="pperfect-${i}">🎉 完璧！全問正解です！</div>
+          <button class="practice-reset-btn" onclick="resetPractice(${i})">🔄 もう一度</button>
+        </div>
+      </div>
+    </div>`).join('');
+}
+
 function toggleGrammar(header) {
   const body = header.nextElementSibling;
   body.classList.toggle('open');
+  // 文法進捗を記録
+  const card = header.parentElement;
+  const idx = card.dataset.gidx;
+  if (idx !== undefined) {
+    progress.grammarLearned['grammar_' + idx] = true;
+    saveProgress();
+  }
+}
+
+function togglePractice(gidx, btn) {
+  const area = document.getElementById('practice-' + gidx);
+  area.classList.toggle('open');
+  btn.textContent = area.classList.contains('open') ? '📝 練習問題を閉じる' : '📝 練習問題を開く';
+}
+
+const practiceScore = {};
+
+function answerPractice(gidx, qi, chosen) {
+  const q = grammarData[gidx].practice[qi];
+  const qEl = document.getElementById('pq-' + gidx + '-' + qi);
+  const expEl = document.getElementById('pexp-' + gidx + '-' + qi);
+  const btns = qEl.querySelectorAll('.practice-choice');
+
+  btns.forEach((b, ci) => {
+    b.disabled = true;
+    if (ci === q.correct) b.classList.add('correct');
+    else if (ci === chosen && ci !== q.correct) b.classList.add('wrong');
+  });
+  expEl.classList.add('show');
+
+  // スコア管理
+  if (!practiceScore[gidx]) practiceScore[gidx] = {};
+  practiceScore[gidx][qi] = (chosen === q.correct);
+
+  // 全問正解チェック
+  const total = grammarData[gidx].practice.length;
+  const answered = Object.keys(practiceScore[gidx]).length;
+  if (answered === total) {
+    const allCorrect = Object.values(practiceScore[gidx]).every(v => v);
+    if (allCorrect) {
+      document.getElementById('pperfect-' + gidx).classList.add('show');
+    }
+  }
+}
+
+function resetPractice(gidx) {
+  delete practiceScore[gidx];
+  const area = document.getElementById('practice-' + gidx);
+  const g = grammarData[gidx];
+  g.practice.forEach((q, qi) => {
+    const qEl = document.getElementById('pq-' + gidx + '-' + qi);
+    const expEl = document.getElementById('pexp-' + gidx + '-' + qi);
+    expEl.classList.remove('show');
+    qEl.querySelectorAll('.practice-choice').forEach(b => {
+      b.disabled = false;
+      b.classList.remove('correct', 'wrong');
+    });
+  });
+  document.getElementById('pperfect-' + gidx).classList.remove('show');
 }
 
 // ---- Init ----
@@ -2041,6 +2378,7 @@ startCards();
 updateProgress();
 updateProgressDisplay();
 renderHomeScreen();
+renderGrammarCards();
 
 // ---- PWA: offline cache ----
 if ('serviceWorker' in navigator) {
