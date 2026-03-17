@@ -674,6 +674,109 @@
 
   /* Loading state removed for smoother experience */
 
+  /* ---- Home / SRS ---- */
+  .home-progress {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+    margin-bottom: 24px;
+  }
+
+  .home-prog-item {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 14px 10px;
+    text-align: center;
+  }
+
+  .home-prog-label {
+    font-size: 0.72rem;
+    color: var(--muted);
+    margin-bottom: 6px;
+  }
+
+  .home-prog-val {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 1.15rem;
+    color: var(--accent);
+    font-weight: 600;
+  }
+
+  .srs-review-box {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 18px;
+  }
+
+  .srs-title {
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--text);
+    margin-bottom: 14px;
+  }
+
+  .srs-list {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-bottom: 14px;
+    max-height: 300px;
+    overflow-y: auto;
+  }
+
+  .srs-empty {
+    color: var(--muted);
+    font-size: 0.85rem;
+    text-align: center;
+    padding: 16px 0;
+  }
+
+  .srs-word-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 10px 14px;
+  }
+
+  .srs-word-thai {
+    font-family: 'Sarabun', sans-serif;
+    font-size: 1rem;
+    color: var(--thai);
+  }
+
+  .srs-word-jp {
+    font-size: 0.78rem;
+    color: var(--text-dim);
+  }
+
+  .srs-overdue {
+    font-size: 0.7rem;
+    color: var(--red);
+    background: rgba(184, 110, 126, 0.12);
+    padding: 2px 8px;
+    border-radius: 10px;
+  }
+
+  .srs-start-btn {
+    width: 100%;
+    background: var(--accent);
+    color: white;
+    border: none;
+    border-radius: 10px;
+    padding: 12px;
+    font-size: 0.95rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: opacity 0.2s;
+  }
+
+  .srs-start-btn:hover { opacity: 0.85; }
+
   /* ---- Settings ---- */
   .settings-list {
     display: flex;
@@ -788,14 +891,43 @@
 </div>
 
 <div class="tabs">
-  <button class="tab active" onclick="switchTab('phrases')">💬 職場フレーズ</button>
+  <button class="tab active" onclick="switchTab('home')">🏠 ホーム</button>
+  <button class="tab" onclick="switchTab('phrases')">💬 職場フレーズ</button>
   <button class="tab" onclick="switchTab('vocab')">🃏 単語カード</button>
   <button class="tab" onclick="switchTab('grammar')">📖 文法ポイント</button>
   <button class="tab" onclick="switchTab('settings')">⚙️ 設定</button>
 </div>
 
+<!-- HOME -->
+<div class="section active" id="home">
+  <p class="section-title">🏠 ホーム</p>
+
+  <div class="home-progress">
+    <div class="home-prog-item">
+      <div class="home-prog-label">単語</div>
+      <div class="home-prog-val" id="homeVocabProg">0/200</div>
+    </div>
+    <div class="home-prog-item">
+      <div class="home-prog-label">フレーズ</div>
+      <div class="home-prog-val" id="homePhraseProg">0/200</div>
+    </div>
+    <div class="home-prog-item">
+      <div class="home-prog-label">文法</div>
+      <div class="home-prog-val" id="homeGrammarProg">0/20</div>
+    </div>
+  </div>
+
+  <div class="srs-review-box">
+    <div class="srs-title">🔥 今日の復習</div>
+    <div id="srsReviewList" class="srs-list">
+      <div class="srs-empty">復習すべき単語はありません 🎉</div>
+    </div>
+    <button class="srs-start-btn" id="srsStartBtn" onclick="startSrsReview()" style="display:none">▶ 復習開始</button>
+  </div>
+</div>
+
 <!-- WORKPLACE PHRASES -->
-<div class="section active" id="phrases">
+<div class="section" id="phrases">
   <p class="section-title">職場会話フレーズ（200フレーズ・音声付き）</p>
   
   <div class="mode-switcher">
@@ -1091,11 +1223,21 @@ function updateProgressDisplay() {
 }
 
 // ---- Tabs ----
-function switchTab(tab) {
+function switchTab(tab, fromCode) {
   document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
   document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
   document.getElementById(tab).classList.add('active');
-  event.target.classList.add('active');
+  if (!fromCode && event && event.target) {
+    event.target.classList.add('active');
+  } else {
+    // コードから呼ばれた場合、対応するタブボタンをアクティブに
+    document.querySelectorAll('.tab').forEach(t => {
+      if (t.getAttribute('onclick') && t.getAttribute('onclick').includes("'" + tab + "'")) {
+        t.classList.add('active');
+      }
+    });
+  }
+  if (tab === 'home') renderHomeScreen();
 }
 
 // ---- Checklist ----
@@ -1748,19 +1890,141 @@ function nextCard(knew) {
   const c = currentCards[cardIndex];
   const allVocab = vocabData[currentCategory].slice(0, 50); // 50個に制限
   const realIndex = allVocab.indexOf(c);
-  
+
   if (vocabMode === 'learn') {
     progress.vocabLearned[currentCategory + '_' + realIndex] = knew;
     saveProgress();
-    
-    if (!knew) {
+
+    if (knew) {
+      // SRS記録
+      recordSrs(currentCategory, realIndex);
+    } else {
       currentCards.push(currentCards[cardIndex]);
     }
+  } else if (vocabMode === 'review') {
+    // 復習モード（SRS）でも覚えた場合に記録
+    if (knew) {
+      recordSrs(currentCategory, realIndex);
+    }
   }
-  
+
   cardIndex++;
   revealed = false;
   document.getElementById('fcButtons').style.display = 'none';
+  showCard();
+}
+
+// ---- SRS ----
+function loadSrsData() {
+  const saved = localStorage.getItem('srsData');
+  return saved ? JSON.parse(saved) : {};
+}
+
+function saveSrsData() {
+  localStorage.setItem('srsData', JSON.stringify(srsData));
+}
+
+let srsData = loadSrsData();
+
+function getSrsIntervalDays(reviewCount) {
+  const intervals = [1, 3, 7, 14, 30];
+  return intervals[reviewCount] ?? null; // null = 完全定着
+}
+
+function getTodayStr() {
+  return new Date().toISOString().slice(0, 10);
+}
+
+function addDays(dateStr, days) {
+  const d = new Date(dateStr);
+  d.setDate(d.getDate() + days);
+  return d.toISOString().slice(0, 10);
+}
+
+function recordSrs(category, index) {
+  const key = category + '_' + index;
+  const today = getTodayStr();
+  const existing = srsData[key] || { reviewCount: 0 };
+  const newCount = existing.reviewCount + 1;
+  const intervalDays = getSrsIntervalDays(newCount - 1);
+  const nextReview = intervalDays !== null ? addDays(today, intervalDays) : null;
+  srsData[key] = {
+    lastReviewed: today,
+    reviewCount: newCount,
+    nextReview: nextReview
+  };
+  saveSrsData();
+}
+
+function getTodayReviewWords() {
+  const today = getTodayStr();
+  const words = [];
+  Object.entries(srsData).forEach(([key, data]) => {
+    if (data.nextReview && data.nextReview <= today) {
+      const [cat, idx] = key.split('_');
+      const word = vocabData[cat]?.[parseInt(idx)];
+      if (word) {
+        words.push({ key, word, data, cat, idx: parseInt(idx) });
+      }
+    }
+  });
+  return words;
+}
+
+function renderHomeScreen() {
+  // 進捗
+  const vocabCount = Object.keys(progress.vocabLearned).filter(k => progress.vocabLearned[k]).length;
+  const phraseCount = Object.keys(progress.phrasesLearned).filter(k => progress.phrasesLearned[k]).length;
+  const grammarCount = Object.keys(progress.grammarLearned).filter(k => progress.grammarLearned[k]).length;
+  document.getElementById('homeVocabProg').textContent = vocabCount + '/200';
+  document.getElementById('homePhraseProg').textContent = phraseCount + '/200';
+  document.getElementById('homeGrammarProg').textContent = grammarCount + '/20';
+
+  // 復習リスト
+  const reviewWords = getTodayReviewWords();
+  const listEl = document.getElementById('srsReviewList');
+  const startBtn = document.getElementById('srsStartBtn');
+
+  if (reviewWords.length === 0) {
+    listEl.innerHTML = '<div class="srs-empty">復習すべき単語はありません 🎉</div>';
+    startBtn.style.display = 'none';
+  } else {
+    listEl.innerHTML = reviewWords.map(item => {
+      const overdueDays = Math.floor((new Date(getTodayStr()) - new Date(item.data.nextReview)) / (1000*60*60*24)) + 1;
+      return `<div class="srs-word-row">
+        <div>
+          <div class="srs-word-thai">${item.word.thai}</div>
+          <div class="srs-word-jp">${item.word.jp}</div>
+        </div>
+        <span class="srs-overdue">${overdueDays > 1 ? overdueDays + '日超過' : '今日'}</span>
+      </div>`;
+    }).join('');
+    startBtn.style.display = 'block';
+  }
+}
+
+let srsReviewQueue = [];
+
+function startSrsReview() {
+  const reviewWords = getTodayReviewWords();
+  if (reviewWords.length === 0) return;
+
+  // 最初のカテゴリで復習モード起動
+  // 復習する単語を vocab タブ経由で表示
+  srsReviewQueue = reviewWords;
+
+  // 単語カードタブへ移動して復習キューをセット
+  switchTab('vocab', true);
+  currentCategory = reviewWords[0].cat;
+  vocabMode = 'review';
+  document.querySelectorAll('.mode-btn').forEach(b => b.classList.remove('active'));
+
+  // srsReviewQueueから currentCards を構築
+  currentCards = reviewWords.map(item => item.word);
+  cardIndex = 0;
+  revealed = false;
+  document.getElementById('fcButtons').style.display = 'flex';
+  document.getElementById('fcNext').style.display = 'none';
   showCard();
 }
 
@@ -1776,6 +2040,7 @@ showPhrase();
 startCards();
 updateProgress();
 updateProgressDisplay();
+renderHomeScreen();
 
 // ---- PWA: offline cache ----
 if ('serviceWorker' in navigator) {
