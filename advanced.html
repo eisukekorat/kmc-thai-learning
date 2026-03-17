@@ -928,6 +928,10 @@
   <button onclick="document.getElementById('installBanner').style.display='none'" style="background:none; border:none; color:#6e6e7e; cursor:pointer; font-size:1.2rem;">✕</button>
 </div>
 
+<div id="offlineBanner" style="display:none; position:fixed; top:0; left:0; right:0; background:#c0392b; color:#fff; text-align:center; padding:8px; font-size:0.82rem; z-index:10000;">
+  📵 オフラインモード - 保存済みコンテンツを表示しています
+</div>
+
 <div class="header">
   <h1>ภาษาไทย レベル3 学習</h1>
   <p class="tagline">職場で使えるタイ語を効率的に習得</p>
@@ -2538,18 +2542,41 @@ window.addEventListener('appinstalled', () => {
   document.getElementById('installBanner').style.display = 'none';
 });
 
+// ---- Online/Offline status ----
+function updateOnlineStatus() {
+  const b = document.getElementById('offlineBanner');
+  if (b) b.style.display = navigator.onLine ? 'none' : 'block';
+}
+window.addEventListener('online', updateOnlineStatus);
+window.addEventListener('offline', updateOnlineStatus);
+updateOnlineStatus();
+
 // ---- PWA: offline cache ----
 if ('serviceWorker' in navigator) {
   const swCode = `
-    const CACHE = 'thai-study-pro-v2';
-    self.addEventListener('install', e => self.skipWaiting());
-    self.addEventListener('fetch', e => {
-      e.respondWith(caches.match(e.request).then(r => r || fetch(e.request).then(res => {
-        const clone = res.clone();
-        caches.open(CACHE).then(c => c.put(e.request, clone));
+const CACHE = 'thai-study-pro-v3';
+const ASSETS = [self.location.pathname.replace('sw.js', 'advanced.html') || '/kmc-thai-learning/advanced.html'];
+self.addEventListener('install', e => {
+  e.waitUntil(caches.open(CACHE).then(c => c.addAll(ASSETS)).then(() => self.skipWaiting()));
+});
+self.addEventListener('activate', e => {
+  e.waitUntil(caches.keys().then(keys => Promise.all(keys.filter(k => k !== CACHE).map(k => caches.delete(k)))).then(() => self.clients.claim()));
+});
+self.addEventListener('fetch', e => {
+  if (e.request.method !== 'GET') return;
+  e.respondWith(
+    caches.match(e.request).then(cached => {
+      const fetchPromise = fetch(e.request).then(res => {
+        if (res.ok) {
+          const clone = res.clone();
+          caches.open(CACHE).then(c => c.put(e.request, clone));
+        }
         return res;
-      }).catch(() => r)));
-    });
+      }).catch(() => cached);
+      return cached || fetchPromise;
+    })
+  );
+});
   `;
   const blob = new Blob([swCode], { type: 'application/javascript' });
   const swUrl = URL.createObjectURL(blob);
