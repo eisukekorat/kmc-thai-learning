@@ -738,6 +738,26 @@
 
   .toggle-switch input:checked + .toggle-slider { background: var(--accent); border-color: var(--accent); }
   .toggle-switch input:checked + .toggle-slider:before { transform: translateX(24px); background: white; }
+
+  .speed-btns {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+  }
+
+  .speed-btn {
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    color: var(--text-dim);
+    border-radius: 8px;
+    padding: 8px 14px;
+    font-size: 0.82rem;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+
+  .speed-btn:hover { border-color: var(--accent); color: var(--accent); }
+  .speed-btn.active { background: var(--accent); border-color: var(--accent); color: #fff; font-weight: 600; }
 </style>
 </head>
 <body>
@@ -982,6 +1002,18 @@
       </label>
     </div>
 
+    <div class="setting-item" style="flex-direction:column; align-items:flex-start; gap:12px;">
+      <div class="setting-info">
+        <div class="setting-label">⏩ 音声速度</div>
+        <div class="setting-desc">読み上げ速度を選択してください</div>
+      </div>
+      <div class="speed-btns" id="speedBtns">
+        <button class="speed-btn" onclick="setSpeechRate(0.5, this)">🐢 0.5x（ゆっくり）</button>
+        <button class="speed-btn active" onclick="setSpeechRate(0.8, this)">▶ 0.8x（標準）</button>
+        <button class="speed-btn" onclick="setSpeechRate(1.0, this)">🐇 1.0x（速い）</button>
+      </div>
+    </div>
+
   </div>
 </div>
 
@@ -997,15 +1029,23 @@ function playAudio(type) {
     window.speechSynthesis.cancel();
     const utterance = new SpeechSynthesisUtterance(text);
     utterance.lang = 'th-TH';
-    utterance.rate = 0.8;
+    utterance.rate = speechRate;
     window.speechSynthesis.speak(utterance);
   }
 }
 
 // ================================
-// SETTINGS: AUTO PLAY
+// SETTINGS: AUTO PLAY & SPEECH RATE
 // ================================
 let autoPlayAudio = localStorage.getItem('autoPlayAudio') === 'true';
+let speechRate = parseFloat(localStorage.getItem('speechRate') || '0.8');
+
+function setSpeechRate(rate, btn) {
+  speechRate = rate;
+  localStorage.setItem('speechRate', rate);
+  document.querySelectorAll('.speed-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+}
 
 function toggleAutoPlay(val) {
   autoPlayAudio = val;
@@ -1016,6 +1056,12 @@ function toggleAutoPlay(val) {
 document.addEventListener('DOMContentLoaded', function() {
   const toggle = document.getElementById('autoPlayToggle');
   if (toggle) toggle.checked = autoPlayAudio;
+  // Init speed buttons
+  const rateMap = { 0.5: 0, 0.8: 1, 1.0: 2 };
+  const btns = document.querySelectorAll('.speed-btn');
+  btns.forEach(b => b.classList.remove('active'));
+  const idx = rateMap[speechRate] ?? 1;
+  if (btns[idx]) btns[idx].classList.add('active');
 });
 
 // ================================
