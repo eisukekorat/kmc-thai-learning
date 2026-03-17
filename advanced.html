@@ -673,6 +673,71 @@
   }
 
   /* Loading state removed for smoother experience */
+
+  /* ---- Settings ---- */
+  .settings-list {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    margin-top: 16px;
+  }
+
+  .setting-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 16px 18px;
+  }
+
+  .setting-label {
+    font-size: 0.95rem;
+    font-weight: 500;
+    color: var(--text);
+    margin-bottom: 4px;
+  }
+
+  .setting-desc {
+    font-size: 0.78rem;
+    color: var(--muted);
+  }
+
+  .toggle-switch {
+    position: relative;
+    display: inline-block;
+    width: 50px;
+    height: 26px;
+    flex-shrink: 0;
+  }
+
+  .toggle-switch input { opacity: 0; width: 0; height: 0; }
+
+  .toggle-slider {
+    position: absolute;
+    cursor: pointer;
+    inset: 0;
+    background: var(--surface3);
+    border-radius: 26px;
+    border: 1px solid var(--border);
+    transition: 0.3s;
+  }
+
+  .toggle-slider:before {
+    content: '';
+    position: absolute;
+    height: 18px;
+    width: 18px;
+    left: 3px;
+    bottom: 3px;
+    background: var(--muted);
+    border-radius: 50%;
+    transition: 0.3s;
+  }
+
+  .toggle-switch input:checked + .toggle-slider { background: var(--accent); border-color: var(--accent); }
+  .toggle-switch input:checked + .toggle-slider:before { transform: translateX(24px); background: white; }
 </style>
 </head>
 <body>
@@ -706,6 +771,7 @@
   <button class="tab active" onclick="switchTab('phrases')">💬 職場フレーズ</button>
   <button class="tab" onclick="switchTab('vocab')">🃏 単語カード</button>
   <button class="tab" onclick="switchTab('grammar')">📖 文法ポイント</button>
+  <button class="tab" onclick="switchTab('settings')">⚙️ 設定</button>
 </div>
 
 <!-- WORKPLACE PHRASES -->
@@ -900,6 +966,25 @@
   </div>
 </div>
 
+<!-- SETTINGS -->
+<div class="section" id="settings">
+  <p class="section-title">⚙️ 設定</p>
+  <div class="settings-list">
+
+    <div class="setting-item">
+      <div class="setting-info">
+        <div class="setting-label">🔊 音声自動再生</div>
+        <div class="setting-desc">カード表示時に自動で音声を再生します</div>
+      </div>
+      <label class="toggle-switch">
+        <input type="checkbox" id="autoPlayToggle" onchange="toggleAutoPlay(this.checked)">
+        <span class="toggle-slider"></span>
+      </label>
+    </div>
+
+  </div>
+</div>
+
 <script>
 function playAudio(type) {
   const text = type === 'phrase' ? 
@@ -916,6 +1001,22 @@ function playAudio(type) {
     window.speechSynthesis.speak(utterance);
   }
 }
+
+// ================================
+// SETTINGS: AUTO PLAY
+// ================================
+let autoPlayAudio = localStorage.getItem('autoPlayAudio') === 'true';
+
+function toggleAutoPlay(val) {
+  autoPlayAudio = val;
+  localStorage.setItem('autoPlayAudio', val);
+}
+
+// Init settings UI on load
+document.addEventListener('DOMContentLoaded', function() {
+  const toggle = document.getElementById('autoPlayToggle');
+  if (toggle) toggle.checked = autoPlayAudio;
+});
 
 // ================================
 // PROGRESS TRACKING
@@ -1579,6 +1680,10 @@ function showCard() {
   document.getElementById('cardCounter').textContent = (cardIndex + 1) + ' / ' + currentCards.length;
   document.getElementById('fcButtons').style.display = 'none';
   revealed = false;
+  // 自動再生
+  if (autoPlayAudio) {
+    setTimeout(() => playAudio('vocab'), 300);
+  }
 }
 
 function showMeaning() {
