@@ -1004,20 +1004,6 @@
     <span class="streak-count" id="streakCount">1</span>
     <span>日目</span>
   </div>
-  <div class="progress-overview" style="display:grid; grid-template-columns: repeat(3, 1fr); gap:10px; margin-top:16px;">
-    <div class="progress-item" style="background:var(--surface); border:1px solid var(--border); border-radius:10px; padding:10px; text-align:center;">
-      <div style="font-size:0.7rem; color:var(--muted); margin-bottom:4px;">単語</div>
-      <div style="font-family:'IBM Plex Mono',monospace; font-size:1.1rem; color:var(--accent); font-weight:600;" id="vocabProgress">0/200</div>
-    </div>
-    <div class="progress-item" style="background:var(--surface); border:1px solid var(--border); border-radius:10px; padding:10px; text-align:center;">
-      <div style="font-size:0.7rem; color:var(--muted); margin-bottom:4px;">フレーズ</div>
-      <div style="font-family:'IBM Plex Mono',monospace; font-size:1.1rem; color:var(--accent); font-weight:600;" id="phraseProgress">0/200</div>
-    </div>
-    <div class="progress-item" style="background:var(--surface); border:1px solid var(--border); border-radius:10px; padding:10px; text-align:center;">
-      <div style="font-size:0.7rem; color:var(--muted); margin-bottom:4px;">文法</div>
-      <div style="font-family:'IBM Plex Mono',monospace; font-size:1.1rem; color:var(--accent); font-weight:600;" id="grammarProgress">0/20</div>
-    </div>
-  </div>
 </div>
 
 <div class="tabs">
@@ -1264,9 +1250,9 @@ function updateProgressDisplay() {
   const phraseCount = Object.keys(progress.phrasesLearned).filter(k => progress.phrasesLearned[k]).length;
   const grammarCount = Object.keys(progress.grammarLearned).filter(k => progress.grammarLearned[k]).length;
   
-  document.getElementById('vocabProgress').textContent = vocabCount + '/200';
-  document.getElementById('phraseProgress').textContent = phraseCount + '/200';
-  document.getElementById('grammarProgress').textContent = grammarCount + '/20';
+  document.getElementById('homeVocabProg').textContent = vocabCount + '/200';
+  document.getElementById('homePhraseProg').textContent = phraseCount + '/200';
+  document.getElementById('homeGrammarProg').textContent = grammarCount + '/20';
 }
 
 // ---- Tabs ----
