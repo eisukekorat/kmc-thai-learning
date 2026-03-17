@@ -690,77 +690,15 @@
 </div>
 
 <div class="tabs">
-  <button class="tab active" onclick="switchTab('daily')">📋 今日のタスク</button>
-  <button class="tab" onclick="switchTab('phrases')">💬 職場フレーズ</button>
+  <button class="tab active" onclick="switchTab('phrases')">💬 職場フレーズ</button>
   <button class="tab" onclick="switchTab('vocab')">🃏 単語カード</button>
   <button class="tab" onclick="switchTab('grammar')">📖 文法ポイント</button>
   <button class="tab" onclick="switchTab('weekly')">📅 週間プラン</button>
   <button class="tab" onclick="switchTab('tips')">💡 学習のコツ</button>
 </div>
 
-<!-- DAILY CHECKLIST -->
-<div class="section active" id="daily">
-  <p class="section-title">今日のチェックリスト（目安：30〜40分）</p>
-  <div class="checklist-grid" id="checklistGrid">
-    <div class="check-item" onclick="toggleCheck(this)">
-      <div class="checkbox">✓</div>
-      <div class="check-label">
-        <div class="main">🔤 単語カード 10枚</div>
-        <div class="sub">職場・品質管理テーマを優先</div>
-      </div>
-      <div class="check-time">10分</div>
-    </div>
-    <div class="check-item" onclick="toggleCheck(this)">
-      <div class="checkbox">✓</div>
-      <div class="check-label">
-        <div class="main">📖 文法ポイント 1項目を読む</div>
-        <div class="sub">例文を声に出して1回読む</div>
-      </div>
-      <div class="check-time">5分</div>
-    </div>
-    <div class="check-item" onclick="toggleCheck(this)">
-      <div class="checkbox">✓</div>
-      <div class="check-label">
-        <div class="main">🗣️ 音読 3文</div>
-        <div class="sub">職場で使うフレーズを練習</div>
-      </div>
-      <div class="check-time">5分</div>
-    </div>
-    <div class="check-item" onclick="toggleCheck(this)">
-      <div class="checkbox">✓</div>
-      <div class="check-label">
-        <div class="main">👂 リスニング（YouTube / ドラマ）</div>
-        <div class="sub">ながら聴きでもOK</div>
-      </div>
-      <div class="check-time">10〜15分</div>
-    </div>
-    <div class="check-item" onclick="toggleCheck(this)">
-      <div class="checkbox">✓</div>
-      <div class="check-label">
-        <div class="main">✍️ 短文ライティング 1〜2文</div>
-        <div class="sub">今日の出来事をタイ語で書いてみる</div>
-      </div>
-      <div class="check-time">5〜10分</div>
-    </div>
-    <div class="check-item" onclick="toggleCheck(this)">
-      <div class="checkbox">✓</div>
-      <div class="check-label">
-        <div class="main">💬 同僚へタイ語で一言</div>
-        <div class="sub">สวัสดีครับ / ขอบคุณครับ でもOK</div>
-      </div>
-      <div class="check-time">実践</div>
-    </div>
-  </div>
-  <div class="progress-summary">
-    <div class="progress-bar-wrap">
-      <div class="progress-bar" id="progressBar" style="width:0%"></div>
-    </div>
-    <div class="progress-text" id="progressText">0 / 6</div>
-  </div>
-</div>
-
 <!-- WORKPLACE PHRASES -->
-<div class="section" id="phrases">
+<div class="section active" id="phrases">
   <p class="section-title">職場会話フレーズ（200フレーズ・音声付き）</p>
   
   <div class="mode-switcher">
