@@ -1039,6 +1039,7 @@
         <button class="filter-btn freq-btn active" onclick="setFreqFilter('all', this)">全て</button>
         <button class="filter-btn freq-btn" onclick="setFreqFilter('high', this)">🔥 超頻出</button>
         <button class="filter-btn freq-btn" onclick="setFreqFilter('medium', this)">📗 頻出</button>
+        <button class="filter-btn freq-btn" onclick="setFreqFilter('weak', this)">⚠️ 苦手</button>
       </div>
       <div class="filter-row">
         <span class="filter-label">🏷 シーン：</span>
@@ -1199,6 +1200,10 @@ function saveProgress() {
 }
 
 let progress = loadProgress();
+
+// 苦手単語
+let weakWords = JSON.parse(localStorage.getItem('weakWords') || '{}');
+function saveWeakWords() { localStorage.setItem('weakWords', JSON.stringify(weakWords)); }
 
 function updateProgressDisplay() {
   const vocabCount = Object.keys(progress.vocabLearned).filter(k => progress.vocabLearned[k]).length;
@@ -1830,8 +1835,15 @@ function setCategory(cat, btn) {
 
 function getVocabList() {
   let allVocab = vocabData[currentCategory].slice(0, 50);
-  // 頻度フィルター
-  if (freqFilter !== 'all') {
+  // 苦手フィルター
+  if (freqFilter === 'weak') {
+    const allV = vocabData[currentCategory].slice(0, 50);
+    allVocab = allVocab.filter(v => {
+      const idx = allV.indexOf(v);
+      return weakWords[currentCategory + '_' + idx];
+    });
+  } else if (freqFilter !== 'all') {
+    // 頻度フィルター
     allVocab = allVocab.filter(v => v.frequency === freqFilter);
   }
   // シーンフィルター
@@ -2028,7 +2040,20 @@ function selectQuizChoice(btn, isCorrect) {
   });
 
   quizTotal++;
-  if (isCorrect) quizCorrect++;
+  if (isCorrect) {
+    quizCorrect++;
+    // 正解したら苦手リストから削除
+    const allVocab = vocabData[currentCategory].slice(0, 50);
+    const realIndex = allVocab.indexOf(currentCards[cardIndex]);
+    delete weakWords[currentCategory + '_' + realIndex];
+    saveWeakWords();
+  } else {
+    // 不正解なら苦手としてマーク
+    const allVocab = vocabData[currentCategory].slice(0, 50);
+    const realIndex = allVocab.indexOf(currentCards[cardIndex]);
+    weakWords[currentCategory + '_' + realIndex] = true;
+    saveWeakWords();
+  }
   document.getElementById('quizNextBtn').style.display = 'block';
 }
 
