@@ -1,0 +1,862 @@
+// =============================================
+// KMC Thai Learning App - data.js
+// Vocabulary, Phrases, and Grammar data
+// =============================================
+const vocabData = {
+  work: [
+    { thai: 'ตรวจสอบ', romaji: 'truat-sop', jp: '検査する・確認する', example: 'ผมจะตรวจสอบชิ้นงานครับ（部品を検査します）', frequency: 'high', scenes: ["QC","不良対応","指示"] },
+    { thai: 'รายงาน', romaji: 'rai-ngan', jp: '報告する / 報告書', example: 'ส่งรายงานให้ผู้จัดการครับ（マネージャーに報告書を提出します）', frequency: 'high', scenes: ["会議","指示","朝礼"] },
+    { thai: 'แก้ไข', romaji: 'gae-khai', jp: '修正する・直す', example: 'ต้องแก้ไขข้อบกพร่องนี้ครับ（この欠陥を修正する必要があります）', frequency: 'high', scenes: ["不良対応","指示","QC"] },
+    { thai: 'กระบวนการ', romaji: 'gra-buan-gan', jp: 'プロセス・工程', example: 'ปรับปรุงกระบวนการผลิตครับ（生産プロセスを改善します）', frequency: 'medium', scenes: ["会議","指示"] },
+    { thai: 'ประสิทธิภาพ', romaji: 'pra-sit-thi-phap', jp: '効率・パフォーマンス', example: 'เพิ่มประสิทธิภาพการทำงานครับ（作業効率を上げます）', frequency: 'medium', scenes: ["会議","朝礼"] },
+    { thai: 'มอบหมาย', romaji: 'mop-mai', jp: '割り当てる・委任する', example: 'ผู้จัดการมอบหมายงานนี้ให้ผมครับ（マネージャーがこの仕事を私に割り当てました）', frequency: 'medium', scenes: ["指示","会議"] },
+    { thai: 'กำหนดการ', romaji: 'gam-not-gan', jp: 'スケジュール・日程', example: 'ตรวจสอบกำหนดการวันนี้ครับ（今日のスケジュールを確認します）', frequency: 'medium', scenes: ["会議","朝礼"] },
+    { thai: 'ดำเนินการ', romaji: 'dam-noen-gan', jp: '実施する・進める', example: 'กำลังดำเนินการอยู่ครับ（現在進行中です）', frequency: 'medium', scenes: ["指示","会議"] },
+    { thai: 'เอกสาร', romaji: 'ek-ga-san', jp: '書類・ドキュメント', example: 'เตรียมเอกสารให้พร้อมครับ（書類を準備します）', frequency: 'medium', scenes: ["会議","指示"] },
+    { thai: 'ประชุม', romaji: 'pra-chum', jp: '会議する / 会議', example: 'ประชุมเริ่มตอน 9 โมงครับ（会議は9時に始まります）', frequency: 'high', scenes: ["会議","朝礼"] },
+    { thai: 'ผลิต', romaji: 'pha-lit', jp: '生産する', example: 'โรงงานนี้ผลิตชิ้นส่วนรถยนต์ครับ（この工場は自動車部品を生産します）', frequency: 'high', scenes: ["QC","指示","朝礼"] },
+    { thai: 'วัตถุดิบ', romaji: 'wat-thu-dip', jp: '原材料', example: 'วัตถุดิบหมดแล้วครับ（原材料が切れました）', frequency: 'medium', scenes: ["QC","指示"] },
+    { thai: 'คลังสินค้า', romaji: 'khlang-sin-kha', jp: '倉庫', example: 'เก็บของในคลังสินค้าครับ（倉庫に保管します）', frequency: 'medium', scenes: ["指示"] },
+    { thai: 'ส่งออก', romaji: 'song-ok', jp: '輸出する', example: 'บริษัทนี้ส่งออกสินค้าไปญี่ปุ่นครับ（この会社は日本に輸出します）', frequency: 'low', scenes: ["会議"] },
+    { thai: 'นำเข้า', romaji: 'nam-khao', jp: '輸入する', example: 'นำเข้าวัตถุดิบจากต่างประเทศครับ（海外から原材料を輸入します）', frequency: 'low', scenes: ["会議"] },
+    { thai: 'ผู้จัดการ', romaji: 'phu-jat-gan', jp: '管理者・マネージャー', example: 'ผู้จัดการอนุมัติแผนนี้แล้วครับ（マネージャーはこの計画を承認しました）', frequency: 'high', scenes: ["会議","朝礼","指示"] },
+    { thai: 'พนักงาน', romaji: 'pha-nak-ngan', jp: '従業員', example: 'พนักงานทุกคนต้องสวมหน้ากากครับ（全従業員はマスクを着用する必要があります）', frequency: 'high', scenes: ["会議","朝礼","指示"] },
+    { thai: 'เงินเดือน', romaji: 'ngoen-duean', jp: '給料', example: 'รับเงินเดือนวันที่ 25 ทุกเดือนครับ（毎月25日に給料を受け取ります）', frequency: 'medium', scenes: ["日常"] },
+    { thai: 'โบนัส', romaji: 'bo-nas', jp: 'ボーナス', example: 'ได้รับโบนัสสิ้นปีครับ（年末ボーナスをもらいます）', frequency: 'low', scenes: ["日常"] },
+    { thai: 'วันหยุด', romaji: 'wan-yut', jp: '休日', example: 'พรุ่งนี้เป็นวันหยุดนักขัตฤกษ์ครับ（明日は祝日です）', frequency: 'medium', scenes: ["日常","朝礼"] },
+    { thai: 'ลาป่วย', romaji: 'la-puay', jp: '病欠する', example: 'วันนี้ขอลาป่วยครับ（今日は病欠します）', frequency: 'medium', scenes: ["日常","朝礼"] },
+    { thai: 'ลากิจ', romaji: 'la-kit', jp: '私用で休む', example: 'ขอลากิจไปธุระส่วนตัวครับ（私用で休みを取ります）', frequency: 'medium', scenes: ["日常","朝礼"] },
+    { thai: 'ทำงานล่วงเวลา', romaji: 'tham-ngan-luang-wela', jp: '残業する', example: 'ต้องทำงานล่วงเวลาคืนนี้ครับ（今夜は残業する必要があります）', frequency: 'high', scenes: ["指示","朝礼"] },
+    { thai: 'ประกันสังคม', romaji: 'pra-gan-sang-khom', jp: '社会保険', example: 'ส่งเงินประกันสังคมทุกเดือนครับ（毎月社会保険料を納めます）', frequency: 'low', scenes: ["日常"] },
+    { thai: 'สัญญา', romaji: 'san-ya', jp: '契約', example: 'เซ็นสัญญาจ้างงานแล้วครับ（雇用契約にサインしました）', frequency: 'low', scenes: ["会議"] },
+    { thai: 'บริษัท', romaji: 'bo-ri-sat', jp: '会社', example: 'บริษัทนี้ตั้งอยู่ในนิคมอุตสาหกรรมครับ（この会社は工業団地にあります）', frequency: 'high', scenes: ["会議","日常"] },
+    { thai: 'โรงงาน', romaji: 'rong-ngan', jp: '工場', example: 'โรงงานเปิดตลอด 24 ชั่วโมงครับ（工場は24時間稼働しています）', frequency: 'high', scenes: ["会議","指示","日常"] },
+    { thai: 'แผนก', romaji: 'pha-naek', jp: '部門・部署', example: 'ผมอยู่แผนกควบคุมคุณภาพครับ（私は品質管理部門にいます）', frequency: 'medium', scenes: ["会議","朝礼"] },
+    { thai: 'ตำแหน่ง', romaji: 'tam-naeng', jp: '役職・ポジション', example: 'ตำแหน่งของผมคือหัวหน้างานครับ（私の役職は現場リーダーです）', frequency: 'medium', scenes: ["会議","日常"] },
+    { thai: 'หัวหน้า', romaji: 'hua-na', jp: '上司・リーダー', example: 'หัวหน้าสั่งให้หยุดสายการผลิตครับ（上司が生産ラインを止めるよう指示しました）', frequency: 'high', scenes: ["指示","朝礼","日常"] },
+    { thai: 'ผู้ใต้บังคับบัญชา', romaji: 'phu-tai-bang-khap-ban-cha', jp: '部下', example: 'ผู้ใต้บังคับบัญชาทำงานเก่งมากครับ（部下はとても優秀です）', frequency: 'medium', scenes: ["指示","会議"] },
+    { thai: 'ทีมงาน', romaji: 'thim-ngan', jp: 'チーム', example: 'ทีมงานร่วมมือกันดีมากครับ（チームの連携がとてもいいです）', frequency: 'medium', scenes: ["会議","朝礼"] },
+    { thai: 'โครงการ', romaji: 'khrong-gan', jp: 'プロジェクト', example: 'โครงการนี้เสร็จสิ้นในเดือนหน้าครับ（このプロジェクトは来月完了します）', frequency: 'medium', scenes: ["会議"] },
+    { thai: 'เป้าหมาย', romaji: 'pao-mai', jp: '目標', example: 'เป้าหมายการผลิตวันนี้คือ 1,000 ชิ้นครับ（今日の生産目標は1,000個です）', frequency: 'high', scenes: ["会議","朝礼"] },
+    { thai: 'ผลงาน', romaji: 'phon-ngan', jp: '成果・実績', example: 'ผลงานของทีมดีขึ้นมากครับ（チームの実績が大幅に向上しました）', frequency: 'medium', scenes: ["会議","朝礼"] },
+    { thai: 'ประเมินผล', romaji: 'pra-moem-phon', jp: '評価する', example: 'ประเมินผลการทำงานทุกปีครับ（毎年業績評価を行います）', frequency: 'medium', scenes: ["会議"] },
+    { thai: 'อบรม', romaji: 'op-rom', jp: '研修・トレーニング', example: 'พนักงานใหม่ต้องเข้ารับการอบรมครับ（新入社員は研修を受ける必要があります）', frequency: 'medium', scenes: ["指示","会議"] },
+    { thai: 'พัฒนา', romaji: 'phat-tha-na', jp: '開発する・育成する', example: 'พัฒนาทักษะภาษาไทยทุกวันครับ（毎日タイ語スキルを磨いています）', frequency: 'medium', scenes: ["会議"] },
+    { thai: 'ลูกค้า', romaji: 'luk-kha', jp: '顧客', example: 'ลูกค้าร้องเรียนเรื่องคุณภาพครับ（顧客が品質について苦情を言っています）', frequency: 'high', scenes: ["会議","日常"] },
+    { thai: 'คู่ค้า', romaji: 'khu-kha', jp: '取引先', example: 'เจรจากับคู่ค้าเรื่องราคาครับ（取引先と価格交渉します）', frequency: 'low', scenes: ["会議"] },
+    { thai: 'ผู้ส่งมอบ', romaji: 'phu-song-mop', jp: 'サプライヤー', example: 'ผู้ส่งมอบส่งของล่าช้าครับ（サプライヤーが納期遅延しました）', frequency: 'low', scenes: ["会議"] },
+    { thai: 'ใบสั่งซื้อ', romaji: 'bai-sang-sue', jp: '発注書', example: 'ออกใบสั่งซื้อไปแล้วครับ（発注書を発行しました）', frequency: 'medium', scenes: ["会議","指示"] },
+    { thai: 'ใบเสนอราคา', romaji: 'bai-sa-noe-ra-kha', jp: '見積書', example: 'รอใบเสนอราคาจากซัพพลายเออร์ครับ（サプライヤーからの見積書を待っています）', frequency: 'medium', scenes: ["会議"] },
+    { thai: 'ใบแจ้งหนี้', romaji: 'bai-jaeng-ni', jp: '請求書', example: 'ส่งใบแจ้งหนี้ให้ลูกค้าแล้วครับ（顧客に請求書を送りました）', frequency: 'medium', scenes: ["会議"] },
+    { thai: 'ชำระเงิน', romaji: 'cham-ra-ngoen', jp: '支払う', example: 'ชำระเงินภายใน 30 วันครับ（30日以内に支払います）', frequency: 'medium', scenes: ["会議"] },
+    { thai: 'เครดิต', romaji: 'khre-dit', jp: '信用・掛け', example: 'ลูกค้ามีเครดิตดีครับ（顧客は信用が良好です）', frequency: 'low', scenes: ["会議"] },
+    { thai: 'กำไร', romaji: 'gam-rai', jp: '利益', example: 'กำไรไตรมาสนี้เพิ่มขึ้นครับ（今四半期の利益が増加しました）', frequency: 'medium', scenes: ["会議"] },
+    { thai: 'ขาดทุน', romaji: 'khat-thun', jp: '損失', example: 'ปีที่แล้วบริษัทขาดทุนครับ（昨年会社は損失を出しました）', frequency: 'medium', scenes: ["会議"] },
+    { thai: 'งบประมาณ', romaji: 'ngop-pra-man', jp: '予算', example: 'งบประมาณปีนี้ถูกอนุมัติแล้วครับ（今年の予算が承認されました）', frequency: 'medium', scenes: ["会議"] },
+    { thai: 'ค่าใช้จ่าย', romaji: 'kha-chai-jai', jp: '経費・支出', example: 'ลดค่าใช้จ่ายในการผลิตครับ（製造コストを削減します）', frequency: 'medium', scenes: ["会議"] }
+  ],
+  quality: [
+    { thai: 'ข้อบกพร่อง', romaji: 'kho-bok-phroeng', jp: '不良・欠陥', example: 'พบข้อบกพร่องในชิ้นงานครับ（部品に欠陥が見つかりました）', frequency: 'high', scenes: ["QC","不良対応"] },
+    { thai: 'มาตรฐาน', romaji: 'mat-tra-than', jp: '基準・スタンダード', example: 'ชิ้นงานนี้ไม่ได้มาตรฐานครับ（この部品は基準を満たしていません）', frequency: 'high', scenes: ["QC","会議"] },
+    { thai: 'ปฏิเสธ', romaji: 'pa-ti-set', jp: '拒否する・却下する', example: 'ปฏิเสธชิ้นงานที่บกพร่องทั้งหมดครับ（欠陥品をすべて却下します）', frequency: 'medium', scenes: ["QC","不良対応"] },
+    { thai: 'สาเหตุ', romaji: 'sa-het', jp: '原因', example: 'ต้องหาสาเหตุของปัญหาครับ（問題の原因を探る必要があります）', frequency: 'high', scenes: ["不良対応","QC"] },
+    { thai: 'แก้ไขปัญหา', romaji: 'gae-khai-pan-ha', jp: '問題を解決する', example: 'แก้ไขปัญหาเครื่องจักรได้แล้วครับ（機械の問題を解決しました）', frequency: 'high', scenes: ["不良対応","QC"] },
+    { thai: 'ผลการตรวจ', romaji: 'phon-gan-truat', jp: '検査結果', example: 'ผลการตรวจชิ้นงานผ่านทั้งหมดครับ（部品の検査結果は全合格です）', frequency: 'high', scenes: ["QC","会議"] },
+    { thai: 'ควบคุม', romaji: 'khuap-khum', jp: '管理する・コントロールする', example: 'ควบคุมคุณภาพการผลิตอย่างเข้มงวดครับ（生産品質を厳格に管理します）', frequency: 'high', scenes: ["QC","指示"] },
+    { thai: 'ปรับปรุง', romaji: 'prap-prung', jp: '改善する', example: 'ปรับปรุงกระบวนการเพื่อลดของเสียครับ（不良品削減のためプロセスを改善します）', frequency: 'high', scenes: ["QC","会議","不良対応"] },
+    { thai: 'ชิ้นงาน', romaji: 'chin-ngan', jp: '部品・ワーク', example: 'ชิ้นงานทุกชิ้นต้องผ่านการตรวจสอบครับ（全部品は検査を通過する必要があります）', frequency: 'high', scenes: ["QC","指示","不良対応"] },
+    { thai: 'ผ่านการตรวจ', romaji: 'phan-gan-truat', jp: '検査合格', example: 'ชิ้นงานล็อตนี้ผ่านการตรวจแล้วครับ（このロットの部品は検査合格しました）', frequency: 'high', scenes: ["QC"] },
+    { thai: 'คุณภาพ', romaji: 'khun-na-phap', jp: '品質', example: 'คุณภาพสินค้าต้องดีที่สุดครับ（製品品質は最高でなければなりません）', frequency: 'high', scenes: ["QC","会議","朝礼"] },
+    { thai: 'ตรวจสอบคุณภาพ', romaji: 'truat-sop-khun-na-phap', jp: '品質検査', example: 'ตรวจสอบคุณภาพทุกวันก่อนส่งครับ（出荷前に毎日品質検査します）', frequency: 'high', scenes: ["QC","指示"] },
+    { thai: 'รับประกัน', romaji: 'rap-pra-gan', jp: '保証する', example: 'สินค้านี้รับประกัน 1 ปีครับ（この製品は1年保証です）', frequency: 'medium', scenes: ["QC","会議"] },
+    { thai: 'ของเสีย', romaji: 'khong-sia', jp: '不良品・廃棄物', example: 'อัตราของเสียลดลงเหลือ 2% ครับ（不良率が2%まで下がりました）', frequency: 'high', scenes: ["QC","不良対応","朝礼"] },
+    { thai: 'แยกของเสีย', romaji: 'yaek-khong-sia', jp: '不良品を分ける', example: 'แยกของเสียออกจากสายการผลิตครับ（生産ラインから不良品を分けます）', frequency: 'high', scenes: ["QC","不良対応","指示"] },
+    { thai: 'เกณฑ์', romaji: 'ken', jp: '基準・条件', example: 'กำหนดเกณฑ์การตรวจสอบใหม่ครับ（新しい検査基準を設定します）', frequency: 'medium', scenes: ["QC","会議"] },
+    { thai: 'ผ่านเกณฑ์', romaji: 'phan-ken', jp: '基準を満たす', example: 'ชิ้นงานนี้ผ่านเกณฑ์แล้วครับ（この部品は基準を満たしました）', frequency: 'high', scenes: ["QC"] },
+    { thai: 'ไม่ผ่านเกณฑ์', romaji: 'mai-phan-ken', jp: '基準未達', example: 'ชิ้นงาน 5 ชิ้นไม่ผ่านเกณฑ์ครับ（部品5個が基準未達です）', frequency: 'high', scenes: ["QC","不良対応"] },
+    { thai: 'ตัวอย่าง', romaji: 'tua-yang', jp: 'サンプル', example: 'เอาตัวอย่างไปตรวจสอบในห้องแล็บครับ（サンプルを検査室に持って行きます）', frequency: 'medium', scenes: ["QC"] },
+    { thai: 'ทดสอบ', romaji: 'thot-sop', jp: 'テストする', example: 'ทดสอบเครื่องจักรก่อนใช้งานครับ（使用前に機械をテストします）', frequency: 'medium', scenes: ["QC","指示"] },
+    { thai: 'วิเคราะห์', romaji: 'wi-khro', jp: '分析する', example: 'วิเคราะห์ข้อมูลการผลิตรายวันครับ（毎日の生産データを分析します）', frequency: 'medium', scenes: ["QC","不良対応","会議"] },
+    { thai: 'วัด', romaji: 'wat', jp: '測定する', example: 'วัดขนาดชิ้นงานด้วยไมโครมิเตอร์ครับ（マイクロメーターで部品の寸法を測定します）', frequency: 'high', scenes: ["QC","指示"] },
+    { thai: 'ชั่ง', romaji: 'chang', jp: '重さを測る', example: 'ชั่งน้ำหนักสินค้าก่อนบรรจุครับ（梱包前に重さを測ります）', frequency: 'medium', scenes: ["QC","指示"] },
+    { thai: 'นับ', romaji: 'nap', jp: '数える', example: 'นับจำนวนชิ้นงานในกล่องครับ（箱の中の部品数を数えます）', frequency: 'high', scenes: ["QC","指示"] },
+    { thai: 'ตรวจนับ', romaji: 'truat-nap', jp: '点検・棚卸し', example: 'ตรวจนับสต็อกทุกสิ้นเดือนครับ（毎月末に棚卸しします）', frequency: 'medium', scenes: ["QC","指示"] },
+    { thai: 'บันทึก', romaji: 'ban-thuek', jp: '記録する', example: 'บันทึกผลการตรวจสอบในระบบครับ（システムに検査結果を記録します）', frequency: 'high', scenes: ["QC","指示","会議"] },
+    { thai: 'รายงานผล', romaji: 'rai-ngan-phon', jp: '結果報告', example: 'รายงานผลการตรวจสอบให้ผู้จัดการทราบครับ（マネージャーに検査結果を報告します）', frequency: 'high', scenes: ["QC","会議"] },
+    { thai: 'เอกสารคุณภาพ', romaji: 'ek-ga-san-khun-na-phap', jp: '品質文書', example: 'จัดทำเอกสารคุณภาพให้ครบถ้วนครับ（品質文書を完備します）', frequency: 'medium', scenes: ["QC","会議"] },
+    { thai: 'ใบรับรอง', romaji: 'bai-rap-rong', jp: '証明書', example: 'ต้องมีใบรับรองคุณภาพก่อนส่งออกครับ（輸出前に品質証明書が必要です）', frequency: 'medium', scenes: ["QC","会議"] },
+    { thai: 'ISO', romaji: 'ai-so', jp: 'ISO（品質規格）', example: 'โรงงานนี้ได้รับการรับรอง ISO 9001 ครับ（この工場はISO9001を取得しています）', frequency: 'medium', scenes: ["QC","会議"] },
+    { thai: 'ตรวจสอบภายใน', romaji: 'truat-sop-phai-nai', jp: '内部監査', example: 'ตรวจสอบภายในประจำปีเสร็จสิ้นแล้วครับ（年次内部監査が完了しました）', frequency: 'medium', scenes: ["QC","会議"] },
+    { thai: 'ตรวจสอบภายนอก', romaji: 'truat-sop-phai-nok', jp: '外部監査', example: 'ทีมตรวจสอบภายนอกมาเยี่ยมโรงงานครับ（外部監査チームが工場を訪問します）', frequency: 'low', scenes: ["QC","会議"] },
+    { thai: 'ไม่เป็นไปตามมาตรฐาน', romaji: 'mai-pen-pai-tam-mat-tra-than', jp: '基準不適合', example: 'รายงานสิ่งที่ไม่เป็นไปตามมาตรฐานทันทีครับ（基準不適合事項をすぐに報告してください）', frequency: 'medium', scenes: ["QC","不良対応"] },
+    { thai: 'แก้ไขทันที', romaji: 'gae-khai-than-thi', jp: 'すぐに修正', example: 'พบปัญหาต้องแก้ไขทันทีครับ（問題を発見したらすぐに修正します）', frequency: 'high', scenes: ["不良対応","QC","指示"] },
+    { thai: 'ป้องกัน', romaji: 'pong-gan', jp: '予防する', example: 'ป้องกันข้อบกพร่องด้วยการตรวจสอบครับ（検査で欠陥を予防します）', frequency: 'medium', scenes: ["QC","不良対応"] },
+    { thai: 'มาตรการป้องกัน', romaji: 'mat-tra-gan-pong-gan', jp: '予防措置', example: 'กำหนดมาตรการป้องกันการเกิดซ้ำครับ（再発防止措置を設定します）', frequency: 'medium', scenes: ["QC","会議"] },
+    { thai: 'ความเสี่ยง', romaji: 'khwam-siang', jp: 'リスク', example: 'ประเมินความเสี่ยงก่อนเริ่มโครงการครับ（プロジェクト開始前にリスク評価します）', frequency: 'medium', scenes: ["QC","会議"] },
+    { thai: 'ประเมินความเสี่ยง', romaji: 'pra-moem-khwam-siang', jp: 'リスク評価', example: 'ประเมินความเสี่ยงด้านความปลอดภัยครับ（安全面のリスク評価をします）', frequency: 'low', scenes: ["QC","会議"] },
+    { thai: 'ปลอดภัย', romaji: 'plot-phai', jp: '安全', example: 'สภาพแวดล้อมในโรงงานต้องปลอดภัยครับ（工場内環境は安全でなければなりません）', frequency: 'high', scenes: ["QC","朝礼","指示"] },
+    { thai: 'อันตราย', romaji: 'an-ta-rai', jp: '危険', example: 'พื้นที่นี้อันตรายครับ（この区域は危険です）', frequency: 'high', scenes: ["QC","朝礼","指示"] },
+    { thai: 'เครื่องมือวัด', romaji: 'khruang-mu-wat', jp: '測定機器', example: 'เครื่องมือวัดต้องผ่านการสอบเทียบครับ（測定機器は校正を通過する必要があります）', frequency: 'medium', scenes: ["QC","指示"] },
+    { thai: 'สอบเทียบ', romaji: 'sop-thiap', jp: '校正する', example: 'สอบเทียบเครื่องมือวัดทุก 6 เดือนครับ（6ヶ月ごとに測定機器を校正します）', frequency: 'low', scenes: ["QC"] },
+    { thai: 'ความแม่นยำ', romaji: 'khwam-maen-yam', jp: '精度', example: 'ความแม่นยำในการวัดต้องสูงมากครับ（測定精度は非常に高くなければなりません）', frequency: 'medium', scenes: ["QC"] },
+    { thai: 'ความคลาดเคลื่อน', romaji: 'khwam-khlat-khluean', jp: '誤差', example: 'ความคลาดเคลื่อนต้องน้อยกว่า 0.1 มม.ครับ（誤差は0.1mm以下でなければなりません）', frequency: 'medium', scenes: ["QC"] },
+    { thai: 'ผลิตภัณฑ์', romaji: 'pha-lit-ta-phan', jp: '製品', example: 'ผลิตภัณฑ์ทุกชิ้นต้องผ่าน QC ครับ（全製品はQCを通過する必要があります）', frequency: 'high', scenes: ["QC","会議"] },
+    { thai: 'ผลิตภัณฑ์สำเร็จรูป', romaji: 'pha-lit-ta-phan-sam-ret-rup', jp: '完成品', example: 'ผลิตภัณฑ์สำเร็จรูปพร้อมส่งครับ（完成品が出荷準備完了です）', frequency: 'medium', scenes: ["QC","指示"] },
+    { thai: 'กึ่งสำเร็จรูป', romaji: 'kueng-sam-ret-rup', jp: '半製品', example: 'กึ่งสำเร็จรูปรอการตรวจสอบครับ（半製品が検査待ちです）', frequency: 'medium', scenes: ["QC","指示"] },
+    { thai: 'วัสดุ', romaji: 'wat-sa-du', jp: '材料', example: 'วัสดุที่ใช้ต้องมีคุณภาพสูงครับ（使用する材料は高品質でなければなりません）', frequency: 'medium', scenes: ["QC","指示"] },
+    { thai: 'คัดแยก', romaji: 'khat-yaek', jp: '選別する', example: 'คัดแยกชิ้นงานที่ดีและของเสียครับ（良品と不良品を選別します）', frequency: 'high', scenes: ["QC","不良対応","指示"] },
+    { thai: 'ตรวจรับ', romaji: 'truat-rap', jp: '受入検査', example: 'ตรวจรับวัตถุดิบก่อนเข้าคลังครับ（倉庫入庫前に原材料を受入検査します）', frequency: 'medium', scenes: ["QC","指示"] }
+  ],
+  daily: [
+    { thai: 'เมื่อคืน', romaji: 'muea-khuoen', jp: '昨夜', example: 'เมื่อคืนทำงานล่วงเวลาครับ（昨夜は残業しました）', frequency: 'medium', scenes: ["日常","朝礼"] },
+    { thai: 'สัปดาห์หน้า', romaji: 'sap-da na', jp: '来週', example: 'สัปดาห์หน้ามีการฝึกอบรมครับ（来週は研修があります）', frequency: 'medium', scenes: ["会議","朝礼"] },
+    { thai: 'ระหว่าง', romaji: 'ra-wang', jp: '〜の間・〜中', example: 'ระหว่างประชุมห้ามใช้โทรศัพท์ครับ（会議中は電話禁止です）', frequency: 'high', scenes: ["日常","会議"] },
+    { thai: 'เพิ่งจะ', romaji: 'phoeng-ja', jp: 'ちょうど〜したところ', example: 'เพิ่งจะเสร็จงานครับ（ちょうど仕事を終えたところです）', frequency: 'medium', scenes: ["日常"] },
+    { thai: 'อีกนาน', romaji: 'ik nan', jp: 'もっと時間がかかる', example: 'อีกนานกว่าจะเสร็จครับ（完成まであと時間がかかります）', frequency: 'medium', scenes: ["日常"] },
+    { thai: 'เดี๋ยว', romaji: 'diao', jp: 'すぐに・ちょっと待って', example: 'เดี๋ยวผมจะไปดูให้ครับ（すぐに確認しに行きます）', frequency: 'high', scenes: ["指示","日常"] },
+    { thai: 'บางครั้ง', romaji: 'bang-khrang', jp: '時々', example: 'บางครั้งต้องทำงานกะดึกครับ（時々夜勤をします）', frequency: 'medium', scenes: ["日常"] },
+    { thai: 'โดยปกติ', romaji: 'doi-pa-ga-ti', jp: '通常・いつもは', example: 'โดยปกติเริ่มงาน 8 โมงเช้าครับ（通常は午前8時に仕事を始めます）', frequency: 'medium', scenes: ["朝礼","日常"] },
+    { thai: 'ฉุกเฉิน', romaji: 'chuk-choeon', jp: '緊急', example: 'มีเหตุฉุกเฉินที่โรงงานครับ（工場で緊急事態が発生しました）', frequency: 'medium', scenes: ["不良対応","指示"] },
+    { thai: 'สะดวก', romaji: 'sa-duak', jp: '便利な・都合がよい', example: 'วันไหนสะดวกประชุมได้บ้างครับ（いつ会議の都合がよいですか）', frequency: 'medium', scenes: ["会議","日常"] },
+    { thai: 'เช้า', romaji: 'chao', jp: '朝', example: 'ตื่นเช้ามาทำงานตรงเวลาครับ（早起きして時間通りに出勤します）', frequency: 'high', scenes: ["朝礼","日常"] },
+    { thai: 'กลางวัน', romaji: 'klang-wan', jp: '昼', example: 'กลางวันพักทานข้าวครับ（昼は休憩して食事します）', frequency: 'high', scenes: ["日常"] },
+    { thai: 'บ่าย', romaji: 'bai', jp: '午後', example: 'บ่ายต้องประชุมกับลูกค้าครับ（午後は顧客と会議があります）', frequency: 'high', scenes: ["日常","会議"] },
+    { thai: 'เย็น', romaji: 'yen', jp: '夕方', example: 'เย็นนี้มีการอบรมเพิ่มเติมครับ（今夕は追加研修があります）', frequency: 'high', scenes: ["日常"] },
+    { thai: 'กลางคืน', romaji: 'klang-khuen', jp: '夜', example: 'กลางคืนนี้เป็นกะดึกครับ（今夜は夜勤です）', frequency: 'medium', scenes: ["日常"] },
+    { thai: 'วันนี้', romaji: 'wan-ni', jp: '今日', example: 'วันนี้มีการตรวจสอบพิเศษครับ（今日は特別検査があります）', frequency: 'high', scenes: ["朝礼","指示","会議","日常"] },
+    { thai: 'เมื่อวาน', romaji: 'muea-wan', jp: '昨日', example: 'เมื่อวานผลิตได้ 500 ชิ้นครับ（昨日は500個生産しました）', frequency: 'high', scenes: ["朝礼","日常"] },
+    { thai: 'พรุ่งนี้', romaji: 'phrung-ni', jp: '明日', example: 'พรุ่งนี้ส่งมอบสินค้าให้ลูกค้าครับ（明日顧客に製品を納品します）', frequency: 'high', scenes: ["朝礼","会議","指示"] },
+    { thai: 'มะรืนนี้', romaji: 'ma-ruen-ni', jp: '明後日', example: 'มะรืนนี้หัวหน้าจะตรวจโรงงานครับ（明後日上司が工場を視察します）', frequency: 'medium', scenes: ["会議","日常"] },
+    { thai: 'สัปดาห์นี้', romaji: 'sap-da-ni', jp: '今週', example: 'สัปดาห์นี้ต้องผลิตให้ได้ 3,000 ชิ้นครับ（今週は3,000個生産する必要があります）', frequency: 'high', scenes: ["朝礼","会議"] },
+    { thai: 'สัปดาห์ที่แล้ว', romaji: 'sap-da-thi-laeo', jp: '先週', example: 'สัปดาห์ที่แล้วประชุมหลายครั้งมากครับ（先週は会議が多かったです）', frequency: 'medium', scenes: ["会議","朝礼"] },
+    { thai: 'เดือนนี้', romaji: 'duean-ni', jp: '今月', example: 'เดือนนี้ยอดผลิตเกินเป้าหมายครับ（今月は生産目標を超えました）', frequency: 'medium', scenes: ["会議","朝礼"] },
+    { thai: 'เดือนหน้า', romaji: 'duean-na', jp: '来月', example: 'เดือนหน้าจะเริ่มโครงการใหม่ครับ（来月新しいプロジェクトを始めます）', frequency: 'medium', scenes: ["会議"] },
+    { thai: 'ปีนี้', romaji: 'pi-ni', jp: '今年', example: 'ปีนี้บริษัทขยายกำลังการผลิตครับ（今年会社は生産能力を拡大します）', frequency: 'medium', scenes: ["会議"] },
+    { thai: 'ปีหน้า', romaji: 'pi-na', jp: '来年', example: 'ปีหน้าจะเปิดโรงงานแห่งใหม่ครับ（来年新しい工場をオープンします）', frequency: 'low', scenes: ["会議"] },
+    { thai: 'ตอนนี้', romaji: 'ton-ni', jp: '今', example: 'ตอนนี้เครื่องจักรเสียครับ（今機械が故障しています）', frequency: 'high', scenes: ["指示","日常","不良対応"] },
+    { thai: 'ทันที', romaji: 'than-thi', jp: 'すぐに', example: 'แจ้งผู้จัดการทันทีครับ（すぐにマネージャーに知らせます）', frequency: 'high', scenes: ["指示","不良対応","QC"] },
+    { thai: 'เร็วๆ', romaji: 'reo-reo', jp: '早く', example: 'ต้องทำให้เร็วๆ นี้ครับ（早くやる必要があります）', frequency: 'high', scenes: ["指示","不良対応"] },
+    { thai: 'ช้า', romaji: 'cha', jp: '遅い', example: 'งานนี้ช้ากว่าแผนครับ（この作業は計画より遅れています）', frequency: 'high', scenes: ["日常","指示"] },
+    { thai: 'สาย', romaji: 'sai', jp: '遅刻', example: 'วันนี้มาสายเพราะรถติดครับ（今日は渋滞で遅刻しました）', frequency: 'medium', scenes: ["朝礼","日常"] },
+    { thai: 'ตรงเวลา', romaji: 'trong-wela', jp: '時間通り', example: 'ส่งงานตรงเวลาทุกครั้งครับ（毎回時間通りに仕事を提出します）', frequency: 'high', scenes: ["朝礼","指示","会議"] },
+    { thai: 'ก่อน', romaji: 'kon', jp: '前に', example: 'ตรวจสอบก่อนเริ่มงานทุกเช้าครับ（毎朝仕事を始める前に確認します）', frequency: 'high', scenes: ["指示","日常"] },
+    { thai: 'หลัง', romaji: 'lang', jp: '後に', example: 'หลังเลิกงานต้องทำความสะอาดครับ（仕事後は掃除する必要があります）', frequency: 'high', scenes: ["指示","日常"] },
+    { thai: 'ขณะนี้', romaji: 'kha-na-ni', jp: 'この瞬間・ただいま', example: 'ขณะนี้กำลังซ่อมเครื่องจักรครับ（ただいま機械を修理中です）', frequency: 'medium', scenes: ["指示","不良対応"] },
+    { thai: 'เสมอ', romaji: 'sa-moe', jp: 'いつも', example: 'ผมเสมอมาทำงานตรงเวลาครับ（私はいつも時間通りに出勤します）', frequency: 'medium', scenes: ["日常"] },
+    { thai: 'ไม่เคย', romaji: 'mai-khoei', jp: '一度もない', example: 'ผมไม่เคยขาดงานโดยไม่แจ้งครับ（私は連絡なしに欠勤したことがありません）', frequency: 'medium', scenes: ["日常"] },
+    { thai: 'เคย', romaji: 'khoei', jp: '〜したことがある', example: 'เคยทำงานที่โรงงานชิ้นส่วนมาก่อนครับ（以前は部品工場で働いたことがあります）', frequency: 'medium', scenes: ["日常"] },
+    { thai: 'แล้ว', romaji: 'laeo', jp: 'もう〜した', example: 'ส่งรายงานให้ผู้จัดการแล้วครับ（マネージャーに報告書をすでに提出しました）', frequency: 'high', scenes: ["指示","日常","QC"] },
+    { thai: 'ยัง', romaji: 'yang', jp: 'まだ', example: 'ยังแก้ไขชิ้นงานที่บกพร่องอยู่ครับ（まだ欠陥品を修正中です）', frequency: 'high', scenes: ["指示","不良対応","日常"] },
+    { thai: 'ยังไม่', romaji: 'yang-mai', jp: 'まだ〜していない', example: 'ยังไม่ได้รับอนุมัติจากผู้จัดการครับ（マネージャーからまだ承認を受けていません）', frequency: 'high', scenes: ["指示","不良対応"] },
+    { thai: 'กำลัง', romaji: 'gam-lang', jp: '〜している（進行中）', example: 'กำลังตรวจสอบสายการผลิตครับ（生産ラインを確認中です）', frequency: 'high', scenes: ["指示","日常","QC"] },
+    { thai: 'จะ', romaji: 'ja', jp: '〜する（未来）', example: 'พรุ่งนี้จะเริ่มสายการผลิตใหม่ครับ（明日新しい生産ラインを開始します）', frequency: 'high', scenes: ["指示","朝礼","日常"] },
+    { thai: 'คง', romaji: 'khong', jp: 'たぶん', example: 'คงเสร็จทันกำหนดครับ（たぶん期日に間に合うでしょう）', frequency: 'medium', scenes: ["日常"] },
+    { thai: 'อาจจะ', romaji: 'at-ja', jp: 'おそらく', example: 'อาจจะต้องทำงานล่วงเวลาคืนนี้ครับ（今夜は残業が必要かもしれません）', frequency: 'medium', scenes: ["日常","会議"] },
+    { thai: 'แน่นอน', romaji: 'nae-non', jp: '確実に', example: 'แน่นอนว่าจะส่งตรงเวลาครับ（確実に時間通りに納品します）', frequency: 'medium', scenes: ["指示","会議"] },
+    { thai: 'ไม่แน่ใจ', romaji: 'mai-nae-jai', jp: '確信がない', example: 'ไม่แน่ใจว่าจะเสร็จทันหรือเปล่าครับ（間に合うかどうか確信が持てません）', frequency: 'medium', scenes: ["日常"] },
+    { thai: 'เหมือนกัน', romaji: 'muean-gan', jp: '同じ', example: 'ชิ้นงานทุกชิ้นต้องเหมือนกันครับ（全部品は同じでなければなりません）', frequency: 'medium', scenes: ["QC","指示"] },
+    { thai: 'ต่างกัน', romaji: 'tang-gan', jp: '違う', example: 'คุณภาพสองล็อตนี้ต่างกันมากครับ（この二つのロットは品質が大きく違います）', frequency: 'medium', scenes: ["QC"] },
+    { thai: 'มากกว่า', romaji: 'mak-kwa', jp: '〜より多い', example: 'วันนี้ผลิตได้มากกว่าเป้าหมายครับ（今日は目標より多く生産しました）', frequency: 'medium', scenes: ["QC","会議"] },
+    { thai: 'น้อยกว่า', romaji: 'noi-kwa', jp: '〜より少ない', example: 'ของเสียน้อยกว่าเดือนที่แล้วครับ（不良品が先月より少ないです）', frequency: 'medium', scenes: ["QC","会議"] }
+  ],
+  polite: [
+    { thai: 'กรุณา', romaji: 'ga-ru-na', jp: '〜してください（丁寧）', example: 'กรุณาสวมอุปกรณ์ป้องกันครับ（保護具を着用してください）', frequency: 'high', scenes: ["指示","会議","朝礼"] },
+    { thai: 'ขอโทษครับ', romaji: 'kho-thot khrap', jp: '申し訳ありません', example: 'ขอโทษครับ ที่ทำให้รอนาน（お待たせして申し訳ありません）', frequency: 'high', scenes: ["日常","不良対応"] },
+    { thai: 'รบกวน', romaji: 'rop-guan', jp: 'お手数をおかけしますが', example: 'รบกวนช่วยตรวจสอบเอกสารนี้ด้วยครับ（この書類の確認をお願いします）', frequency: 'high', scenes: ["会議","日常"] },
+    { thai: 'ยินดีครับ', romaji: 'yin-di khrap', jp: 'どういたしまして・喜んで', example: 'ยินดีครับ จะช่วยทันที（喜んでいただきます、すぐに手伝います）', frequency: 'high', scenes: ["日常","会議"] },
+    { thai: 'ได้รับทราบครับ', romaji: 'dai-rap-sap khrap', jp: '承知しました', example: 'ได้รับทราบครับ จะดำเนินการทันที（承知しました、すぐに対応します）', frequency: 'high', scenes: ["指示","会議"] },
+    { thai: 'ขอเรียนให้ทราบ', romaji: 'kho-rian-hai-sap', jp: 'ご報告申し上げます', example: 'ขอเรียนให้ทราบว่าการผลิตเสร็จสิ้นแล้วครับ（生産が完了したことをご報告します）', frequency: 'medium', scenes: ["会議"] },
+    { thai: 'โปรดทราบ', romaji: 'prot-sap', jp: 'ご承知おきください', example: 'โปรดทราบว่ากำหนดส่งคือพรุ่งนี้ครับ（納期は明日であることをご承知おきください）', frequency: 'medium', scenes: ["会議","指示"] },
+    { thai: 'ขอความอนุเคราะห์', romaji: 'kho-khwam-a-nu-khro', jp: 'ご協力をお願いします', example: 'ขอความอนุเคราะห์ตรวจสอบรายงานนี้ครับ（この報告書の確認にご協力をお願いします）', frequency: 'medium', scenes: ["会議"] },
+    { thai: 'ตามที่ได้แจ้ง', romaji: 'tam-thi-dai-jaeng', jp: '以前ご連絡の通り', example: 'ตามที่ได้แจ้งไว้ การประชุมเลื่อนออกไปครับ（以前ご連絡の通り、会議が延期されました）', frequency: 'medium', scenes: ["会議"] },
+    { thai: 'สอบถามได้ครับ', romaji: 'sop-tham-dai khrap', jp: 'お気軽にお問い合わせください', example: 'หากมีข้อสงสัยสอบถามได้ครับ（ご質問があればお気軽にお問い合わせください）', frequency: 'medium', scenes: ["会議","日常"] },
+    { thai: 'สวัสดีครับ', romaji: 'sa-wat-di khrap', jp: 'こんにちは（男性）', example: 'สวัสดีครับ ยินดีต้อนรับสู่โรงงาน（こんにちは、工場へようこそ）', frequency: 'high', scenes: ["朝礼","日常"] },
+    { thai: 'สวัสดีค่ะ', romaji: 'sa-wat-di kha', jp: 'こんにちは（女性）', example: 'สวัสดีค่ะ ยินดีให้บริการ（こんにちは、喜んでお手伝いします）', frequency: 'high', scenes: ["朝礼","日常"] },
+    { thai: 'ขอบคุณครับ', romaji: 'khop-khun khrap', jp: 'ありがとうございます（男性）', example: 'ขอบคุณครับ ที่ช่วยส่งรายงาน（報告書を提出してくれてありがとうございます）', frequency: 'high', scenes: ["日常","会議"] },
+    { thai: 'ขอบคุณค่ะ', romaji: 'khop-khun kha', jp: 'ありがとうございます（女性）', example: 'ขอบคุณค่ะ ที่ให้ข้อมูลมา（情報をいただきありがとうございます）', frequency: 'high', scenes: ["日常","会議"] },
+    { thai: 'ขอบคุณมากครับ', romaji: 'khop-khun-mak khrap', jp: '大変ありがとうございます', example: 'ขอบคุณมากครับ สำหรับความช่วยเหลือ（ご支援に大変ありがとうございます）', frequency: 'high', scenes: ["日常","会議"] },
+    { thai: 'ไม่เป็นไรครับ', romaji: 'mai-pen-rai khrap', jp: '大丈夫です・気にしないで', example: 'ไม่เป็นไรครับ เดี๋ยวจัดการเอง（大丈夫です、自分で対処します）', frequency: 'high', scenes: ["日常"] },
+    { thai: 'ด้วยความเคารพ', romaji: 'duay-khwam-khao-rop', jp: '敬具', example: 'เรียนท่านผู้จัดการ ด้วยความเคารพครับ（マネージャー様、敬具）', frequency: 'low', scenes: ["会議"] },
+    { thai: 'เรียน', romaji: 'rian', jp: '〜様（宛名）', example: 'เรียนผู้จัดการฝ่ายผลิตครับ（生産部門マネージャー様）', frequency: 'low', scenes: ["会議"] },
+    { thai: 'ท่าน', romaji: 'than', jp: '〜様（尊敬）', example: 'ท่านผู้อำนวยการเยี่ยมชมโรงงานครับ（工場長が工場を視察します）', frequency: 'medium', scenes: ["会議","指示"] },
+    { thai: 'คุณ', romaji: 'khun', jp: 'あなた・〜さん', example: 'คุณสมชายรับผิดชอบแผนกนี้ครับ（ソムチャイさんがこの部門を担当しています）', frequency: 'high', scenes: ["日常","会議"] },
+    { thai: 'เชิญ', romaji: 'chooen', jp: 'どうぞ', example: 'เชิญนั่งก่อนนะครับ（どうぞ座ってください）', frequency: 'medium', scenes: ["日常","会議"] },
+    { thai: 'เชิญครับ', romaji: 'chooen khrap', jp: 'どうぞ（丁寧）', example: 'เชิญครับ เข้ามาได้เลย（どうぞ、入ってください）', frequency: 'medium', scenes: ["日常","会議"] },
+    { thai: 'ขออนุญาต', romaji: 'kho-a-nu-yat', jp: '失礼します', example: 'ขออนุญาตออกไปประชุมข้างนอกครับ（外の会議に出席する失礼をします）', frequency: 'high', scenes: ["日常","会議"] },
+    { thai: 'ขอตัวก่อนครับ', romaji: 'kho-tua-kon khrap', jp: 'お先に失礼します', example: 'ขอตัวก่อนครับ มีนัดสำคัญ（先に失礼します、大切な約束があります）', frequency: 'high', scenes: ["日常","朝礼"] },
+    { thai: 'รอสักครู่ครับ', romaji: 'ro-sak-khru khrap', jp: '少々お待ちください', example: 'รอสักครู่ครับ กำลังตรวจสอบข้อมูล（少々お待ちください、データを確認中です）', frequency: 'high', scenes: ["日常","会議"] },
+    { thai: 'รออีกครู่หนึ่งครับ', romaji: 'ro-ik-khru-nueng khrap', jp: 'もう少しお待ちください', example: 'รออีกครู่หนึ่งครับ เกือบเสร็จแล้ว（もう少しお待ちください、もうすぐ終わります）', frequency: 'medium', scenes: ["日常","会議"] },
+    { thai: 'ขอรับครับ', romaji: 'kho-rap khrap', jp: 'かしこまりました', example: 'ขอรับครับ จะทำตามคำสั่งทันที（かしこまりました、すぐに指示通りに行います）', frequency: 'high', scenes: ["指示","会議"] },
+    { thai: 'เข้าใจครับ', romaji: 'khao-jai khrap', jp: '理解しました', example: 'เข้าใจครับ จะดำเนินการให้ถูกต้อง（理解しました、正しく対応します）', frequency: 'high', scenes: ["指示","会議"] },
+    { thai: 'ไม่เข้าใจครับ', romaji: 'mai-khao-jai khrap', jp: '理解できません', example: 'ไม่เข้าใจครับ ช่วยอธิบายอีกครั้งได้ไหม（理解できません、もう一度説明していただけますか）', frequency: 'high', scenes: ["指示","日常"] },
+    { thai: 'ขอโทษที่ทำให้รอนานครับ', romaji: 'kho-thot-thi-tham-hai-ro-nan khrap', jp: 'お待たせして申し訳ありません', example: 'ขอโทษที่ทำให้รอนานครับ มีปัญหากับระบบ（お待たせして申し訳ありません、システムに問題がありました）', frequency: 'medium', scenes: ["日常","会議"] },
+    { thai: 'ขอโทษที่มาสายครับ', romaji: 'kho-thot-thi-ma-sai khrap', jp: '遅刻して申し訳ありません', example: 'ขอโทษที่มาสายครับ รถติดมากครับ（遅刻して申し訳ありません、渋滞がひどかったです）', frequency: 'medium', scenes: ["朝礼","日常"] },
+    { thai: 'ขอแสดงความนับถือ', romaji: 'kho-sa-daeng-khwam-nap-thue', jp: '敬意を表します', example: 'ขอแสดงความนับถือท่านผู้จัดการครับ（マネージャー様に敬意を表します）', frequency: 'low', scenes: ["会議"] },
+    { thai: 'ด้วยความขอบคุณ', romaji: 'duay-khwam-khop-khun', jp: '感謝を込めて', example: 'ด้วยความขอบคุณสำหรับโอกาสนี้ครับ（この機会に感謝を込めて）', frequency: 'low', scenes: ["会議"] },
+    { thai: 'กราบเรียน', romaji: 'krap-rian', jp: '謹んで申し上げます', example: 'กราบเรียนท่านผู้อำนวยการครับ（工場長、謹んで申し上げます）', frequency: 'low', scenes: ["会議"] },
+    { thai: 'เรียนผู้บริหาร', romaji: 'rian-phu-bo-ri-han', jp: '経営者各位', example: 'เรียนผู้บริหารทุกท่านครับ（経営者各位）', frequency: 'low', scenes: ["会議"] },
+    { thai: 'เรียนท่านผู้จัดการ', romaji: 'rian-than-phu-jat-gan', jp: 'マネージャー様', example: 'เรียนท่านผู้จัดการ ขอรายงานผลประจำสัปดาห์ครับ（マネージャー様、週次報告をご報告します）', frequency: 'low', scenes: ["会議"] },
+    { thai: 'ตามคำสั่ง', romaji: 'tam-kham-sang', jp: 'ご指示通りに', example: 'ดำเนินการตามคำสั่งของท่านครับ（ご指示通りに進めました）', frequency: 'medium', scenes: ["指示","会議"] },
+    { thai: 'ด้วยความเต็มใจ', romaji: 'duay-khwam-tem-jai', jp: '喜んで', example: 'ด้วยความเต็มใจจะช่วยงานนี้ครับ（喜んでこの仕事を手伝います）', frequency: 'medium', scenes: ["会議","日常"] },
+    { thai: 'ขอบพระคุณอย่างสูง', romaji: 'khop-phra-khun-yang-sung', jp: '心より感謝申し上げます', example: 'ขอบพระคุณอย่างสูงสำหรับคำแนะนำครับ（ご指導に心より感謝申し上げます）', frequency: 'low', scenes: ["会議"] },
+    { thai: 'ขอให้โชคดีครับ', romaji: 'kho-hai-chok-di khrap', jp: 'ご多幸をお祈りします', example: 'ขอให้โชคดีกับโครงการใหม่ครับ（新しいプロジェクトにご多幸をお祈りします）', frequency: 'low', scenes: ["日常"] },
+    { thai: 'ขออภัยครับ', romaji: 'kho-a-phai khrap', jp: 'お詫び申し上げます', example: 'ขออภัยครับ ที่ทำผิดพลาดครั้งนี้（今回の間違いをお詫び申し上げます）', frequency: 'medium', scenes: ["日常","不良対応"] },
+    { thai: 'รู้สึกเป็นเกียรติ', romaji: 'ru-suek-pen-kiat', jp: '光栄に存じます', example: 'รู้สึกเป็นเกียรติที่ได้รับมอบหมายงานนี้ครับ（この仕事を任せていただいて光栄です）', frequency: 'low', scenes: ["会議"] },
+    { thai: 'ขอขอบพระคุณเป็นอย่างสูง', romaji: 'kho-khop-phra-khun-pen-yang-sung', jp: '深く御礼申し上げます', example: 'ขอขอบพระคุณเป็นอย่างสูงสำหรับการสนับสนุนครับ（ご支援に深く御礼申し上げます）', frequency: 'low', scenes: ["会議"] },
+    { thai: 'ได้โปรดครับ', romaji: 'dai-prot khrap', jp: 'どうかお願いします', example: 'ได้โปรดครับ พิจารณาข้อเสนอของผมด้วย（どうか私の提案をご検討ください）', frequency: 'medium', scenes: ["日常","指示"] },
+    { thai: 'ช่วยเหลือด้วยครับ', romaji: 'chuay-luea-duay khrap', jp: 'お助けください', example: 'ช่วยเหลือด้วยครับ ทำคนเดียวไม่ไหว（お助けください、一人ではできません）', frequency: 'medium', scenes: ["不良対応","日常"] },
+    { thai: 'ยินดีต้อนรับครับ', romaji: 'yin-di-ton-rap khrap', jp: 'ようこそ・歓迎いたします', example: 'ยินดีต้อนรับครับ สู่ทีมงานของเรา（ようこそ、私たちのチームへ歓迎します）', frequency: 'medium', scenes: ["朝礼","日常"] },
+    { thai: 'ขอแสดงความยินดี', romaji: 'kho-sa-daeng-khwam-yin-di', jp: 'お祝い申し上げます', example: 'ขอแสดงความยินดีกับการเลื่อนตำแหน่งครับ（昇進おめでとうございます）', frequency: 'low', scenes: ["日常"] },
+    { thai: 'ขอให้สุขภาพแข็งแรง', romaji: 'kho-hai-suk-kha-phap-khaeng-raeng', jp: 'ご健勝をお祈りします', example: 'ขอให้สุขภาพแข็งแรงนะครับ（お体に気をつけてください）', frequency: 'low', scenes: ["日常"] },
+    { thai: 'ประสบความสำเร็จ', romaji: 'pra-sop-khwam-sam-ret', jp: '成功されますように', example: 'ขอให้ประสบความสำเร็จในหน้าที่ใหม่ครับ（新しい職務で成功されますように）', frequency: 'low', scenes: ["会議","日常"] },
+    { thai: 'ตามสมควร', romaji: 'tam-som-khuan', jp: '適切に・相応しく', example: 'ให้รางวัลตามสมควรกับผลงานครับ（業績に応じた適切な報酬を与えます）', frequency: 'medium', scenes: ["会議"] }
+  ]
+};
+
+// ---- Workplace Phrases ----
+const phrasesData = {
+  meeting: [
+    // 既存10個
+    { thai: 'ขอบคุณที่มาประชุมครับ', romaji: 'khop-khun thi ma pra-chum khrap', jp: '会議に来ていただきありがとうございます' },
+    { thai: 'เรามาเริ่มประชุมกันเลยครับ', romaji: 'rao ma roem pra-chum gan loei khrap', jp: '会議を始めましょう' },
+    { thai: 'วันนี้เรามีหัวข้ออะไรบ้างครับ', romaji: 'wan-ni rao mi hua-kho a-rai bang khrap', jp: '本日の議題は何ですか' },
+    { thai: 'มีคำถามอะไรไหมครับ', romaji: 'mi kham-tham a-rai mai khrap', jp: '何か質問はありますか' },
+    { thai: 'ผมเห็นด้วยกับความคิดนี้ครับ', romaji: 'phom hen-duay gap khwam-khit ni khrap', jp: 'この意見に賛成です' },
+    { thai: 'ขอเพิ่มเติมอีกนิดหนึ่งครับ', romaji: 'kho phoem-toem ik nit-nueng khrap', jp: '少し補足させてください' },
+    { thai: 'เราตกลงกันแล้วใช่ไหมครับ', romaji: 'rao tok-long gan laeo chai-mai khrap', jp: '合意できましたね' },
+    { thai: 'ขอสรุปประเด็นสำคัญครับ', romaji: 'kho sa-rup pra-den sam-khan khrap', jp: '重要なポイントをまとめます' },
+    { thai: 'ประชุมครั้งหน้าวันไหนครับ', romaji: 'pra-chum khrang-na wan-nai khrap', jp: '次の会議はいつですか' },
+    { thai: 'ขอบคุณทุกคนครับ', romaji: 'khop-khun thuk-khon khrap', jp: '皆さんありがとうございました' },
+    // 新規40個
+    { thai: 'กรุณานั่งครับ', romaji: 'ga-ru-na nang khrap', jp: 'お座りください' },
+    { thai: 'เริ่มประชุมตอนกี่โมงครับ', romaji: 'roem pra-chum ton ki-mong khrap', jp: '会議は何時に始まりますか' },
+    { thai: 'ขออนุญาตพูดครับ', romaji: 'kho a-nu-yat phut khrap', jp: '発言させてください' },
+    { thai: 'ผมมีความเห็นต่างครับ', romaji: 'phom mi khwam-hen-tang khrap', jp: '異なる意見があります' },
+    { thai: 'ช่วยอธิบายเพิ่มเติมได้ไหมครับ', romaji: 'chuay a-thi-bai phoem-toem dai-mai khrap', jp: 'もう少し説明していただけますか' },
+    { thai: 'ผมไม่ค่อยเห็นด้วยครับ', romaji: 'phom mai-khoi hen-duay khrap', jp: 'あまり賛成できません' },
+    { thai: 'เราควรพิจารณาอีกครั้งครับ', romaji: 'rao khuan phi-ja-ra-na ik-khrang khrap', jp: 'もう一度検討すべきです' },
+    { thai: 'มีข้อมูลเพิ่มเติมไหมครับ', romaji: 'mi kho-mun phoem-toem mai khrap', jp: '追加情報はありますか' },
+    { thai: 'ขอดูเอกสารหน่อยครับ', romaji: 'kho du ek-ga-san noi khrap', jp: '資料を見せてください' },
+    { thai: 'เราต้องตัดสินใจวันนี้ไหมครับ', romaji: 'rao tong tat-sin-jai wan-ni mai khrap', jp: '今日決定する必要がありますか' },
+    { thai: 'ขอเวลาคิดอีกสักครู่ครับ', romaji: 'kho wela khit ik sak-khru khrap', jp: '少し考える時間をください' },
+    { thai: 'ให้ลงมติกันไหมครับ', romaji: 'hai long-ma-ti gan mai khrap', jp: '投票しましょうか' },
+    { thai: 'ใครเห็นด้วยบ้างครับ', romaji: 'khrai hen-duay bang khrap', jp: '誰が賛成ですか' },
+    { thai: 'ใครคัดค้านบ้างครับ', romaji: 'khrai khat-khan bang khrap', jp: '誰が反対ですか' },
+    { thai: 'งดออกเสียงครับ', romaji: 'ngot ok siang khrap', jp: '棄権します' },
+    { thai: 'มติเป็นเอกฉันท์ครับ', romaji: 'ma-ti pen ek-ka-chan khrap', jp: '満場一致です' },
+    { thai: 'ขอบันทึกรายงานการประชุมครับ', romaji: 'kho ban-thuek rai-ngan gan pra-chum khrap', jp: '議事録を記録してください' },
+    { thai: 'ใครเป็นเลขานุการครับ', romaji: 'khrai pen le-kha-nu-gan khrap', jp: '誰が書記ですか' },
+    { thai: 'ขอแจกเอกสารครับ', romaji: 'kho jaek ek-ga-san khrap', jp: '資料を配布します' },
+    { thai: 'กรุณาดูหน้านี้ครับ', romaji: 'ga-ru-na du na-ni khrap', jp: 'このページを見てください' },
+    { thai: 'มีใครไม่เข้าใจไหมครับ', romaji: 'mi khrai mai khao-jai mai khrap', jp: '分からない方はいますか' },
+    { thai: 'ขอพักเบรกสักครู่ครับ', romaji: 'kho phak break sak-khru khrap', jp: '少し休憩しましょう' },
+    { thai: 'กลับมาประชุมต่อครับ', romaji: 'klap ma pra-chum to khrap', jp: '会議を再開します' },
+    { thai: 'เรามีเวลาจำกัดครับ', romaji: 'rao mi wela jam-gat khrap', jp: '時間が限られています' },
+    { thai: 'ขอให้สรุปสั้นๆ ครับ', romaji: 'kho hai sa-rup san-san khrap', jp: '簡潔にまとめてください' },
+    { thai: 'เรื่องนี้เร่งด่วนครับ', romaji: 'rueang ni reng-duan khrap', jp: 'これは緊急です' },
+    { thai: 'ขอเลื่อนเป็นครั้งหน้าครับ', romaji: 'kho luean pen khrang-na khrap', jp: '次回に延期しましょう' },
+    { thai: 'วาระถัดไปครับ', romaji: 'wa-ra that-pai khrap', jp: '次の議題です' },
+    { thai: 'ขอถามคำถามหน่อยครับ', romaji: 'kho tham kham-tham noi khrap', jp: '質問させてください' },
+    { thai: 'ใครมีความคิดเห็นบ้างครับ', romaji: 'khrai mi khwam-khit-hen bang khrap', jp: '意見がある方はいますか' },
+    { thai: 'ผมขอแนะนำครับ', romaji: 'phom kho nae-nam khrap', jp: '提案させてください' },
+    { thai: 'เราควรทำอย่างไรครับ', romaji: 'rao khuan tham yang-rai khrap', jp: 'どうすべきでしょうか' },
+    { thai: 'มีทางเลือกอื่นไหมครับ', romaji: 'mi thang-lueak uen mai khrap', jp: '他の選択肢はありますか' },
+    { thai: 'ขอให้โหวตครับ', romaji: 'kho hai wot khrap', jp: '投票してください' },
+    { thai: 'ผลโหวตเป็นอย่างไรครับ', romaji: 'phon wot pen yang-rai khrap', jp: '投票結果はどうですか' },
+    { thai: 'ขอปิดประชุมครับ', romaji: 'kho pit pra-chum khrap', jp: '会議を終了します' },
+    { thai: 'ขอบคุณที่ให้ความร่วมมือครับ', romaji: 'khop-khun thi hai khwam-ruam-mue khrap', jp: 'ご協力ありがとうございました' },
+    { thai: 'นัดประชุมครั้งหน้าครับ', romaji: 'nat pra-chum khrang-na khrap', jp: '次回の会議を設定します' },
+    { thai: 'ส่งรายงานภายในพรุ่งนี้ครับ', romaji: 'song rai-ngan phai-nai phrung-ni khrap', jp: '明日までに報告書を提出してください' },
+    { thai: 'กรุณาตรวจสอบอีกครั้งครับ', romaji: 'ga-ru-na truat-sop ik-khrang khrap', jp: 'もう一度ご確認ください' }
+  ],
+  instruction: [
+    // 既存10個
+    { thai: 'ช่วยตรวจสอบนี่หน่อยครับ', romaji: 'chuay truat-sop ni noi khrap', jp: 'これを確認してください' },
+    { thai: 'กรุณาทำให้เสร็จภายในวันนี้ครับ', romaji: 'ga-ru-na tham hai set phai-nai wan-ni khrap', jp: '本日中に完了してください' },
+    { thai: 'ส่งรายงานมาให้ผมด้วยครับ', romaji: 'song rai-ngan ma hai phom duay khrap', jp: '報告書を提出してください' },
+    { thai: 'อย่าลืมบันทึกข้อมูลนะครับ', romaji: 'ya luem ban-thuek kho-mun na khrap', jp: 'データ記録を忘れないでください' },
+    { thai: 'ต้องระวังตรงนี้ให้ดีครับ', romaji: 'tong ra-wang trong-ni hai di khrap', jp: 'ここは注意してください' },
+    { thai: 'ให้เขาช่วยด้วยครับ', romaji: 'hai khao chuay duay khrap', jp: '彼に手伝ってもらってください' },
+    { thai: 'ปฏิบัติตามขั้นตอนนี้ครับ', romaji: 'pa-ti-bat tam khan-ton ni khrap', jp: 'この手順に従ってください' },
+    { thai: 'แก้ไขส่วนนี้ใหม่ครับ', romaji: 'gae-khai suan-ni mai khrap', jp: 'この部分を修正してください' },
+    { thai: 'รีบทำให้เร็วหน่อยครับ', romaji: 'rip tham hai reo noi khrap', jp: '急いでやってください' },
+    { thai: 'ทำตามที่บอกนะครับ', romaji: 'tham tam thi bok na khrap', jp: '言った通りにしてください' },
+    // 新規40個
+    { thai: 'เริ่มทำงานเลยครับ', romaji: 'roem tham-ngan loei khrap', jp: '作業を始めてください' },
+    { thai: 'หยุดทำงานก่อนครับ', romaji: 'yut tham-ngan kon khrap', jp: '作業を止めてください' },
+    { thai: 'ทำต่อได้ครับ', romaji: 'tham to dai khrap', jp: '続けてください' },
+    { thai: 'รอคำสั่งครับ', romaji: 'ro kham-sang khrap', jp: '指示を待ってください' },
+    { thai: 'เตรียมอุปกรณ์ให้พร้อมครับ', romaji: 'triam u-pa-kon hai phrom khrap', jp: '設備を準備してください' },
+    { thai: 'จัดโต๊ะให้เรียบร้อยครับ', romaji: 'jat to hai riap-roi khrap', jp: '机を整理してください' },
+    { thai: 'เก็บของให้เข้าที่ครับ', romaji: 'kep khong hai khao-thi khrap', jp: '物を片付けてください' },
+    { thai: 'ทำความสะอาดครับ', romaji: 'tham khwam-sa-at khrap', jp: '掃除してください' },
+    { thai: 'เช็ดเครื่องจักรครับ', romaji: 'chet khruean jak khrap', jp: '機械を拭いてください' },
+    { thai: 'ตรวจเช็คเครื่องมือครับ', romaji: 'truat-check khruean-mu khrap', jp: '工具を点検してください' },
+    { thai: 'เปลี่ยนชิ้นส่วนนี้ครับ', romaji: 'plian chin-suan ni khrap', jp: 'この部品を交換してください' },
+    { thai: 'ซ่อมแซมให้เสร็จวันนี้ครับ', romaji: 'som-saem hai set wan-ni khrap', jp: '今日中に修理してください' },
+    { thai: 'ปรับแต่งตามที่บอกครับ', romaji: 'prap-taeng tam-thi-bok khrap', jp: '言った通りに調整してください' },
+    { thai: 'ทดสอบก่อนใช้งานครับ', romaji: 'thot-sop kon chai-ngan khrap', jp: '使う前にテストしてください' },
+    { thai: 'เริ่มเครื่องได้ครับ', romaji: 'roem khruean dai khrap', jp: '機械を起動してください' },
+    { thai: 'ปิดเครื่องด้วยครับ', romaji: 'pit khruean duay khrap', jp: '機械を停止してください' },
+    { thai: 'ตั้งค่าตามนี้ครับ', romaji: 'tang kha tam-ni khrap', jp: 'この設定にしてください' },
+    { thai: 'ปรับความเร็วลงครับ', romaji: 'prap khwam-reo long khrap', jp: '速度を下げてください' },
+    { thai: 'เพิ่มความเร็วขึ้นครับ', romaji: 'phoem khwam-reo khuen khrap', jp: '速度を上げてください' },
+    { thai: 'ใส่วัตถุดิบเพิ่มครับ', romaji: 'sai wat-thu-dip phoem khrap', jp: '原材料を追加してください' },
+    { thai: 'เอาออกมาครับ', romaji: 'ao ok ma khrap', jp: '取り出してください' },
+    { thai: 'ใส่เข้าไปครับ', romaji: 'sai khao-pai khrap', jp: '入れてください' },
+    { thai: 'วางตรงนี้ครับ', romaji: 'wang trong-ni khrap', jp: 'ここに置いてください' },
+    { thai: 'ย้ายไปตรงนั้นครับ', romaji: 'yai pai trong-nan khrap', jp: 'あそこに移動してください' },
+    { thai: 'จัดเรียงตามลำดับครับ', romaji: 'jat-riang tam-lam-dap khrap', jp: '順番に並べてください' },
+    { thai: 'นับจำนวนให้ชัดเจนครับ', romaji: 'nap jam-nuan hai chat-jen khrap', jp: '数をはっきり数えてください' },
+    { thai: 'เขียนรายงานให้ละเอียดครับ', romaji: 'khian rai-ngan hai la-iat khrap', jp: '報告書を詳しく書いてください' },
+    { thai: 'ลงชื่อตรงนี้ครับ', romaji: 'long-chue trong-ni khrap', jp: 'ここにサインしてください' },
+    { thai: 'ประทับตราด้วยครับ', romaji: 'pra-thap tra duay khrap', jp: '押印してください' },
+    { thai: 'ส่งอีเมลหาผมครับ', romaji: 'song email ha phom khrap', jp: 'メールを送ってください' },
+    { thai: 'โทรหาฉันทันทีครับ', romaji: 'tho ha chan than-thi khrap', jp: 'すぐに電話してください' },
+    { thai: 'แจ้งให้ทุกคนทราบครับ', romaji: 'jaeng hai thuk-khon sap khrap', jp: '全員に知らせてください' },
+    { thai: 'ประกาศในกลุ่มไลน์ครับ', romaji: 'pra-kat nai klum line khrap', jp: 'LINEグループで告知してください' },
+    { thai: 'อัพเดทสถานะครับ', romaji: 'up-date sa-tha-na khrap', jp: 'ステータスを更新してください' },
+    { thai: 'ติดตามความคืบหน้าครับ', romaji: 'tit-tam khwam-khuep-na khrap', jp: '進捗を追跡してください' },
+    { thai: 'รายงานผลทุกวันครับ', romaji: 'rai-ngan phon thuk-wan khrap', jp: '毎日報告してください' },
+    { thai: 'อย่าลืมนะครับ', romaji: 'ya luem na khrap', jp: '忘れないでくださいね' },
+    { thai: 'ทำให้ดีที่สุดครับ', romaji: 'tham hai di thi-sut khrap', jp: '最善を尽くしてください' },
+    { thai: 'ขอบคุณที่ช่วยครับ', romaji: 'khop-khun thi chuay khrap', jp: '手伝ってくれてありがとう' },
+    { thai: 'เก่งมากเลยครับ', romaji: 'keng mak loei khrap', jp: 'とても上手です' }
+  ],
+  question: [
+    // 既存10個
+    { thai: 'มีปัญหาอะไรไหมครับ', romaji: 'mi pan-ha a-rai mai khrap', jp: '何か問題ありますか' },
+    { thai: 'ทำเสร็จแล้วหรือยังครับ', romaji: 'tham set laeo rue yang khrap', jp: '終わりましたか' },
+    { thai: 'เข้าใจไหมครับ', romaji: 'khao-jai mai khrap', jp: '理解できましたか' },
+    { thai: 'ต้องการความช่วยเหลือไหมครับ', romaji: 'tong-gan khwam-chuay-luea mai khrap', jp: '手伝いが必要ですか' },
+    { thai: 'คิดว่ายังไงครับ', romaji: 'khit wa yang-ngai khrap', jp: 'どう思いますか' },
+    { thai: 'ผลเป็นอย่างไรครับ', romaji: 'phon pen yang-rai khrap', jp: '結果はどうですか' },
+    { thai: 'มีข้อสงสัยไหมครับ', romaji: 'mi kho-song-sai mai khrap', jp: '疑問はありますか' },
+    { thai: 'พร้อมแล้วใช่ไหมครับ', romaji: 'phrom laeo chai-mai khrap', jp: '準備できましたか' },
+    { thai: 'ยังมีอะไรอีกไหมครับ', romaji: 'yang mi a-rai ik mai khrap', jp: '他に何かありますか' },
+    { thai: 'ทำไมเป็นแบบนี้ครับ', romaji: 'tham-mai pen baep-ni khrap', jp: 'なぜこうなったのですか' },
+    // 新規40個
+    { thai: 'ไปไหนมาครับ', romaji: 'pai-nai ma khrap', jp: 'どこに行ってきましたか' },
+    { thai: 'ทำอะไรอยู่ครับ', romaji: 'tham a-rai yu khrap', jp: '何をしていますか' },
+    { thai: 'กำลังทำอะไรครับ', romaji: 'gam-lang tham a-rai khrap', jp: '今何をしていますか' },
+    { thai: 'จะทำอะไรต่อครับ', romaji: 'ja tham a-rai to khrap', jp: '次に何をしますか' },
+    { thai: 'ใครทำครับ', romaji: 'khrai tham khrap', jp: '誰がやりましたか' },
+    { thai: 'ทำเมื่อไหร่ครับ', romaji: 'tham muea-rai khrap', jp: 'いつやりましたか' },
+    { thai: 'ทำที่ไหนครับ', romaji: 'tham thi-nai khrap', jp: 'どこでやりましたか' },
+    { thai: 'ใช้เวลานานแค่ไหนครับ', romaji: 'chai wela nan khae-nai khrap', jp: 'どのくらい時間がかかりますか' },
+    { thai: 'ใช้อุปกรณ์อะไรครับ', romaji: 'chai u-pa-kon a-rai khrap', jp: 'どんな設備を使いますか' },
+    { thai: 'ต้องการวัสดุอะไรบ้างครับ', romaji: 'tong-gan wat-sa-du a-rai bang khrap', jp: 'どんな材料が必要ですか' },
+    { thai: 'มีสต็อกเหลือไหมครับ', romaji: 'mi stock luea mai khrap', jp: '在庫は残っていますか' },
+    { thai: 'ได้กี่ชิ้นครับ', romaji: 'dai ki-chin khrap', jp: '何個できましたか' },
+    { thai: 'ของเสียมีกี่เปอร์เซ็นต์ครับ', romaji: 'khong-sia mi ki percent khrap', jp: '不良率は何パーセントですか' },
+    { thai: 'ใครรับผิดชอบครับ', romaji: 'khrai rap-phit-chop khrap', jp: '誰が担当ですか' },
+    { thai: 'แผนการผลิตเป็นอย่างไรครับ', romaji: 'phaen-gan pha-lit pen yang-rai khrap', jp: '生産計画はどうですか' },
+    { thai: 'กำหนดส่งวันไหนครับ', romaji: 'gam-not song wan-nai khrap', jp: '納期はいつですか' },
+    { thai: 'ลูกค้าต้องการเมื่อไหร่ครับ', romaji: 'luk-kha tong-gan muea-rai khrap', jp: '顧客はいつ必要としていますか' },
+    { thai: 'ราคาเท่าไหร่ครับ', romaji: 'ra-kha thao-rai khrap', jp: '価格はいくらですか' },
+    { thai: 'สามารถต่อรองได้ไหมครับ', romaji: 'sa-ma-rat to-rong dai-mai khrap', jp: '値引き交渉できますか' },
+    { thai: 'มีส่วนลดไหมครับ', romaji: 'mi suan-lot mai khrap', jp: '割引はありますか' },
+    { thai: 'ส่งได้ทันไหมครับ', romaji: 'song dai than mai khrap', jp: '間に合いますか' },
+    { thai: 'จะล่าช้าหรือเปล่าครับ', romaji: 'ja la-cha rue plao khrap', jp: '遅れますか' },
+    { thai: 'ต้องเร่งรัดไหมครับ', romaji: 'tong reng-rat mai khrap', jp: '急ぐ必要がありますか' },
+    { thai: 'มีเครื่องสำรองไหมครับ', romaji: 'mi khruean sam-rong mai khrap', jp: '予備機はありますか' },
+    { thai: 'ซ่อมได้ไหมครับ', romaji: 'som dai-mai khrap', jp: '修理できますか' },
+    { thai: 'ต้องเปลี่ยนใหม่หรือครับ', romaji: 'tong plian mai rue khrap', jp: '新しいものに交換する必要がありますか' },
+    { thai: 'ค่าใช้จ่ายเท่าไหร่ครับ', romaji: 'kha-chai-jai thao-rai khrap', jp: '費用はいくらですか' },
+    { thai: 'อนุมัติแล้วหรือยังครับ', romaji: 'a-nu-mat laeo rue yang khrap', jp: '承認されましたか' },
+    { thai: 'ใครเป็นผู้อนุมัติครับ', romaji: 'khrai pen phu a-nu-mat khrap', jp: '誰が承認者ですか' },
+    { thai: 'เอกสารครบไหมครับ', romaji: 'ek-ga-san khrop mai khrap', jp: '書類は揃っていますか' },
+    { thai: 'ขาดอะไรบ้างครับ', romaji: 'khat a-rai bang khrap', jp: '何が不足していますか' },
+    { thai: 'ต้องเพิ่มอะไรอีกไหมครับ', romaji: 'tong phoem a-rai ik mai khrap', jp: '他に追加する必要がありますか' },
+    { thai: 'ตรวจสอบหมดแล้วใช่ไหมครับ', romaji: 'truat-sop mot laeo chai-mai khrap', jp: '全部チェックしましたか' },
+    { thai: 'มีข้อผิดพลาดไหมครับ', romaji: 'mi kho-phit-phlat mai khrap', jp: 'ミスはありますか' },
+    { thai: 'แน่ใจแล้วใช่ไหมครับ', romaji: 'nae-jai laeo chai-mai khrap', jp: '確信していますか' },
+    { thai: 'ตรวจซ้ำอีกครั้งได้ไหมครับ', romaji: 'truat sam ik-khrang dai-mai khrap', jp: 'もう一度確認できますか' },
+    { thai: 'รายงานส่งแล้วหรือยังครับ', romaji: 'rai-ngan song laeo rue yang khrap', jp: '報告書は提出しましたか' },
+    { thai: 'ได้รับแจ้งแล้วใช่ไหมครับ', romaji: 'dai-rap jaeng laeo chai-mai khrap', jp: '通知は受け取りましたか' },
+    { thai: 'เข้าใจคำสั่งไหมครับ', romaji: 'khao-jai kham-sang mai khrap', jp: '指示は理解できましたか' },
+    { thai: 'มั่นใจว่าทำได้ไหมครับ', romaji: 'man-jai wa tham-dai mai khrap', jp: 'できると確信していますか' },
+    { thai: 'ต้องการอธิบายเพิ่มไหมครับ', romaji: 'tong-gan a-thi-bai phoem mai khrap', jp: '追加説明が必要ですか' },
+    { thai: 'ช่วยได้ไหมครับ', romaji: 'chuay dai-mai khrap', jp: '手伝えますか' },
+    { thai: 'สบายดีไหมครับ', romaji: 'sa-bai-di mai khrap', jp: '大丈夫ですか' },
+    { thai: 'เหนื่อยไหมครับ', romaji: 'nuea mai khrap', jp: '疲れましたか' },
+    { thai: 'พักก่อนไหมครับ', romaji: 'phak kon mai khrap', jp: '先に休みますか' },
+    { thai: 'หิวข้าวไหมครับ', romaji: 'hiu khao mai khrap', jp: 'お腹空きましたか' },
+    { thai: 'กลับบ้านได้แล้วครับ', romaji: 'klap ban dai laeo khrap', jp: 'もう帰っていいですよ' },
+    { thai: 'พรุ่งนี้มาทำงานไหมครับ', romaji: 'phrung-ni ma tham-ngan mai khrap', jp: '明日出勤しますか' }
+  ],
+  polite: [
+    // 既存10個
+    { thai: 'ขอโทษที่รบกวนครับ', romaji: 'kho-thot thi rop-guan khrap', jp: 'お邪魔してすみません' },
+    { thai: 'รบกวนถามหน่อยครับ', romaji: 'rop-guan tham noi khrap', jp: 'ちょっとお聞きしてもよろしいですか' },
+    { thai: 'ขอบคุณมากครับ', romaji: 'khop-khun mak khrap', jp: '本当にありがとうございます' },
+    { thai: 'ยินดีครับ', romaji: 'yin-di khrap', jp: 'どういたしまして' },
+    { thai: 'ได้รับทราบครับ', romaji: 'dai-rap-sap khrap', jp: '承知しました' },
+    { thai: 'ขอโทษด้วยครับ', romaji: 'kho-thot duay khrap', jp: '申し訳ございません' },
+    { thai: 'กรุณารอสักครู่ครับ', romaji: 'ga-ru-na ro sak-khru khrap', jp: '少々お待ちください' },
+    { thai: 'ขอความกรุณาด้วยครับ', romaji: 'kho khwam-ga-ru-na duay khrap', jp: 'お願いします' },
+    { thai: 'ขอบพระคุณอย่างสูงครับ', romaji: 'khop-phra-khun yang-sung khrap', jp: '心より感謝申し上げます' },
+    { thai: 'สอบถามได้เลยครับ', romaji: 'sop-tham dai loei khrap', jp: 'お気軽にお尋ねください' },
+    // 新規40個
+    { thai: 'สวัสดีตอนเช้าครับ', romaji: 'sa-wat-di ton-chao khrap', jp: 'おはようございます' },
+    { thai: 'สวัสดีตอนบ่ายครับ', romaji: 'sa-wat-di ton-bai khrap', jp: 'こんにちは（午後）' },
+    { thai: 'ราตรีสวัสดิ์ครับ', romaji: 'ra-tri sa-wat khrap', jp: 'おやすみなさい' },
+    { thai: 'เชิญนั่งครับ', romaji: 'chooen nang khrap', jp: 'お座りください' },
+    { thai: 'เชิญรับประทานครับ', romaji: 'chooen rap-pra-than khrap', jp: '召し上がってください' },
+    { thai: 'ขอให้อร่อยนะครับ', romaji: 'kho hai a-roi na khrap', jp: 'ごゆっくりどうぞ' },
+    { thai: 'ขออภัยในความไม่สะดวกครับ', romaji: 'kho-a-phai nai khwam-mai sa-duak khrap', jp: 'ご不便をおかけして申し訳ございません' },
+    { thai: 'ขอโทษที่ทำให้ผิดหวังครับ', romaji: 'kho-thot thi tham hai phit-wang khrap', jp: 'ご期待に添えず申し訳ありません' },
+    { thai: 'ขอให้โทษด้วยครับ', romaji: 'kho hai thot duay khrap', jp: 'お許しください' },
+    { thai: 'รู้สึกเสียใจมากครับ', romaji: 'ru-suek sia-jai mak khrap', jp: '大変残念に思います' },
+    { thai: 'ผมจะพยายามปรับปรุงครับ', romaji: 'phom ja pha-ya-yam prap-prung khrap', jp: '改善するよう努めます' },
+    { thai: 'ขอรับคำสั่งครับ', romaji: 'kho rap kham-sang khrap', jp: 'ご指示をお受けします' },
+    { thai: 'ตามที่ท่านสั่งครับ', romaji: 'tam thi than sang khrap', jp: 'おっしゃる通りにいたします' },
+    { thai: 'ด้วยความนับถือครับ', romaji: 'duay khwam nap-thue khrap', jp: '敬具' },
+    { thai: 'ขอแสดงความนับถืออย่างสูงครับ', romaji: 'kho sa-daeng khwam nap-thue yang sung khrap', jp: '深く敬意を表します' },
+    { thai: 'เรียนผู้มีเกียรติครับ', romaji: 'rian phu mi kiat khrap', jp: '尊敬する皆様' },
+    { thai: 'ท่านผู้ทรงเกียรติครับ', romaji: 'than phu song kiat khrap', jp: '名誉ある方々' },
+    { thai: 'ขอขอบคุณเป็นอย่างยิ่งครับ', romaji: 'kho khop-khun pen yang ying khrap', jp: '誠にありがとうございます' },
+    { thai: 'ขอบใจจริงๆ ครับ', romaji: 'khop-jai jing-jing khrap', jp: '本当に感謝します' },
+    { thai: 'ช่วยได้มากเลยครับ', romaji: 'chuay dai mak loei khrap', jp: '大変助かりました' },
+    { thai: 'ขอขอบพระคุณอย่างสูงครับ', romaji: 'kho khop phra-khun yang sung khrap', jp: '深く御礼申し上げます' },
+    { thai: 'ไม่รู้จะขอบคุณยังไงดีครับ', romaji: 'mai ru ja khop-khun yang-ngai di khrap', jp: 'お礼の言葉もございません' },
+    { thai: 'รู้สึกซาบซึ้งมากครับ', romaji: 'ru-suek sap-sueng mak khrap', jp: '深く感動しております' },
+    { thai: 'ขอให้ประสบความสำเร็จครับ', romaji: 'kho hai pra-sop khwam sam-ret khrap', jp: 'ご成功をお祈りします' },
+    { thai: 'ขอให้มีความสุขครับ', romaji: 'kho hai mi khwam-suk khrap', jp: 'お幸せでありますように' },
+    { thai: 'ขอให้สุขภาพแข็งแรงครับ', romaji: 'kho hai suk-kha-phap khaeng-raeng khrap', jp: 'ご健勝をお祈りします' },
+    { thai: 'ขอให้โชคดีครับ', romaji: 'kho hai chok-di khrap', jp: '幸運を祈ります' },
+    { thai: 'ขอให้ราบรื่นครับ', romaji: 'kho hai rap-ruen khrap', jp: '順調でありますように' },
+    { thai: 'พบกันใหม่ครับ', romaji: 'phop gan mai khrap', jp: 'またお会いしましょう' },
+    { thai: 'ไปมาดีๆ นะครับ', romaji: 'pai ma di-di na khrap', jp: '気をつけて行ってきてください' },
+    { thai: 'กลับบ้านปลอดภัยนะครับ', romaji: 'klap ban plot-phai na khrap', jp: '気をつけてお帰りください' },
+    { thai: 'ฝันดีครับ', romaji: 'fan di khrap', jp: 'よい夢を' },
+    { thai: 'พักผ่อนให้เต็มที่ครับ', romaji: 'phak-phon hai tem-thi khrap', jp: 'ゆっくりお休みください' },
+    { thai: 'หายป่วยเร็วๆ นะครับ', romaji: 'hai puay reo-reo na khrap', jp: 'お大事に' },
+    { thai: 'ขอให้หายไวๆ ครับ', romaji: 'kho hai hai wai-wai khrap', jp: '早く良くなりますように' },
+    { thai: 'ดูแลสุขภาพด้วยนะครับ', romaji: 'du-lae suk-kha-phap duay na khrap', jp: '健康に気をつけてください' },
+    { thai: 'อย่าทำงานหนักเกินไปนะครับ', romaji: 'ya tham-ngan nak koen-pai na khrap', jp: '無理しないでください' },
+    { thai: 'ขอให้ทำงานสะดวกครับ', romaji: 'kho hai tham-ngan sa-duak khrap', jp: '業務がスムーズに運びますように' },
+    { thai: 'ขอให้ประสบผลสำเร็จครับ', romaji: 'kho hai pra-sop phon sam-ret khrap', jp: '成果をあげられますように' },
+    { thai: 'ยินดีต้อนรับสู่บริษัทครับ', romaji: 'yin-di ton-rap su bo-ri-sat khrap', jp: '弊社へようこそ' },
+    { thai: 'ยินดีที่ได้รู้จักครับ', romaji: 'yin-di thi dai ru-jak khrap', jp: 'お会いできて光栄です' },
+    { thai: 'ยินดีที่ได้ร่วมงานครับ', romaji: 'yin-di thi dai ruam-ngan khrap', jp: 'ご一緒に働けて嬉しいです' },
+    { thai: 'ขอให้การทำงานราบรื่นครับ', romaji: 'kho hai gan tham-ngan rap-ruen khrap', jp: '円滑な業務をお祈りします' },
+    { thai: 'ยินดีให้บริการครับ', romaji: 'yin-di hai bo-ri-gan khrap', jp: '喜んでお手伝いします' },
+    { thai: 'มีอะไรให้ช่วยบอกได้เลยครับ', romaji: 'mi a-rai hai chuay bok dai loei khrap', jp: '何かお手伝いできることがあれば言ってください' },
+    { thai: 'พร้อมให้ความช่วยเหลือครับ', romaji: 'phrom hai khwam chuay-luea khrap', jp: 'お手伝いさせていただきます' },
+    { thai: 'หากต้องการอะไรบอกได้นะครับ', romaji: 'hak tong-gan a-rai bok dai na khrap', jp: '何か必要でしたらおっしゃってください' },
+    { thai: 'ยินดีรับใช้ครับ', romaji: 'yin-di rap-chai khrap', jp: '謹んでお仕えします' }
+  ]
+};
+
+// ---- Grammar ----
+const grammarData = [
+  {
+    tag: '使役', title: 'ให้ の使い方（〜させる）',
+    pattern: '主語 + ให้ + 人 + 動詞<br>「〜に〜させる / 〜してもらう」',
+    examples: [
+      { thai: 'ผมให้เขาตรวจสอบชิ้นงานครับ', romaji: 'phom hai khao truat-sop chin-ngan khrap', jp: '私は彼に部品を検査させました。' },
+      { thai: 'กรุณาให้ผมทราบด้วยครับ', romaji: 'ga-ru-na hai phom sap duay khrap', jp: 'ご連絡いただけますでしょうか。' }
+    ],
+    practice: [
+      { question: 'ผมให้เขา____ชิ้นงานครับ', choices: ['ตรวจสอบ', 'รายงาน', 'ประชุม'], correct: 0, explanation: '「検査させる」なので ตรวจสอบ が正解' },
+      { question: '____ให้เขาแก้ไขด่วนครับ', choices: ['ผม', 'เขา', 'ถ้า'], correct: 0, explanation: '「私が彼に修正させる」の主語は ผม' },
+      { question: 'กรุณาให้ผม____ด้วยครับ', choices: ['ทราบ', 'เคย', 'จะ'], correct: 0, explanation: 'ให้ผมทราบ＝「私に知らせてください」' }
+    ]
+  },
+  {
+    tag: '条件', title: 'ถ้า / หาก（もし〜なら）',
+    pattern: 'ถ้า/หาก + 条件 + ก็ + 結果<br>หาก はより書き言葉・丁寧な表現',
+    examples: [
+      { thai: 'ถ้าพบข้อบกพร่อง ให้รายงานทันทีครับ', romaji: 'tha phop kho-bok-phroeng hai rai-ngan than-thi khrap', jp: '不良を発見したら、すぐに報告してください。' },
+      { thai: 'หากมีปัญหา ผมจะช่วยครับ', romaji: 'hak mi pan-ha phom ja chuay khrap', jp: '問題があれば、私が対応します。' }
+    ],
+    practice: [
+      { question: '____พบข้อบกพร่อง ให้หยุดสายการผลิตครับ', choices: ['ถ้า', 'และ', 'แต่'], correct: 0, explanation: '条件を表す ถ้า が正解' },
+      { question: 'ถ้าเครื่องจักรเสีย____ต้องแจ้งทันทีครับ', choices: ['ก็', 'จาก', 'กับ'], correct: 0, explanation: 'ถ้า...ก็ のセットで「もし〜なら〜」' },
+      { question: '____มีปัญหา ผมจะช่วยครับ', choices: ['หาก', 'เพราะ', 'ซึ่ง'], correct: 0, explanation: 'หาก＝もし（書き言葉で丁寧）' }
+    ]
+  },
+  {
+    tag: '受動', title: 'ถูก（受け身・マイナス表現）',
+    pattern: '主語 + ถูก + 動詞<br>日本語の「〜された（否定的な意味合い）」に相当',
+    examples: [
+      { thai: 'ชิ้นงานถูกปฏิเสธจากลูกค้าครับ', romaji: 'chin-ngan thuk pa-ti-set jak luk-kha khrap', jp: '部品が顧客から拒否されました。' }
+    ],
+    practice: [
+      { question: 'ชิ้นงาน____ปฏิเสธจากลูกค้าครับ', choices: ['ถูก', 'ให้', 'ควร'], correct: 0, explanation: '受け身の ถูก が正解' },
+      { question: 'รายงาน____ส่งผิดครับ', choices: ['ถูก', 'จะ', 'ต้อง'], correct: 0, explanation: '「報告書が誤って提出された」= ถูก + 動詞' },
+      { question: '____สั่งให้แก้ไขแล้วครับ', choices: ['ถูก', 'ให้', 'กำลัง'], correct: 0, explanation: '「（命令を）受けた」= ถูก + สั่ง' }
+    ]
+  },
+  {
+    tag: '程度', title: 'ค่อนข้าง / พอสมควร（わりと〜）',
+    pattern: '<strong>ค่อนข้าง</strong>：わりと・かなり（やや強調）<br><strong>พอสมควร</strong>：まあまあ・ほどほどに',
+    examples: [
+      { thai: 'ปัญหานี้ค่อนข้างซับซ้อนครับ', romaji: 'pan-ha ni khon-khang sap-son khrap', jp: 'この問題はかなり複雑です。' },
+      { thai: 'ผลลัพธ์ดีพอสมควรครับ', romaji: 'phon-lap di pho-som-khuan khrap', jp: '結果はまあまあ良いです。' }
+    ],
+    practice: [
+      { question: 'ปัญหานี้____ซับซ้อนครับ', choices: ['ค่อนข้าง', 'ถ้า', 'ถูก'], correct: 0, explanation: 'ค่อนข้าง＝かなり・わりと' },
+      { question: 'ผลงานดี____ครับ', choices: ['พอสมควร', 'ค่อนข้าง', 'ให้'], correct: 0, explanation: 'พอสมควร＝まあまあ（文末に置く）' },
+      { question: 'เครื่องจักรเก่า____ครับ', choices: ['ค่อนข้าง', 'ถ้า', 'แต่'], correct: 0, explanation: 'ค่อนข้าง + 形容詞 で「かなり〜」' }
+    ]
+  },
+  {
+    tag: '接続', title: 'นอกจากนี้ / อีกทั้ง（さらに・加えて）',
+    pattern: 'ビジネス文書や説明でよく使う接続詞。<br><strong>นอกจากนี้</strong>：これに加えて / さらに<br><strong>อีกทั้ง</strong>：また / さらには',
+    examples: [
+      { thai: 'นอกจากนี้ เราต้องตรวจสอบกระบวนการด้วยครับ', romaji: 'nok-jak-ni rao tong truat-sop gra-buan-gan duay khrap', jp: 'さらに、私たちはプロセスも確認する必要があります。' }
+    ],
+    practice: [
+      { question: '____เราต้องตรวจสอบเอกสารด้วยครับ', choices: ['นอกจากนี้', 'ถ้า', 'เพราะ'], correct: 0, explanation: 'นอกจากนี้＝さらに・加えて' },
+      { question: '____เราต้องแก้ไขกระบวนการด้วยครับ', choices: ['อีกทั้ง', 'ถูก', 'ควร'], correct: 0, explanation: 'อีกทั้ง＝また・さらには' },
+      { question: 'ปัญหาคือการผลิตช้า ____คุณภาพต่ำด้วยครับ', choices: ['อีกทั้ง', 'ถ้า', 'ให้'], correct: 0, explanation: '「また〜でもある」= อีกทั้ง' }
+    ]
+  },
+  {
+    tag: '進行', title: 'กำลัง（〜している・現在進行形）',
+    pattern: '主語 + กำลัง + 動詞 + อยู่<br>「今〜しているところ」（อยู่ は省略可能）',
+    examples: [
+      { thai: 'ผมกำลังตรวจสอบชิ้นงานครับ', romaji: 'phom gam-lang truat-sop chin-ngan khrap', jp: '私は今部品を検査しています。' },
+      { thai: 'เครื่องจักรกำลังทำงานอยู่ครับ', romaji: 'khruean-jak gam-lang tham-ngan yu khrap', jp: '機械は現在稼働中です。' }
+    ],
+    practice: [
+      { question: 'ผม____ตรวจสอบชิ้นงานครับ', choices: ['กำลัง', 'จะ', 'เคย'], correct: 0, explanation: 'กำลัง + 動詞 で「〜している」（進行形）' },
+      { question: 'เครื่องจักร____ทำงาน____ครับ', choices: ['กำลัง / อยู่', 'จะ / แล้ว', 'ต้อง / ได้'], correct: 0, explanation: 'กำลัง...อยู่ で継続中を強調' },
+      { question: 'ขณะนี้ทีม____ซ่อมแซมอยู่ครับ', choices: ['กำลัง', 'ถ้า', 'ให้'], correct: 0, explanation: '「現在チームが修理中」= กำลัง + 動詞' }
+    ]
+  },
+  {
+    tag: '未来', title: 'จะ（〜する・未来・意志）',
+    pattern: '主語 + จะ + 動詞<br>「〜するつもり / 〜する（予定・意志）」',
+    examples: [
+      { thai: 'พรุ่งนี้ผมจะตรวจสอบสายการผลิตครับ', romaji: 'phrung-ni phom ja truat-sop sai-gan-pha-lit khrap', jp: '明日、私は生産ラインを確認します。' },
+      { thai: 'ถ้าพบปัญหาจะแจ้งทันทีครับ', romaji: 'tha phop pan-ha ja jaeng than-thi khrap', jp: '問題が見つかればすぐに報告します。' }
+    ],
+    practice: [
+      { question: 'พรุ่งนี้ผม____ตรวจสอบสายการผลิตครับ', choices: ['จะ', 'กำลัง', 'เคย'], correct: 0, explanation: 'จะ + 動詞 で「〜するつもり・〜する」（未来）' },
+      { question: 'ถ้าพบปัญหา____แจ้งทันทีครับ', choices: ['จะ', 'ให้', 'ถูก'], correct: 0, explanation: 'ถ้า...จะ で「もし〜なら〜する」' },
+      { question: 'ผม____ส่งรายงานพรุ่งนี้ครับ', choices: ['จะ', 'กำลัง', 'ถ้า'], correct: 0, explanation: '「明日報告書を提出します」= จะ + 動詞' }
+    ]
+  },
+  {
+    tag: '経験', title: 'เคย / ไม่เคย（〜したことがある/ない）',
+    pattern: 'เคย + 動詞：〜したことがある<br>ไม่เคย + 動詞：〜したことがない',
+    examples: [
+      { thai: 'ผมเคยทำงานที่โรงงานนี้มาก่อนครับ', romaji: 'phom khoei tham-ngan thi rong-ngan ni ma kon khrap', jp: '以前この工場で働いたことがあります。' },
+      { thai: 'ผมไม่เคยมาสายโดยไม่แจ้งครับ', romaji: 'phom mai-khoei ma sai doi mai jaeng khrap', jp: '連絡なしに遅刻したことはありません。' }
+    ],
+    practice: [
+      { question: 'ผม____ทำงานที่โรงงานนี้มาก่อนครับ', choices: ['เคย', 'จะ', 'กำลัง'], correct: 0, explanation: 'เคย＝〜したことがある（経験）' },
+      { question: 'ผม____มาสายโดยไม่แจ้งครับ', choices: ['ไม่เคย', 'กำลัง', 'ถ้า'], correct: 0, explanation: 'ไม่เคย＝〜したことがない' },
+      { question: 'คุณ____ใช้เครื่องมือนี้ไหมครับ', choices: ['เคย', 'จะ', 'ต้อง'], correct: 0, explanation: '「この機械を使ったことがありますか」= เคย + 動詞' }
+    ]
+  },
+  {
+    tag: '義務', title: 'ต้อง（〜しなければならない）',
+    pattern: '主語 + ต้อง + 動詞<br>「絶対に〜しなければならない」（強い義務・必要）',
+    examples: [
+      { thai: 'พนักงานทุกคนต้องสวมอุปกรณ์ป้องกันครับ', romaji: 'pha-nak-ngan thuk-khon tong suam u-pa-kon pong-gan khrap', jp: '全従業員は保護具を着用しなければなりません。' },
+      { thai: 'ต้องส่งรายงานภายในวันนี้ครับ', romaji: 'tong song rai-ngan phai-nai wan-ni khrap', jp: '今日中に報告書を提出しなければなりません。' }
+    ],
+    practice: [
+      { question: 'พนักงานทุกคน____สวมอุปกรณ์ป้องกันครับ', choices: ['ต้อง', 'ควร', 'อาจจะ'], correct: 0, explanation: 'ต้อง＝〜しなければならない（義務・必要）' },
+      { question: '____ส่งรายงานภายในวันนี้ครับ', choices: ['ต้อง', 'เคย', 'กำลัง'], correct: 0, explanation: '「今日中に報告書を提出しなければならない」= ต้อง' },
+      { question: 'ถ้าพบของเสีย____แยกทันทีครับ', choices: ['ต้อง', 'เพราะ', 'แต่'], correct: 0, explanation: 'ต้อง + 動詞 で「必ず〜しなければならない」' }
+    ]
+  },
+  {
+    tag: '推奨', title: 'ควร（〜すべき・〜した方がよい）',
+    pattern: '主語 + ควร + 動詞<br>「〜すべき / 〜した方が良い」（ต้อง より柔らかい）',
+    examples: [
+      { thai: 'เราควรตรวจสอบสาเหตุก่อนครับ', romaji: 'rao khuan truat-sop sa-het kon khrap', jp: 'まず原因を確認すべきです。' },
+      { thai: 'ปัญหานี้ควรรายงานให้ผู้จัดการทราบครับ', romaji: 'pan-ha ni khuan rai-ngan hai phu-jat-gan sap khrap', jp: 'この問題はマネージャーに報告すべきです。' }
+    ],
+    practice: [
+      { question: 'เรา____ตรวจสอบสาเหตุก่อนครับ', choices: ['ควร', 'ต้อง', 'ถูก'], correct: 0, explanation: 'ควร＝〜すべき（推奨・望ましい）' },
+      { question: 'ปัญหานี้____รายงานให้ผู้จัดการทราบครับ', choices: ['ควร', 'กำลัง', 'จะ'], correct: 0, explanation: '「この問題はマネージャーに報告すべき」= ควร' },
+      { question: 'พนักงานใหม่____เข้ารับการอบรมครับ', choices: ['ควร', 'เคย', 'ถ้า'], correct: 0, explanation: '「新入社員は研修を受けるべき」= ควร' }
+    ]
+  },
+  {
+    tag: '可能', title: 'สามารถ...ได้（〜できる）',
+    pattern: '主語 + สามารถ + 動詞 + ได้<br>「〜することができる」',
+    examples: [
+      { thai: 'ผมสามารถทำงานนี้ได้ครับ', romaji: 'phom sa-ma-rat tham-ngan ni dai khrap', jp: '私はこの仕事ができます。' },
+      { thai: 'สอบถามเพิ่มเติมได้ครับ', romaji: 'sop-tham phoem-toem dai khrap', jp: 'さらにお問い合わせいただけます。' }
+    ],
+    practice: [
+      { question: 'ผมสามารถ____งานนี้ได้ครับ', choices: ['ทำ', 'จะ', 'ให้'], correct: 0, explanation: 'สามารถ + 動詞 + ได้ で「〜できる」' },
+      { question: '____สอบถามเพิ่มเติมได้ครับ', choices: ['สามารถ', 'ต้อง', 'ถูก'], correct: 0, explanation: 'สามารถ + 動詞 + ได้ で可能を表す' },
+      { question: 'เครื่องจักรนี้สามารถผลิตได้วันละ____ชิ้นครับ', choices: ['500', 'จะ', 'ควร'], correct: 0, explanation: 'สามารถ...ได้ は「〜することができる」' }
+    ]
+  },
+  {
+    tag: '完了', title: 'แล้ว（もう〜した・完了）',
+    pattern: '動詞 + แล้ว（文末）<br>「もう〜した / 〜し終わった」（完了・変化）',
+    examples: [
+      { thai: 'ส่งรายงานแล้วครับ', romaji: 'song rai-ngan laeo khrap', jp: '報告書はもう提出しました。' },
+      { thai: 'ตรวจสอบชิ้นงานแล้วทุกชิ้นครับ', romaji: 'truat-sop chin-ngan laeo thuk-chin khrap', jp: '全部品の検査が完了しました。' }
+    ],
+    practice: [
+      { question: 'ส่งรายงาน____ครับ', choices: ['แล้ว', 'กำลัง', 'จะ'], correct: 0, explanation: 'แล้ว を文末に置いて「〜済み・完了」を表す' },
+      { question: 'ตรวจสอบชิ้นงาน____ทุกชิ้นครับ', choices: ['แล้ว', 'ต้อง', 'ควร'], correct: 0, explanation: '「全部品の検査が完了した」= 動詞 + แล้ว' },
+      { question: 'เครื่องจักรซ่อม____ครับ', choices: ['แล้ว', 'กำลัง', 'ถ้า'], correct: 0, explanation: '「機械の修理が終わった」= แล้ว' }
+    ]
+  },
+  {
+    tag: '継続', title: 'ยัง...อยู่（まだ〜している）',
+    pattern: '主語 + ยัง + 動詞 + อยู่<br>「まだ〜している / 〜し続けている」',
+    examples: [
+      { thai: 'ยังมีของเสียอยู่ครับ', romaji: 'yang mi khong-sia yu khrap', jp: 'まだ不良品があります。' },
+      { thai: 'เครื่องจักรยังเสียอยู่ครับ', romaji: 'khruean-jak yang sia yu khrap', jp: '機械はまだ故障中です。' }
+    ],
+    practice: [
+      { question: 'ยังมีของเสีย____ครับ', choices: ['อยู่', 'แล้ว', 'ต้อง'], correct: 0, explanation: '「まだ不良品がある」= ยัง + 動詞 + อยู่' },
+      { question: 'เครื่องจักรยังเสีย____ครับ', choices: ['อยู่', 'แล้ว', 'ได้'], correct: 0, explanation: '「機械はまだ故障中」= ยัง + อยู่' },
+      { question: 'ผม____ทำงาน____ครับ', choices: ['ยัง / อยู่', 'กำลัง / แล้ว', 'ให้ / ต้อง'], correct: 0, explanation: 'ยัง + 動詞 + อยู่ で「まだ〜している」' }
+    ]
+  },
+  {
+    tag: '理由', title: 'เพราะ / เนื่องจาก（〜なので）',
+    pattern: '<strong>เพราะ</strong>：〜なので・〜のため（口語）<br><strong>เนื่องจาก</strong>：〜のため（書き言葉・丁寧）',
+    examples: [
+      { thai: 'มาสายเพราะรถติดครับ', romaji: 'ma sai phro rot tit khrap', jp: '渋滞で遅刻しました。' },
+      { thai: 'เนื่องจากเครื่องจักรเสีย การผลิตจึงหยุดครับ', romaji: 'nueang-jak khruean-jak sia gan-pha-lit jueng yut khrap', jp: '機械の故障により、生産が停止しました。' }
+    ],
+    practice: [
+      { question: 'มาสาย____รถติดครับ', choices: ['เพราะ', 'ถ้า', 'แต่'], correct: 0, explanation: 'เพราะ＝〜なので・〜のため（理由）' },
+      { question: '____เครื่องจักรเสีย การผลิตจึงหยุดครับ', choices: ['เนื่องจาก', 'กำลัง', 'ให้'], correct: 0, explanation: 'เนื่องจาก＝〜のため（書き言葉・より丁寧）' },
+      { question: 'ของเสียเพิ่มขึ้น____ไม่มีการตรวจสอบครับ', choices: ['เพราะ', 'ถ้า', 'ต้อง'], correct: 0, explanation: '「不良品が増えた→なぜなら検査がなかったから」= เพราะ' }
+    ]
+  },
+  {
+    tag: '逆接', title: 'แต่（しかし・でも）',
+    pattern: '文1 + แต่ + 文2<br>「〜だが、しかし〜」（逆接）',
+    examples: [
+      { thai: 'งานเสร็จแล้ว แต่มีของเสียอยู่ครับ', romaji: 'ngan set laeo tae mi khong-sia yu khrap', jp: '仕事は終わりましたが、まだ不良品があります。' },
+      { thai: 'ราคาสูง แต่คุณภาพดีมากครับ', romaji: 'ra-kha sung tae khun-na-phap di mak khrap', jp: '値段は高いが、品質はとても良いです。' }
+    ],
+    practice: [
+      { question: 'งานเสร็จแล้ว____มีของเสียอยู่ครับ', choices: ['แต่', 'เพราะ', 'ให้'], correct: 0, explanation: 'แต่＝しかし・でも（逆接）' },
+      { question: 'เขาตรวจสอบแล้ว____ยังพบปัญหาครับ', choices: ['แต่', 'เพราะ', 'กำลัง'], correct: 0, explanation: '「確認したが、まだ問題が見つかった」= แต่' },
+      { question: 'ราคาสูง____คุณภาพดีมากครับ', choices: ['แต่', 'ถ้า', 'ต้อง'], correct: 0, explanation: '「値段は高いが品質が良い」= แต่' }
+    ]
+  },
+  {
+    tag: '目的', title: 'เพื่อ（〜のために）',
+    pattern: '動詞 + เพื่อ + 目的<br>「〜するために〜する」（目的）',
+    examples: [
+      { thai: 'ตรวจสอบชิ้นงานเพื่อป้องกันของเสียครับ', romaji: 'truat-sop chin-ngan phuea pong-gan khong-sia khrap', jp: '不良品防止のために部品を検査します。' },
+      { thai: 'อบรมเพื่อพัฒนาทักษะพนักงานครับ', romaji: 'op-rom phuea phat-tha-na thak-sa pha-nak-ngan khrap', jp: 'スタッフのスキル向上のために研修します。' }
+    ],
+    practice: [
+      { question: 'ตรวจสอบชิ้นงาน____ป้องกันของเสียครับ', choices: ['เพื่อ', 'เพราะ', 'แต่'], correct: 0, explanation: 'เพื่อ＝〜のために（目的）' },
+      { question: 'อบรม____พัฒนาทักษะพนักงานครับ', choices: ['เพื่อ', 'ถ้า', 'ให้'], correct: 0, explanation: '「スタッフのスキル向上のため研修する」= เพื่อ' },
+      { question: 'ส่งรายงาน____ให้ผู้จัดการทราบครับ', choices: ['เพื่อ', 'เพราะ', 'ต้อง'], correct: 0, explanation: 'เพื่อ + 動詞 で目的を表す' }
+    ]
+  },
+  {
+    tag: '関係節', title: 'ซึ่ง（〜という・関係節）',
+    pattern: '名詞 + ซึ่ง + 動詞/説明<br>「〜という〜 / 〜で〜」（関係節）',
+    examples: [
+      { thai: 'ชิ้นงานซึ่งผ่านการตรวจสอบแล้วพร้อมส่งครับ', romaji: 'chin-ngan sueng phan-gan-truat laeo phrom song khrap', jp: '検査に合格した部品は出荷準備ができています。' },
+      { thai: 'เอกสารซึ่งผมส่งเมื่อวานนี้ถูกต้องครับ', romaji: 'ek-ga-san sueng phom song muea-wan-ni thuk-tong khrap', jp: '昨日私が提出した書類は正確です。' }
+    ],
+    practice: [
+      { question: 'ชิ้นงาน____ผ่านการตรวจสอบแล้วพร้อมส่งครับ', choices: ['ซึ่ง', 'ถ้า', 'ให้'], correct: 0, explanation: 'ซึ่ง＝〜という・〜で（関係節を作る）' },
+      { question: 'เอกสาร____ผมส่งเมื่อวานนี้ถูกต้องครับ', choices: ['ซึ่ง', 'เพราะ', 'แต่'], correct: 0, explanation: '「昨日提出した書類は正確」= ซึ่ง' },
+      { question: 'ปัญหา____เกิดขึ้นต้องแก้ไขทันทีครับ', choices: ['ซึ่ง', 'ต้อง', 'กำลัง'], correct: 0, explanation: '「発生した問題はすぐに修正すべき」= ซึ่ง' }
+    ]
+  },
+  {
+    tag: '列挙', title: 'ทั้ง...และ（〜と〜・両方）',
+    pattern: 'ทั้ง + 名詞/節1 + และ + 名詞/節2<br>「〜と〜の両方・〜も〜も」',
+    examples: [
+      { thai: 'ต้องตรวจสอบทั้งคุณภาพและปริมาณครับ', romaji: 'tong truat-sop thang khun-na-phap lae pa-ri-man khrap', jp: '品質と数量の両方を確認する必要があります。' },
+      { thai: 'ทั้งผู้จัดการและพนักงานต้องรับรู้ครับ', romaji: 'thang phu-jat-gan lae pha-nak-ngan tong rap-ru khrap', jp: 'マネージャーも従業員も知る必要があります。' }
+    ],
+    practice: [
+      { question: 'ต้องตรวจสอบ____คุณภาพ____ปริมาณครับ', choices: ['ทั้ง / และ', 'ถ้า / ก็', 'เพราะ / แต่'], correct: 0, explanation: 'ทั้ง...และ＝〜と〜両方（列挙）' },
+      { question: '____ผู้จัดการ____พนักงานต้องรับรู้ครับ', choices: ['ทั้ง / และ', 'ให้ / ต้อง', 'เคย / ไม่เคย'], correct: 0, explanation: '「マネージャーも従業員も知る必要がある」= ทั้ง...และ' },
+      { question: 'พัฒนา____ทักษะ____ความรู้ครับ', choices: ['ทั้ง / และ', 'เพราะ / แต่', 'ถ้า / ก็'], correct: 0, explanation: 'ทั้ง + 名詞1 + และ + 名詞2 で「両方とも〜」' }
+    ]
+  },
+  {
+    tag: '譲歩', title: 'ไม่ว่า（〜にかかわらず）',
+    pattern: 'ไม่ว่า + 疑問詞/名詞 + จะ + 動詞<br>「どんな〜でも / 〜にかかわらず」',
+    examples: [
+      { thai: 'ไม่ว่าจะเกิดปัญหาอะไร ต้องแก้ไขทันทีครับ', romaji: 'mai-wa ja koet pan-ha a-rai tong gae-khai than-thi khrap', jp: 'どんな問題が起きても、すぐに対処しなければなりません。' },
+      { thai: 'ไม่ว่าใคร ต้องปฏิบัติตามกฎครับ', romaji: 'mai-wa khrai tong pa-ti-bat tam kot khrap', jp: '誰であっても規則に従わなければなりません。' }
+    ],
+    practice: [
+      { question: '____จะเกิดปัญหาอะไร ต้องแก้ไขทันทีครับ', choices: ['ไม่ว่า', 'ถ้า', 'เพราะ'], correct: 0, explanation: 'ไม่ว่า＝〜にかかわらず・どんな〜でも' },
+      { question: '____ใคร ต้องปฏิบัติตามกฎครับ', choices: ['ไม่ว่า', 'ให้', 'ต้อง'], correct: 0, explanation: '「誰であっても規則に従わなければならない」= ไม่ว่า' },
+      { question: '____สถานการณ์จะเป็นอย่างไร เราต้องพยายามครับ', choices: ['ไม่ว่า', 'แต่', 'เพื่อ'], correct: 0, explanation: 'ไม่ว่า...จะ... で「どんな〜でも〜する」' }
+    ]
+  },
+  {
+    tag: '準拠', title: 'ตาม（〜に従って・〜通りに）',
+    pattern: 'ตาม + 名詞（規則・指示など）<br>「〜に従って / 〜の通りに」',
+    examples: [
+      { thai: 'ดำเนินการตามขั้นตอนที่กำหนดครับ', romaji: 'dam-noen-gan tam khan-ton thi gam-not khrap', jp: '定められた手順通りに進めます。' },
+      { thai: 'ทำตามคำสั่งของผู้จัดการครับ', romaji: 'tham tam kham-sang khong phu-jat-gan khrap', jp: 'マネージャーの指示通りに行います。' }
+    ],
+    practice: [
+      { question: 'ดำเนินการ____ขั้นตอนที่กำหนดครับ', choices: ['ตาม', 'ให้', 'เพราะ'], correct: 0, explanation: 'ตาม＝〜に従って・〜通りに' },
+      { question: 'ทำ____คำสั่งของผู้จัดการครับ', choices: ['ตาม', 'เพื่อ', 'ซึ่ง'], correct: 0, explanation: '「マネージャーの指示通りに行う」= ตาม' },
+      { question: 'ส่งงาน____กำหนดเวลาครับ', choices: ['ตาม', 'ถ้า', 'แต่'], correct: 0, explanation: '「期日通りに提出する」= ตาม' }
+    ]
+  }
+];
+
+// =============================================
+// KMC Business Data - ロールプレイ・CAR・メール
+// =============================================
+
+const roleplayData = [
+  {
+    scene: '朝礼',
+    title: '朝礼での挨拶と連絡',
+    dialogue: [
+      { speaker: '🇯🇵 日本人', thai: 'สวัสดีตอนเช้าครับ วันนี้มีเรื่องแจ้งครับ', romaji: 'sa-wat-di ton-chao khrap, wan-ni mi rueang jaeng khrap', jp: 'おはようございます。今日は連絡事項があります。' },
+      { speaker: '🇹🇭 タイ人', thai: 'สวัสดีค่ะ ยินดีรับฟังค่ะ', romaji: 'sa-wat-di kha, yin-di rap-fang kha', jp: 'おはようございます。お聞きします。' },
+      { speaker: '🇯🇵 日本人', thai: 'วันนี้มีลูกค้ามาเยี่ยมชมโรงงานครับ กรุณาเตรียมพื้นที่ให้เรียบร้อยครับ', romaji: 'wan-ni mi luk-kha ma yiam-chom rong-ngan khrap, ka-ru-na triam phuen-thi hai riap-roi khrap', jp: '今日はお客様が工場見学に来ます。エリアをきれいにしてください。' },
+      { speaker: '🇹🇭 タイ人', thai: 'รับทราบค่ะ จะเตรียมให้เรียบร้อยค่ะ', romaji: 'rap-sap kha, ja triam hai riap-roi kha', jp: '了解しました。準備しておきます。' }
+    ],
+    vocab: [
+      { thai: 'แจ้ง', romaji: 'jaeng', jp: '連絡する・通知する' },
+      { thai: 'เยี่ยมชม', romaji: 'yiam-chom', jp: '見学する' },
+      { thai: 'เตรียม', romaji: 'triam', jp: '準備する' },
+      { thai: 'เรียบร้อย', romaji: 'riap-roi', jp: 'きちんと・整然と' }
+    ]
+  },
+  {
+    scene: 'QC不良報告',
+    title: '品質不良の報告と対応',
+    dialogue: [
+      { speaker: '🇹🇭 タイ人', thai: 'ขอรายงานปัญหาคุณภาพครับ พบของเสียจำนวน 5 ชิ้นครับ', romaji: 'kho rai-ngan pan-ha khun-na-phap khrap, phop khong-sia jam-nuan ha chin khrap', jp: '品質問題を報告します。不良品5個を発見しました。' },
+      { speaker: '🇯🇵 日本人', thai: 'ปัญหาเกิดจากอะไรครับ', romaji: 'pan-ha koet jak a-rai khrap', jp: '原因は何ですか？' },
+      { speaker: '🇹🇭 タイ人', thai: 'สาเหตุมาจากเครื่องจักรปรับตั้งไม่ถูกต้องครับ', romaji: 'sa-het ma-jak khrueang-jak prap-tang mai thuk-tong khrap', jp: '原因は機械の設定が正しくなかったためです。' },
+      { speaker: '🇯🇵 日本人', thai: 'กรุณาหยุดสายการผลิตและตรวจสอบใหม่ครับ', romaji: 'ka-ru-na yut sai gan pha-lit lae truat-sop mai khrap', jp: 'ラインを止めて再検査してください。' },
+      { speaker: '🇹🇭 タイ人', thai: 'รับทราบครับ จะดำเนินการทันทีครับ', romaji: 'rap-sap khrap, ja dam-noen-gan than-thi khrap', jp: '了解しました。すぐに対応します。' }
+    ],
+    vocab: [
+      { thai: 'ของเสีย', romaji: 'khong-sia', jp: '不良品' },
+      { thai: 'สาเหตุ', romaji: 'sa-het', jp: '原因' },
+      { thai: 'เครื่องจักร', romaji: 'khrueang-jak', jp: '機械' },
+      { thai: 'สายการผลิต', romaji: 'sai gan pha-lit', jp: '生産ライン' },
+      { thai: 'ตรวจสอบ', romaji: 'truat-sop', jp: '検査する' }
+    ]
+  },
+  {
+    scene: '納期確認',
+    title: 'サプライヤーへの納期確認',
+    dialogue: [
+      { speaker: '🇯🇵 日本人', thai: 'ขอสอบถามเรื่องกำหนดส่งของครับ', romaji: 'kho sop-tham rueang kam-not song khong khrap', jp: '納期について確認させてください。' },
+      { speaker: '🇹🇭 タイ人', thai: 'ได้ครับ เรื่องอะไรครับ', romaji: 'dai khrap, rueang a-rai khrap', jp: 'はい、何についてでしょうか。' },
+      { speaker: '🇯🇵 日本人', thai: 'ล็อตที่สั่งเมื่อวันที่ 15 จะส่งได้เมื่อไหร่ครับ', romaji: 'lot thi sang muea wan-thi sip-ha ja song dai muea-rai khrap', jp: '15日に発注したロットはいつ届きますか？' },
+      { speaker: '🇹🇭 タイ人', thai: 'คาดว่าจะส่งได้ภายในวันศุกร์นี้ครับ', romaji: 'khat wa ja song dai phai-nai wan suk ni khrap', jp: '今週金曜までに送れる見込みです。' },
+      { speaker: '🇯🇵 日本人', thai: 'ถ้าล่าช้ากรุณาแจ้งล่วงหน้านะครับ', romaji: 'tha la-cha ka-ru-na jaeng luang-na na khrap', jp: '遅れる場合は事前に連絡してくださいね。' }
+    ],
+    vocab: [
+      { thai: 'กำหนดส่ง', romaji: 'kam-not song', jp: '納期' },
+      { thai: 'ล็อต', romaji: 'lot', jp: 'ロット' },
+      { thai: 'คาดว่า', romaji: 'khat wa', jp: '見込む・予想する' },
+      { thai: 'ล่าช้า', romaji: 'la-cha', jp: '遅延する' },
+      { thai: 'ล่วงหน้า', romaji: 'luang-na', jp: '事前に' }
+    ]
+  },
+  {
+    scene: '会議',
+    title: '改善会議での議論',
+    dialogue: [
+      { speaker: '🇯🇵 日本人', thai: 'วันนี้เราจะประชุมเรื่องการปรับปรุงกระบวนการผลิตครับ', romaji: 'wan-ni rao ja pra-chum rueang gan prap-prung kra-buan-gan pha-lit khrap', jp: '今日は製造プロセス改善の会議です。' },
+      { speaker: '🇹🇭 タイ人', thai: 'จากข้อมูลเดือนที่แล้ว อัตราของเสียอยู่ที่ 2.5% ครับ', romaji: 'jak kho-mun duean thi laew, at-tra khong-sia yu thi song jut ha percent khrap', jp: '先月のデータでは不良率は2.5%です。' },
+      { speaker: '🇯🇵 日本人', thai: 'เป้าหมายของเราคือลดให้ต่ำกว่า 1% ครับ มีข้อเสนอแนะอะไรบ้างครับ', romaji: 'pao-mai khong rao khue lot hai tam kwa nueng percent khrap, mi kho-sa-noe-nae a-rai bang khrap', jp: '目標は1%未満です。何か提案はありますか？' },
+      { speaker: '🇹🇭 タイ人', thai: 'เสนอให้เพิ่มจุดตรวจสอบระหว่างกระบวนการครับ', romaji: 'sa-noe hai phoem jut truat-sop ra-wang kra-buan-gan khrap', jp: '工程間の検査ポイントを増やすことを提案します。' }
+    ],
+    vocab: [
+      { thai: 'ปรับปรุง', romaji: 'prap-prung', jp: '改善する' },
+      { thai: 'กระบวนการผลิต', romaji: 'kra-buan-gan pha-lit', jp: '製造プロセス' },
+      { thai: 'อัตราของเสีย', romaji: 'at-tra khong-sia', jp: '不良率' },
+      { thai: 'เป้าหมาย', romaji: 'pao-mai', jp: '目標' },
+      { thai: 'ข้อเสนอแนะ', romaji: 'kho-sa-noe-nae', jp: '提案' }
+    ]
+  },
+  {
+    scene: '安全指示',
+    title: '安全に関する指示',
+    dialogue: [
+      { speaker: '🇯🇵 日本人', thai: 'ขอเตือนเรื่องความปลอดภัยครับ', romaji: 'kho tuean rueang khwam plot-phai khrap', jp: '安全について注意喚起します。' },
+      { speaker: '🇯🇵 日本人', thai: 'กรุณาสวมอุปกรณ์ป้องกันทุกครั้งที่เข้าพื้นที่การผลิตครับ', romaji: 'ka-ru-na suam u-pa-kon pong-kan thuk khrang thi khao phuen-thi gan pha-lit khrap', jp: '生産エリアに入るときは必ず保護具を着用してください。' },
+      { speaker: '🇹🇭 タイ人', thai: 'รับทราบครับ จะปฏิบัติตามครับ', romaji: 'rap-sap khrap, ja pa-ti-bat tam khrap', jp: '了解しました。従います。' }
+    ],
+    vocab: [
+      { thai: 'ความปลอดภัย', romaji: 'khwam plot-phai', jp: '安全' },
+      { thai: 'อุปกรณ์ป้องกัน', romaji: 'u-pa-kon pong-kan', jp: '保護具・PPE' },
+      { thai: 'ปฏิบัติตาม', romaji: 'pa-ti-bat tam', jp: '従う・遵守する' }
+    ]
+  }
+];
+
+const carData = [
+  {
+    category: '寸法不良',
+    title: 'ขนาดไม่ได้ตามสเปค (寸法不良)',
+    sections: [
+      { label: '問題の説明 (รายละเอียดปัญหา)', thai: 'พบชิ้นงานมีขนาดเกินค่าสเปคที่กำหนด จำนวน __ ชิ้น จากล็อตที่ __ วันที่ __', jp: 'ロット__の日付__にて、仕様値を超えるワークが__個発見されました。' },
+      { label: '原因分析 (การวิเคราะห์สาเหตุ)', thai: 'สาเหตุเกิดจาก: 1) เครื่องจักรไม่ได้ปรับตั้งค่าตามมาตรฐาน 2) ไม่ได้ตรวจสอบชิ้นแรก (First Article)', jp: '原因: 1) 機械の設定が標準通りでなかった 2) 初品検査(First Article)が未実施' },
+      { label: '暫定処置 (มาตรการชั่วคราว)', thai: 'กักกันล็อตที่มีปัญหาทั้งหมด และคัดแยก 100% เพื่อแยกชิ้นงาน OK/NG', jp: '問題ロットを全数隔離し、100%選別でOK/NGを分離' },
+      { label: '恒久対策 (มาตรการแก้ไขถาวร)', thai: '1) จัดทำ Check Sheet สำหรับการปรับตั้งเครื่องจักร 2) กำหนดให้ตรวจสอบ First Article ทุกล็อต 3) อบรมพนักงานเรื่องขั้นตอนการปรับตั้ง', jp: '1) 機械設定用チェックシート作成 2) 全ロットで初品検査義務化 3) 設定手順について作業者教育実施' }
+    ]
+  },
+  {
+    category: '外観不良',
+    title: 'รอยขีดข่วน/รอยตำหนิ (外観不良)',
+    sections: [
+      { label: '問題の説明 (รายละเอียดปัญหา)', thai: 'พบรอยขีดข่วนบนผิวชิ้นงาน จำนวน __ ชิ้น ลูกค้าแจ้ง Claim เมื่อวันที่ __', jp: 'ワーク表面に傷__個を発見。顧客から日付__にクレーム受領。' },
+      { label: '原因分析 (การวิเคราะห์สาเหตุ)', thai: 'สาเหตุเกิดจาก: 1) อุปกรณ์จับยึดชิ้นงานเสียหาย 2) การจัดเก็บและขนส่งไม่ระมัดระวัง', jp: '原因: 1) ワーク固定治具の損傷 2) 保管・搬送時の取扱い不注意' },
+      { label: '暫定処置 (มาตรการชั่วคราว)', thai: 'เปลี่ยนอุปกรณ์จับยึดใหม่ ตรวจสอบสต็อกทั้งหมด', jp: '固定治具を交換。在庫全数検査を実施。' },
+      { label: '恒久対策 (มาตรการแก้ไขถาวร)', thai: '1) กำหนดแผนบำรุงรักษาอุปกรณ์จับยึดทุก 3 เดือน 2) จัดทำมาตรฐานการจัดเก็บและขนส่ง 3) เพิ่มจุดตรวจสอบผิวชิ้นงานก่อนบรรจุ', jp: '1) 治具を3ヶ月毎に保全計画策定 2) 保管・搬送基準の作成 3) 梱包前の外観検査ポイント追加' }
+    ]
+  },
+  {
+    category: '納期遅延',
+    title: 'ส่งของล่าช้า (納期遅延)',
+    sections: [
+      { label: '問題の説明 (รายละเอียดปัญหา)', thai: 'ส่งของล่าช้ากว่ากำหนด __ วัน ล็อตที่ __ กำหนดส่งวันที่ __ ส่งจริงวันที่ __', jp: 'ロット__の納品が__日遅延。納期__、実納品__。' },
+      { label: '原因分析 (การวิเคราะห์สาเหตุ)', thai: 'สาเหตุเกิดจาก: 1) วัตถุดิบจากซัพพลายเออร์มาล่าช้า 2) การวางแผนการผลิตไม่สอดคล้องกับคำสั่งซื้อ', jp: '原因: 1) サプライヤーからの原材料遅延 2) 生産計画と受注の不整合' },
+      { label: '暫定処置 (มาตรการชั่วคราว)', thai: 'เร่งผลิตด้วยการทำงานล่วงเวลา ส่งของบางส่วนก่อน', jp: '残業にて緊急生産。一部先行納品を実施。' },
+      { label: '恒久対策 (มาตรการแก้ไขถาวร)', thai: '1) กำหนด Safety Stock สำหรับวัตถุดิบหลัก 2) ทบทวนแผนการผลิตทุกสัปดาห์ 3) ติดตามสถานะวัตถุดิบจากซัพพลายเออร์เป็นประจำ', jp: '1) 主要原材料のSafety Stock設定 2) 毎週の生産計画見直し 3) サプライヤー原材料状況の定期フォロー' }
+    ]
+  }
+];
+
+const emailData = [
+  {
+    category: '納期確認',
+    subject: 'ขอยืนยันกำหนดส่งของ (納期確認)',
+    thai: 'เรียน ผู้จัดการฝ่ายขาย\n\nเรื่อง: ขอยืนยันกำหนดส่งของ PO# ______\n\nตามที่ได้สั่งซื้อสินค้าตาม PO ข้างต้น ขอยืนยันกำหนดส่งของดังนี้:\n- รายการ: ______\n- จำนวน: ______ ชิ้น\n- กำหนดส่ง: วันที่ ______\n\nกรุณายืนยันว่าสามารถส่งได้ตามกำหนดหรือไม่\nหากมีปัญหากรุณาแจ้งล่วงหน้าด้วยครับ\n\nขอบคุณครับ',
+    jp: '営業部マネージャー殿\n\n件名: PO# ______の納期確認\n\n上記POの発注について、納期を確認いたします：\n- 品目: ______\n- 数量: ______個\n- 納期: ______日\n\n予定通り納品可能かご確認ください。\n問題がある場合は事前にご連絡ください。\n\nよろしくお願いいたします。'
+  },
+  {
+    category: 'クレーム連絡',
+    subject: 'แจ้งปัญหาคุณภาพสินค้า (品質クレーム)',
+    thai: 'เรียน ผู้จัดการฝ่ายคุณภาพ\n\nเรื่อง: แจ้งปัญหาคุณภาพสินค้า Lot# ______\n\nขอแจ้งว่าพบปัญหาคุณภาพในสินค้าที่ได้รับดังนี้:\n- Lot#: ______\n- ปัญหาที่พบ: ______\n- จำนวนที่มีปัญหา: ______ ชิ้น จากทั้งหมด ______ ชิ้น\n\nกรุณาดำเนินการดังนี้:\n1. ส่งรายงานวิเคราะห์สาเหตุภายใน 3 วันทำการ\n2. ส่งมาตรการแก้ไขและป้องกันภายใน 7 วันทำการ\n3. แจ้งแผนเปลี่ยนสินค้าที่มีปัญหา\n\nขอบคุณครับ',
+    jp: '品質管理部マネージャー殿\n\n件名: Lot# ______の品質問題通知\n\n受領品に以下の品質問題を発見しましたので通知します：\n- Lot#: ______\n- 発見した問題: ______\n- 不良数量: 全______個中______個\n\n以下の対応をお願いします：\n1. 3営業日以内に原因分析報告\n2. 7営業日以内に是正・予防措置\n3. 不良品の交換計画のご連絡\n\nよろしくお願いいたします。'
+  },
+  {
+    category: '見積依頼',
+    subject: 'ขอใบเสนอราคา (見積依頼)',
+    thai: 'เรียน ฝ่ายขาย\n\nเรื่อง: ขอใบเสนอราคาสินค้า\n\nบริษัทเราสนใจสั่งซื้อสินค้าดังต่อไปนี้ กรุณาส่งใบเสนอราคา:\n\n1. ชื่อสินค้า: ______\n   - สเปค: ______\n   - จำนวน: ______ ชิ้น/เดือน\n\nกรุณาระบุข้อมูลดังนี้:\n- ราคาต่อหน่วย\n- ระยะเวลาการผลิต (Lead Time)\n- เงื่อนไขการชำระเงิน\n- MOQ (จำนวนสั่งซื้อขั้นต่ำ)\n\nขอบคุณครับ',
+    jp: '営業部殿\n\n件名: 製品見積依頼\n\n以下の製品の購入を検討しております。見積書をお送りください：\n\n1. 製品名: ______\n   - 仕様: ______\n   - 数量: ______個/月\n\n以下の情報をご記載ください：\n- 単価\n- リードタイム\n- 支払条件\n- MOQ（最小発注数量）\n\nよろしくお願いいたします。'
+  },
+  {
+    category: '会議招集',
+    subject: 'ขอเชิญประชุม (会議招集)',
+    thai: 'เรียน ผู้เกี่ยวข้องทุกท่าน\n\nเรื่อง: ขอเชิญประชุม ______\n\nขอเชิญเข้าร่วมประชุมตามรายละเอียดดังนี้:\n- วันที่: ______\n- เวลา: ______ น.\n- สถานที่: ห้องประชุม ______\n- วาระการประชุม:\n  1. ______\n  2. ______\n\nกรุณายืนยันการเข้าร่วมภายในวันที่ ______\n\nขอบคุณครับ',
+    jp: '関係者各位\n\n件名: ______会議のご案内\n\n以下の通り会議を開催いたします：\n- 日付: ______\n- 時間: ______\n- 場所: 会議室______\n- 議題:\n  1. ______\n  2. ______\n\n______日までに出席をご確認ください。\n\nよろしくお願いいたします。'
+  }
+];
